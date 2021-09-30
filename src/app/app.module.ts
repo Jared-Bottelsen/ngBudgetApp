@@ -3,14 +3,25 @@ import { BrowserModule } from '@angular/platform-browser';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-
+import { MainHeaderComponent } from './main-header/main-header.component';
+import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { MobileFooterComponent } from './mobile-footer/mobile-footer.component';
+import { BudgetOverviewComponent } from './budget-overview/budget-overview.component';
+import {ScrollPanelModule} from 'primeng/scrollpanel';
+import { BudgetComponent } from './budget/budget.component';
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    MainHeaderComponent,
+    MobileFooterComponent,
+    BudgetOverviewComponent,
+    BudgetComponent
   ],
   imports: [
     BrowserModule,
-    AppRoutingModule
+    AppRoutingModule,
+    FontAwesomeModule,
+    ScrollPanelModule
   ],
   providers: [],
   bootstrap: [AppComponent]
