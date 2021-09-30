@@ -1,0 +1,21 @@
+@media only screen and (max-width: 600px) {
+    .mobile-footer-container {
+        position: fixed;
+        bottom: 0;
+        width: 100%;
+        height: 7%;
+        display: flex;
+    }
+    
+    .navigation-icon {
+        font-size: 1.5rem;
+    }
+    
+    .nav-icon-container {
+        width: 25%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: rgb(252, 250, 248);
+    }   
+}
