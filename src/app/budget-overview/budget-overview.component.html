@@ -1,0 +1,38 @@
+<div class="overview-header-container">
+    <h1 class="overview-header-text">Overview</h1>
+
+    <div class="current-balance-container">
+        <div class="current-balance-amount-container">
+            <div class="remaining-expenses-container">
+                <p>Budget Remaining</p>
+                <p>$3,000</p>
+            </div> 
+            <div class="monthly-budgeted-expense-container">
+                <div class="monthly-income-container">
+                    <p>Budgeted</p>
+                    <p>$3,000</p>    
+                </div>
+                <div class="budgeted-expenses-container">
+                    <p>Income</p>
+                    <p>$3,000</p>
+                </div>    
+            </div>   
+        </div>
+    </div>
+    <h3 class="expenses-header">Most Recent Expenses</h3>
+    <div>
+        <p-scrollPanel>
+            <div class="expenses-container scroll-panel-container">
+                <div *ngFor="let expense of individualExpenses"                                 class="individual-expense"> 
+                    <div class="expense-information-container">
+                        <fa-icon [icon]="faHandHoldingUsd" 
+                                class="money-hand">
+                        </fa-icon>
+                        <p class="expense-name">{{expense.expenseName}}</p>
+                        <p class="expense-amount">${{expense.expenseValue}}</p>
+                    </div>
+                </div>
+            </div>
+        </p-scrollPanel>
+    </div>
+</div>

@@ -1,0 +1,108 @@
+* {
+    font-family: 'Alumni Sans', sans-serif;
+}
+
+.overview-header-container {
+    // background-color: rgb(66, 111, 239);
+    // height: 160px;
+    // width: 100%;
+    position: relative;
+}
+
+.overview-header-text {
+    font-size: 50px;
+    position: absolute;
+    text-align: center;
+    width: 30%;
+}
+
+p {
+    font-size: 1.8rem;
+}
+
+.current-balance-container {
+    display: flex;
+    justify-content: center;
+}
+
+.current-balance-amount-container {
+    background-color: rgb(252, 250, 248);
+    font-size: 20px;
+    width: 60%;
+    height: 160px;
+    margin: 60px 0 0 0;
+    box-shadow: 0px 2px 7px black;
+    border-radius: 5px;
+}
+
+.remaining-expenses-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    height: 80px;
+    width: 100%;
+}
+
+.monthly-budgeted-expense-container {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    text-align: center;
+    height: 80px;
+}
+
+.expenses-header {
+    margin: 5% 0 2% 20%;
+    font-size: 30px;
+}
+
+.expenses-container {
+    display: grid;
+    justify-content: center;
+    grid-gap: 10px;
+}
+
+.individual-expense {
+    height: 60px;
+    background-color: rgb(252, 250, 248);
+    box-shadow: 0px 2px 7px black;
+    border-radius: 5px;
+    font-size: 25px;
+    width: 100%;
+}
+
+.expense-information-container {
+    display: grid;
+    grid-template-columns: 1fr 4fr 1.2fr;
+    justify-items: center;
+    align-items: center;
+    height: inherit;
+
+    .expense-name {
+        justify-self: start;
+    }
+
+    .expense-amount {
+        justify-self: end;
+        margin-right: 5px;
+    }
+
+    .money-hand {
+        font-size: 1.8rem;
+    }
+}
+
+@media screen and (max-height: 750px) {
+
+   .scroll-panel-container {
+        width: 100%;
+        height: 325px;
+    }
+}
+
+@media screen and (max-height: 700px) {
+
+    .scroll-panel-container {
+        width: 100%;
+        height: 275px;
+    }
+}
