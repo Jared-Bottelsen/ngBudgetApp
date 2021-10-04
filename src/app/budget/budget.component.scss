@@ -1,0 +1,57 @@
+.header-container {
+    margin-bottom: 20px;
+    display: flex;
+    justify-content: space-between;
+
+    &__text {
+        margin: 5px 0 0 5px;
+    }
+    
+    &__add-icon {
+        margin: 5px 5px 0 0;
+        font-size: 1.8em;
+    }
+}
+
+.budget-categories-container {
+    display: grid;
+    justify-items: center;
+    grid-gap: 10px;
+
+    &__category-wrapper {
+        width: 60%;
+        background-color: rgb(252, 250, 248);
+        border: solid 1px black;
+        border-radius: 5px;
+        box-shadow: 0px 2px 7px black;
+    }
+}
+
+.budget-category-header-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 6px;
+    
+    &__balance-header {
+        margin: 3px 5px 0 0;
+    }
+
+    &__category-title {
+        margin: 0 0 0 5px;
+    }
+    
+}
+
+.budget-item-individual-expense-container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+
+    &__item-title {
+        margin: 0 0 0 5px;
+    }
+
+    &__balance-remaining {
+        margin: 0 5px 0 0;
+    }
+}
