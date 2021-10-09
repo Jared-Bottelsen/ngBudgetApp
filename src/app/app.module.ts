@@ -14,6 +14,8 @@ import { ProgressBarComponent } from './budget/progress-bar/progress-bar.compone
 import { BudgetAddComponent } from './budget/budget-add/budget-add.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
+import { DragDropModule } from '@angular/cdk/drag-drop';
+import { ReactiveFormsModule } from '@angular/forms';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,9 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
     ScrollPanelModule,
     ProgressBarModule,
     DynamicDialogModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    DragDropModule,
+    ReactiveFormsModule
   ],
 
   entryComponents: [
