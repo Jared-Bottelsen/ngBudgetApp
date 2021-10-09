@@ -30,8 +30,7 @@
 .budget-category-header-container {
     display: flex;
     justify-content: space-between;
-    margin-bottom: 6px;
-    
+
     &__balance-header {
         margin: 3px 5px 0 0;
     }
@@ -46,6 +45,7 @@
     display: flex;
     flex-direction: row;
     justify-content: space-between;
+    margin-bottom: 5px;
 
     &__item-title {
         margin: 0 0 0 5px;
@@ -54,4 +54,8 @@
     &__balance-remaining {
         margin: 0 5px 0 0;
     }
+}
+
+hr {
+    margin-bottom: 5px;
 }
