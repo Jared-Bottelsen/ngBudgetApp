@@ -1,6 +1,6 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { FormBuilder, FormGroup } from '@angular/forms';
-import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { DialogService, DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-budget-add',
@@ -11,19 +11,35 @@ export class BudgetAddComponent implements OnInit {
 
   budgetForm = this.fb.group({
     categoryTitle: '',
-    subCategoryTitle: '',
-    subCategoryValue: ''
+    subCategory: this.fb.array([]),
   });
 
-  constructor(private fb: FormBuilder, public ref: DynamicDialogRef, public config: DynamicDialogConfig) {
+  get subCategories() {
+    return this.budgetForm.get('subCategory') as FormArray
+  }
+
+  addSubcategory() {
+    const subCategory = this.fb.group({
+      subCategoryTitle: [],
+      subCategoryValue: []
+    })
+
+    this.subCategories.push(subCategory);
+  }
+
+  deleteSubCategory(i: any) {
+    this.subCategories.removeAt(i);
+  }
+
+  onSubmit(budgetForm: FormGroup) {
+    if (budgetForm.pristine) {
+      this.ref.close();
+    }
+    this.ref.close(budgetForm);
+  }
+
+  constructor(private fb: FormBuilder, public ref: DynamicDialogRef) {
   }
   ngOnInit(): void {
-    this.budgetForm.valueChanges.subscribe(console.log)
   }
-
-  onSubmit() {
-    console.log(this.budgetForm);
-    this.ref.close(this.budgetForm.value);
-  }
-
 }

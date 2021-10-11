@@ -7,8 +7,8 @@
     <div cdkDropList (cdkDropListDropped)= "drop($event)" class="budget-categories-container">
         <div class="budget-categories-container__category-wrapper" cdkDrag *ngFor="let budgetCat of budgetcategory; let i = index">
             <div class="budget-category-header-container">
-                <h3 class="budget-category-header-container__category-title">{{budgetCat.categoryTitle.categoryTitle}}</h3>
-                <h5 class="budget-category-header-container__balance-header">Remaining</h5>    
+                <h3 class="budget-category-header-container__category-title">{{budgetCat.categoryTitle}}</h3>
+                <h5 class="budget-category-header-container__balance-header">Planned</h5>    
             </div>
             <hr>
             <div *ngFor="let subCat of budgetcategory[i].subCategory">
