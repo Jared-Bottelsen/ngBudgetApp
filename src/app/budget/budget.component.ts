@@ -22,30 +22,11 @@ export class BudgetComponent implements OnInit {
   budgetAddModalOptions = {
     header: 'Add to Your Budget',
     width: '80%',
-    height: '80%',
+    height: '50%',
     styleClass: 'budget-add'  
   }
 
-  budgetcategory: any = [
-    {
-      categoryTitle: new BudgetCategory('A test string'),
-      subCategory: [
-        new BudgetSubcategory('Test String', 500),
-        new BudgetSubcategory('test test', 6500),
-        new BudgetSubcategory('Another test', 555),
-        new BudgetSubcategory('Tertiary test', 2342),
-        new BudgetSubcategory('more tests', 342322)
-      ] 
-    },
-    {
-      categoryTitle: new BudgetCategory('Another test string'),
-      subCategory: [
-        new BudgetSubcategory('Another test', 555),
-        new BudgetSubcategory('Tertiary test', 2342),
-        new BudgetSubcategory('more tests', 342322)
-      ]
-    } 
-  ]
+  budgetcategory: any = [];
 
   constructor(public dialogService: DialogService, public ref: DynamicDialogRef) { 
 
@@ -54,17 +35,13 @@ export class BudgetComponent implements OnInit {
   showModal() {
     const ref = this.dialogService.open(BudgetAddComponent, this.budgetAddModalOptions)
     
-    ref.onClose.subscribe((test) => {
-      console.log(test)
-      this.budgetcategory.push({
-        categoryTitle: new BudgetCategory(test.categoryTitle),
-        subCategory: [
-          new BudgetSubcategory(test.subCategoryTitle, test.subCategoryValue)
-        ]
-      })
-      console.log(this.budgetcategory);
+    ref.onClose.subscribe((category) => {
+      if (category === undefined) {
+        console.log('No form data sent');
+      } else {
+        this.budgetcategory.push(category)
+      }
     })
-
   }
 
   drop(event: CdkDragDrop<string[]>) {

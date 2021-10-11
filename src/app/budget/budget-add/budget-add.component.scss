@@ -1,7 +1,21 @@
-.budget-add.p-dialog {
-    
-    .p-dialog-header {
-        border-top-right-radius: 20px;
-        border-top-left-radius: 20px;
+.form-group-container {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-gap: 5px;
+
+    #categoryTitle {
+        margin-bottom: 5px;
     }
+}
+
+.form-array-container {
+    display: grid;
+    grid-template-columns: 1fr .5fr;
+    grid-gap: 5px;
+}
+
+.button-group-container {
+    display: flex;
+    justify-content: space-between;
+    margin-top: 10px;
 }

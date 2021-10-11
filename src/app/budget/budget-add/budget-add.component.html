@@ -1,7 +1,20 @@
 <form [formGroup]="budgetForm">
-    <input formControlName="categoryTitle">
-    <input formControlName="subCategoryTitle">
-    <input formControlName="subCategoryValue">
+    <div class="form-group-container">
+        <label for="categoryTitle">New Category Title</label>
+        <input id="categoryTitle" formControlName="categoryTitle">
+    </div>
+<div formArrayName="subCategory">
+    <div *ngFor="let subCat of subCategories.controls; let i = index" [formGroupName]="i" class="form-array-container">
+        <label for="subCategoryTitle">Item Label</label>
+        <input id="subCategoryTitle" formControlName="subCategoryTitle">
+    
+        <label for="subCategoryValue">Amount</label>
+        <input id="subCategoryValue" formControlName="subCategoryValue">    
+    </div>
+</div>
 </form>
-<button (click)= "onSubmit()">OK</button>
+<div class="button-group-container">
+    <button (click)="addSubcategory()">Add New Subcategory</button>    
+    <button (click)= "onSubmit(budgetForm.value)">OK</button>
+</div>
 
