@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { faReceipt, faWallet, faChartPie, faBalanceScale, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
+import { faReceipt, faWallet, faChartPie, faBalanceScale, faPlusCircle, faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-mobile-footer',
@@ -12,6 +12,7 @@ export class MobileFooterComponent implements OnInit {
   faWallet = faWallet;
   faChartPie = faChartPie;
   faBalanceScale = faBalanceScale;
+  faPlusSquare = faPlusSquare;
   
   constructor() { }
 
