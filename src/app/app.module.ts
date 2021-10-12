@@ -1,6 +1,9 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
+import { AngularFireDatabaseModule} from "@angular/fire/compat/database";
+import { environment } from "../environments/environment";
+import { AngularFireModule } from '@angular/fire/compat';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
@@ -28,6 +31,8 @@ import { ReactiveFormsModule } from '@angular/forms';
     BudgetAddComponent
   ],
   imports: [
+    AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireDatabaseModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
