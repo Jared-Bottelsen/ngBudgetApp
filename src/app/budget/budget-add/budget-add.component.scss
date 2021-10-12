@@ -10,8 +10,11 @@
 
 .form-array-container {
     display: grid;
-    grid-template-columns: 1fr .5fr;
-    grid-gap: 5px;
+    grid-template-columns: 1fr 1fr;
+
+    label {
+        font-size: .8rem;
+    }
 }
 
 .button-group-container {
