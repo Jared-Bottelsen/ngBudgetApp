@@ -21,15 +21,18 @@
     </div>
     <h3 class="expenses-header">Most Recent Expenses</h3>
     <div>
-        <p-scrollPanel>
-            <div class="expenses-container scroll-panel-container">
-                <div *ngFor="let expense of individualExpenses"                                 class="individual-expense"> 
+        <p-scrollPanel [style] = "{'width': '100%', 'height': '290px'}" styleClass="customStyles">
+            <div class="expenses-container">
+                <div *ngFor="let expense of individualExpenses" class="individual-expense"> 
                     <div class="expense-information-container">
-                        <fa-icon [icon]="faHandHoldingUsd" 
+                        <div class="expense-date-container">
+                            <p class="expense-date">{{expense.expenseDate}}</p>
+                        </div>    
+                        <!-- <fa-icon [icon]="faHandHoldingUsd" 
                                 class="money-hand">
-                        </fa-icon>
-                        <p class="expense-name">{{expense.expenseName}}</p>
-                        <p class="expense-amount">${{expense.expenseValue}}</p>
+                        </fa-icon> -->
+                        <p class="expense-name">{{expense.expenseCategory}}</p>
+                        <p class="expense-amount">${{expense.expenseAmount}}</p>
                     </div>
                 </div>
             </div>

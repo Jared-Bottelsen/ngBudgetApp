@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
 import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { FirebaseService } from '../services/firebase.service';
 
 @Component({
   selector: 'app-budget-overview',
@@ -16,41 +17,16 @@ export class BudgetOverviewComponent implements OnInit {
 
   isDesktop: boolean = this.deviceService.isDesktop();
 
-  individualExpenses = [{
-    expenseName: 'Pay Rent',
-    expenseValue: 3500
-  }, {
-    expenseName: 'Get Groceries',
-    expenseValue: 200
-  }, {
-    expenseName: 'Buy Car',
-    expenseValue: 25000
-  }, {
-    expenseName: 'Pay Rent',
-    expenseValue: 3500
-  }, {
-    expenseName: 'Get Groceries',
-    expenseValue: 200
-  }, {
-    expenseName: 'Pay Rent',
-    expenseValue: 3500
-  }, {
-    expenseName: 'Get Groceries',
-    expenseValue: 200
-  }, {
-    expenseName: 'Buy Car',
-    expenseValue: 25000
-  }, {
-    expenseName: 'Pay Rent',
-    expenseValue: 3500
-  }, {
-    expenseName: 'Get Groceries',
-    expenseValue: 200
-  }]; 
+  individualExpenses:any = []; 
 
-  constructor(private deviceService: DeviceDetectorService) { }
+  constructor(private deviceService: DeviceDetectorService, private db: FirebaseService) { }
 
   ngOnInit(): void {
+    let expenseList = this.db.getExpenses();
+    expenseList.subscribe((expenses) => {
+      expenses.map((expenseList) => {
+        this.individualExpenses.push(expenseList.payload.doc.data());
+      })
+    })
   }
-
 }
