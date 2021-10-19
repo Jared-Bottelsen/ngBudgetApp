@@ -4,8 +4,6 @@ import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BudgetAddComponent } from './budget-add/budget-add.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
-import { BudgetCategory } from './budget-add/budget-category.model';
-import { BudgetSubcategory } from './budget-add/budget-subcategory.model';
 import { FirebaseService } from '../services/firebase.service';
 
 @Component({
@@ -53,10 +51,11 @@ export class BudgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    let ref = this.db.getCategories();
-    ref.valueChanges().subscribe((categories) => {
-      this.budgetcategory = categories;
-      console.log(this.budgetcategory);
+    this.db.getCategories()
+    .subscribe((categories) => {
+      categories.map((data) => {
+        this.budgetcategory.push(data.payload.doc.data())
+      });
     })
   }
 

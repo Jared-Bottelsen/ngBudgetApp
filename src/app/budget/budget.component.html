@@ -11,7 +11,7 @@
                 <h5 class="budget-category-header-container__balance-header">Planned</h5>    
             </div>
             <hr>
-            <div *ngFor="let subCat of budgetcategory[i].subCategory">
+            <div *ngFor="let subCat of budgetCat.subCategory">
                 <div class="budget-item-individual-expense-container">
                 <h4 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h4>
                 <h4 class="budget-item-individual-expense-container__balance-remaining">${{subCat.subCategoryValue}}</h4>
