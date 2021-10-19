@@ -1,28 +1,29 @@
 import { Injectable } from '@angular/core';
-import { AngularFireDatabase } from '@angular/fire/compat/database';
-import { AngularFireList } from '@angular/fire/compat/database';
+import { AngularFirestore } from "@angular/fire/compat/firestore";
 
 @Injectable({
   providedIn: 'root'
 })
 export class FirebaseService {
 
-  categories?: AngularFireList<any>;
-
-  constructor(private db: AngularFireDatabase) {
+ 
+  constructor(private database: AngularFirestore) {
   }
 
   addCategory(categoryData: any) {
-    this.db.list('budgetCategory')
-    .push(categoryData);
+    this.database.collection("budgetCategory").add(categoryData)
+  }
+
+  addExpense(expenseData: any) {
+    this.database.collection('budgetExpense').add(expenseData);
+  }
+
+  getExpenses() {
+    return this.database.collection('budgetExpense').snapshotChanges();
   }
 
   getCategories() {
-    this.categories = this.db.list('budgetCategory');
-    return this.categories
-  }
+    return this.database.collection('budgetCategory').snapshotChanges();
 
-  dragAndDropUpdate(categoryData: any) {
-    this.db.list('budgetCategory').update('budgetCategory', categoryData);
   }
 }
