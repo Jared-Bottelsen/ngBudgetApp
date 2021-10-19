@@ -4,6 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AngularFireDatabaseModule} from "@angular/fire/compat/database";
 import { environment } from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
+import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { MainHeaderComponent } from './main-header/main-header.component';
@@ -19,6 +20,10 @@ import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
+import { ExpenseAddComponent } from './budget/expense-add/expense-add.component';
+import { SelectButtonModule } from 'primeng/selectbutton'
+import { FormsModule } from '@angular/forms';
+import { MultiSelectModule } from 'primeng/multiselect'
 
 @NgModule({
   declarations: [
@@ -28,11 +33,13 @@ import { ReactiveFormsModule } from '@angular/forms';
     BudgetOverviewComponent,
     BudgetComponent,
     ProgressBarComponent,
-    BudgetAddComponent
+    BudgetAddComponent,
+    ExpenseAddComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
+    AngularFirestoreModule,
     BrowserModule,
     AppRoutingModule,
     FontAwesomeModule,
@@ -41,7 +48,10 @@ import { ReactiveFormsModule } from '@angular/forms';
     DynamicDialogModule,
     BrowserAnimationsModule,
     DragDropModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    SelectButtonModule,
+    FormsModule,
+    MultiSelectModule
   ],
 
   entryComponents: [
