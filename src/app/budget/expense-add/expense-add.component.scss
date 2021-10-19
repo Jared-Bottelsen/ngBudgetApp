@@ -1,0 +1,16 @@
+.form-toggle-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 10%;
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+
+    .form-container__expense {
+        display: grid;
+        grid-template-rows: repeat(1fr, auto);
+    }
+}
