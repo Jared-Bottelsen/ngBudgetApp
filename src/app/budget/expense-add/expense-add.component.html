@@ -1,0 +1,18 @@
+<div class="form-toggle-container">
+    <p-selectButton [options]="formOptions" [(ngModel)]="selectedOption" (ngModelChange)="optionValue($event)"></p-selectButton>
+</div>
+<div class="form-container">
+    <form *ngIf="selectedOption === 'expense'" [formGroup]="expenseForm" class="form-container__expense">
+        <label>Category</label>
+        <p-multiSelect formControlName="expenseCategory" [options]="categoryOptions" [filter]="false" [showToggleAll]="false" [showHeader]="false" [selectionLimit]="1" [style]="{'width' : '100%'}"></p-multiSelect>
+        <label for="expense-amount">Amount</label>
+        <input formControlName="expenseAmount" id="expense-amount" type="text">
+        <button (click)="onFormSubmit(expenseForm)">Create</button>
+    </form>  
+
+    <form *ngIf="selectedOption === 'income'">
+        <input type="text">
+        <input type="text">
+        <input type="text">
+    </form>  
+</div>
