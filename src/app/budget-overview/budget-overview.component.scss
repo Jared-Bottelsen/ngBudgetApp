@@ -17,7 +17,7 @@
 }
 
 p {
-    font-size: 1.8rem;
+    font-size: 1.6rem;
 }
 
 .current-balance-container {
@@ -28,7 +28,7 @@ p {
 .current-balance-amount-container {
     background-color: rgb(252, 250, 248);
     font-size: 20px;
-    width: 60%;
+    width: 70%;
     height: 160px;
     margin: 60px 0 0 0;
     box-shadow: 0px 2px 7px black;
@@ -51,13 +51,12 @@ p {
 }
 
 .expenses-header {
-    margin: 5% 0 2% 20%;
+    margin: 5% 0 2% 15%;
     font-size: 30px;
 }
 
 .expenses-container {
     display: grid;
-    justify-content: center;
     grid-gap: 10px;
 }
 
@@ -67,7 +66,6 @@ p {
     box-shadow: 0px 2px 7px black;
     border-radius: 5px;
     font-size: 25px;
-    width: 100%;
 }
 
 .expense-information-container {
@@ -76,6 +74,10 @@ p {
     justify-items: center;
     align-items: center;
     height: inherit;
+
+    .expense-date-container {
+        margin: 0 10px 0 5px;
+    }
 
     .expense-name {
         justify-self: start;
@@ -90,19 +92,12 @@ p {
         font-size: 1.8rem;
     }
 }
+.p-scrollpanel {
 
-@media screen and (max-height: 750px) {
+    :host ::ng-deep &.customStyles {
 
-   .scroll-panel-container {
-        width: 100%;
-        height: 325px;
-    }
-}
-
-@media screen and (max-height: 700px) {
-
-    .scroll-panel-container {
-        width: 100%;
-        height: 275px;
+        .p-scrollpanel-bar {
+            background-color: transparent;
+        }
     }
 }
