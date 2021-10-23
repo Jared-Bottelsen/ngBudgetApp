@@ -53,6 +53,7 @@ export class BudgetComponent implements OnInit {
   ngOnInit(): void {
     this.db.getCategories()
     .subscribe((categories: any) => {
+      this.budgetCategory = categories
     })
   }
 }
