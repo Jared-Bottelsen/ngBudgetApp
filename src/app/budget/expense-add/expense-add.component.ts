@@ -67,16 +67,9 @@ export class ExpenseAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    // let ref = this.db.getCategories();
-    // ref.subscribe((categories) => {
-    //   this.categoryOptions = this.isolateOptions(categories);
-    //   console.log(this.categoryOptions);
-    // })
     this.db.getCategories()
     .subscribe((categories) => {
-      categories.map((data) => {
-        this.rawCateories.push(data.payload.doc.data())
-      });
+      this.rawCateories = categories
       this.categoryOptions = this.isolateOptions(this.rawCateories);
     })
   }
