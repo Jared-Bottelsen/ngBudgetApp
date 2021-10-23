@@ -1,4 +1,4 @@
-import { Component, OnInit, OnDestroy } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -18,14 +18,14 @@ export class BudgetComponent implements OnInit {
 
   testValue: number = 100;
 
+  budgetCategory: any[] = [];
+
   budgetAddModalOptions = {
     header: 'Add to Your Budget',
     width: '80%',
     height: '50%',
     styleClass: 'budget-add'  
   }
-
-  budgetcategory: any = [];
 
   constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { 
 
@@ -38,7 +38,7 @@ export class BudgetComponent implements OnInit {
       if (category === undefined) {
         console.log('No form data sent');
       } else {
-        this.budgetcategory.push(category);
+        this.budgetCategory.push(category);
         this.db.addCategory(category);
         console.log(category);
 
@@ -47,19 +47,12 @@ export class BudgetComponent implements OnInit {
   }
 
   drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.budgetcategory, event.previousIndex, event.currentIndex);
+    moveItemInArray(this.budgetCategory, event.previousIndex, event.currentIndex);
   }
 
   ngOnInit(): void {
     this.db.getCategories()
-    .subscribe((categories) => {
-      categories.map((data) => {
-        this.budgetcategory.push(data.payload.doc.data())
-      });
+    .subscribe((categories: any) => {
     })
-  }
-
-  OnDestroy(): void {
-    console.log(this.budgetcategory);
   }
 }
