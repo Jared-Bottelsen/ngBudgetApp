@@ -26,7 +26,7 @@ export class FirebaseService {
   }
 
   getExpenses() {
-    return this.database.collection('budgetExpense').snapshotChanges();
+    return this.database.collection('budgetExpense').valueChanges();
   }
 
   getCategories() {

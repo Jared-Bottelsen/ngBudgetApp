@@ -25,7 +25,7 @@ export class BudgetOverviewComponent implements OnInit {
     let expenseList = this.db.getExpenses();
     expenseList.subscribe((expenses) => {
       expenses.map((expenseList) => {
-        this.individualExpenses.push(expenseList.payload.doc.data());
+        this.individualExpenses.push(expenseList);
       })
     })
   }
