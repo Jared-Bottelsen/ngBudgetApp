@@ -52,6 +52,7 @@ export class FirebaseService {
         this.fullCurrentBudgetCategory.subCategoryValue = this.currentCategoryValue;
         this.subCategoryCopy.push(this.fullCurrentBudgetCategory);
         this.queriedData.subCategory = this.subCategoryCopy;
+        break
       }     
     }
   }
