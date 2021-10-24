@@ -12,6 +12,7 @@ export class ExpenseAddComponent implements OnInit {
   selectedOption: string;
   categoryOptions: any;
   rawCateories: any = [];
+  currentBudgetValue: any;
 
 
   expenseForm = this.fb.group({
@@ -38,9 +39,18 @@ export class ExpenseAddComponent implements OnInit {
     let newDate = new Date();
     let month = newDate.getMonth() + 1;
     let day = newDate.getDate();
-    console.log(`${month}/${day}`);
     return `${month}/${day}`
   }
+
+  findExpenseCategory(budgetCategory: string) {
+      for(let i = 0; i < this.rawCateories.length; i++) {
+        let index = this.rawCateories[i].subCategory.find((x: any) => x.subCategoryTitle === budgetCategory)
+        if (index) {
+          this.currentBudgetValue = index
+        }
+      }
+    }
+  
 
   isolateOptions (options: any) {
     let categories: any = [];
@@ -59,6 +69,9 @@ export class ExpenseAddComponent implements OnInit {
     console.log(formData.value);
     this.db.addExpense({expenseCategory: formData.value.expenseCategory,
     expenseAmount: formData.value.expenseAmount, expenseDate: this.createDate()});
+    this.findExpenseCategory(formData.value.expenseCategory)
+    this.db.getExpenseInfo(formData.value.expenseAmount, this.currentBudgetValue.subCategoryValue, this.currentBudgetValue);
+    this.db.expenseQuery(this.currentBudgetValue)
   }
 
   constructor(private fb: FormBuilder, private db: FirebaseService) { 
