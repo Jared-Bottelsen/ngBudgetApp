@@ -19,6 +19,7 @@ export class BudgetComponent implements OnInit {
   testValue: number = 100;
 
   budgetCategory: any[] = [];
+  budgetSubCategory: any[] = [];
 
   budgetAddModalOptions = {
     header: 'Add to Your Budget',
@@ -31,6 +32,28 @@ export class BudgetComponent implements OnInit {
 
   }
 
+  private createSubCategoryObj(subCatArray: any[]) {
+    for (let i = 0; i < subCatArray.length; i++) {
+      subCatArray[i].startingValue = subCatArray[i].subCategoryValue
+      this.budgetSubCategory.push(subCatArray[i])
+    }
+    return this.budgetSubCategory;
+  }
+
+  calcRemainingPercent(subCategories: any) {
+    if(subCategories.startingValue === subCategories.subCategoryValue) {
+      return 100;
+    } else if (subCategories.startingValue !== subCategories.subCategoryValue && subCategories.subCategoryValue > 0) {
+      let starting = parseInt(subCategories.startingValue);
+      let remaining = parseInt(subCategories.subCategoryValue);
+      let calc = (remaining / starting) * 100
+      console.log(calc);
+      return calc
+    } else {
+      return 0
+    }
+  }
+
   showModal() {
     const ref = this.dialogService.open(BudgetAddComponent, this.budgetAddModalOptions)
     
@@ -38,10 +61,10 @@ export class BudgetComponent implements OnInit {
       if (category === undefined) {
         console.log('No form data sent');
       } else {
-        this.budgetCategory.push(category);
-        this.db.addCategory(category);
-        console.log(category);
-
+        this.createSubCategoryObj(category.subCategory)
+        this.budgetCategory.push({categoryTitle: category.categoryTitle, subCategory: this.budgetSubCategory});
+        this.db.addCategory({categoryTitle: category.categoryTitle, subCategory: this.budgetSubCategory});
+        console.log(this.budgetCategory);
       }
     })
   }

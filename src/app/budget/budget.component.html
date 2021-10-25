@@ -16,7 +16,7 @@
                 <h4 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h4>
                 <h4 class="budget-item-individual-expense-container__balance-remaining">${{subCat.subCategoryValue}}</h4>
                 </div>
-                <app-progress-bar [value]="testValue"></app-progress-bar>
+                <app-progress-bar [value]="calcRemainingPercent(subCat)"></app-progress-bar>
             </div>
         </div>
     </div>
