@@ -1,0 +1,7 @@
+.p-progressbar {
+    :host ::ng-deep &.customStyle {
+        .p-progressbar-value {
+            background-color: #426fef;
+        }
+    }
+}
