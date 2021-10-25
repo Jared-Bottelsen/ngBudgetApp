@@ -8,13 +8,13 @@
         <div class="budget-categories-container__category-wrapper" cdkDrag *ngFor="let budgetCat of budgetCategory; let i = index">
             <div class="budget-category-header-container">
                 <h3 class="budget-category-header-container__category-title">{{budgetCat.categoryTitle}}</h3>
-                <h5 class="budget-category-header-container__balance-header">Planned</h5>    
+                <h5 class="budget-category-header-container__balance-header">Remaining</h5>    
             </div>
             <hr>
             <div *ngFor="let subCat of budgetCategory[i].subCategory">
                 <div class="budget-item-individual-expense-container">
-                <h4 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h4>
-                <h4 class="budget-item-individual-expense-container__balance-remaining">${{subCat.subCategoryValue}}</h4>
+                <h5 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h5>
+                <h5 class="budget-item-individual-expense-container__balance-remaining">${{subCat.subCategoryValue}}</h5>
                 </div>
                 <app-progress-bar [value]="calcRemainingPercent(subCat)"></app-progress-bar>
             </div>
