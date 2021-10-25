@@ -47,7 +47,6 @@ export class BudgetComponent implements OnInit {
       let starting = parseInt(subCategories.startingValue);
       let remaining = parseInt(subCategories.subCategoryValue);
       let calc = (remaining / starting) * 100
-      console.log(calc);
       return calc
     } else {
       return 0
