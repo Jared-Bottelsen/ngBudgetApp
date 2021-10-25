@@ -26,7 +26,7 @@ export class FirebaseService {
   }
 
   getExpenses() {
-    return this.database.collection('budgetExpense').valueChanges();
+    return this.database.collection("budgetExpense", ref => ref.orderBy("expenseDate", "asc")).valueChanges();
   }
 
   getCategories() {
