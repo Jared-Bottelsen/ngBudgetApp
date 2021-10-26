@@ -30,7 +30,7 @@ export class FirebaseService {
   }
 
   getCategories() {
-    return this.database.collection('budgetCategory').valueChanges();
+    return this.database.collection('budgetCategory', ref => ref.orderBy("categoryTitle", "asc")).valueChanges()
 
   }
 
