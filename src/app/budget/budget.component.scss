@@ -1,7 +1,8 @@
 .header-container {
-    margin-bottom: 20px;
+    margin-bottom: 5%;
     display: flex;
     justify-content: space-between;
+    height: 20%;
 
     &__text {
         margin: 5px 0 0 5px;
@@ -19,7 +20,7 @@
     grid-gap: 10px;
 
     &__category-wrapper {
-        width: 60%;
+        width: 80%;
         background-color: rgb(252, 250, 248);
         border: solid 1px black;
         border-radius: 5px;
@@ -60,8 +61,14 @@ hr {
     margin-bottom: 5px;
 }
 
-@media screen and (max-width: '500px') {
-    .budget-categories-container__category-wrapper {
-        width: 80%;
+.category-panel-container {
+    height: 50%;
+}
+
+.p-scrollpanel {
+    :host ::ng-deep &.customScrollStyles {
+        .p-scrollpanel-wrapper {
+            height: 500px;
+        }
     }
 }
