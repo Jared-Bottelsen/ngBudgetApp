@@ -5,6 +5,7 @@ import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BudgetAddComponent } from './budget-add/budget-add.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../services/firebase.service';
+import { BudgetEditComponent } from './budget-edit/budget-edit.component';
 
 @Component({
   selector: 'app-budget',
@@ -18,6 +19,8 @@ export class BudgetComponent implements OnInit {
 
   testValue: number = 100;
 
+  isMenuVisible!: number;
+
   budgetCategory: any[] = [];
   budgetSubCategory: any[] = [];
 
@@ -28,8 +31,35 @@ export class BudgetComponent implements OnInit {
     styleClass: 'budget-add'  
   }
 
+  budgetEditModalOptions = {
+    header: 'Make Edits to Your Budget',
+    width: '100%',
+    height: '75%',
+    styleClass: ''
+  }
+
   constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { 
 
+  }
+
+  openBudgetEditModl(index: number) {
+    const ref = this.dialogService.open(BudgetEditComponent, {
+      header: 'Make Edits to Your Budget',
+      data: {
+        subCategories: this.budgetCategory[index].subCategory
+      },
+      width: '100%',
+      height: '75%',
+      styleClass: ''
+    })
+  }
+
+  showMenu(index: number) {
+    this.isMenuVisible = index;
+  }
+
+  hideMenu() {
+    this.isMenuVisible = -1;
   }
 
   private createSubCategoryObj(subCatArray: any[]) {

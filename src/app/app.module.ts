@@ -21,9 +21,11 @@ import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { DragDropModule } from '@angular/cdk/drag-drop';
 import { ReactiveFormsModule } from '@angular/forms';
 import { ExpenseAddComponent } from './budget/expense-add/expense-add.component';
-import { SelectButtonModule } from 'primeng/selectbutton'
+import { SelectButtonModule } from 'primeng/selectbutton';
 import { FormsModule } from '@angular/forms';
-import { MultiSelectModule } from 'primeng/multiselect'
+import { MultiSelectModule } from 'primeng/multiselect';
+import { ButtonModule } from 'primeng/button';
+import { BudgetEditComponent } from './budget/budget-edit/budget-edit.component';
 
 @NgModule({
   declarations: [
@@ -34,7 +36,8 @@ import { MultiSelectModule } from 'primeng/multiselect'
     BudgetComponent,
     ProgressBarComponent,
     BudgetAddComponent,
-    ExpenseAddComponent
+    ExpenseAddComponent,
+    BudgetEditComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -51,7 +54,8 @@ import { MultiSelectModule } from 'primeng/multiselect'
     ReactiveFormsModule,
     SelectButtonModule,
     FormsModule,
-    MultiSelectModule
+    MultiSelectModule,
+    ButtonModule
   ],
 
   entryComponents: [
