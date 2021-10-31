@@ -1,24 +1,52 @@
 <div>
     <div class="header-container">
         <h1 class="header-container__text">Monthly Budget</h1>
-        <fa-icon [icon]="faPlusCircle" class="header-container__add-icon" (click)="showModal()"></fa-icon>    
+        <fa-icon [icon]="faPlusCircle" class="header-container__add-icon" (click)="showBudgetCategoryModal()"></fa-icon>    
     </div>
     <div class="category-panel-container">
         <p-scrollPanel styleClass="customScrollStyles">
-            <div cdkDropList (cdkDropListDropped)= "drop($event)" class="budget-categories-container">
-                <div class="budget-categories-container__category-wrapper" cdkDrag *ngFor="let budgetCat of budgetCategory; let i = index">
-                    <div class="budget-category-header-container">
-                        <h3 class="budget-category-header-container__category-title">{{budgetCat.categoryTitle}}</h3>
-                        <h5 class="budget-category-header-container__balance-header">Remaining</h5>    
-                    </div>
-                    <hr>
-                    <div *ngFor="let subCat of budgetCategory[i].subCategory">
-                        <div class="budget-item-individual-expense-container">
-                        <h5 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h5>
-                        <h5 class="budget-item-individual-expense-container__balance-remaining">${{subCat.subCategoryValue}}</h5>
+            <div 
+                cdkDropList 
+                (cdkDropListDropped)= "drop($event)" 
+                class="budget-categories-container"
+            >
+                <div 
+                    class="budget-categories-container__category-wrapper" 
+                    cdkDrag 
+                    *ngFor="let budgetCat of budgetCategory; let i = index" 
+                >
+                    <div (click)="showMenu(i)">
+                        <div class="budget-category-header-container">
+                            <h3 class="budget-category-header-container__category-title">{{budgetCat.categoryTitle}}</h3>
+                            <h5 class="budget-category-header-container__balance-header">Remaining</h5>    
                         </div>
-                        <app-progress-bar [value]="calcRemainingPercent(subCat)"></app-progress-bar>
+                        <hr>
+                        <div *ngFor="let subCat of budgetCategory[i].subCategory">
+                            <div class="budget-item-individual-expense-container">
+                            <h5 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h5>
+                            <h5 class="budget-item-individual-expense-container__balance-remaining">${{subCat.subCategoryValue}}</h5>
+                            </div>
+                            <app-progress-bar [value]="calcRemainingPercent(subCat)"></app-progress-bar>
+                        </div>    
                     </div>
+                    <div *ngIf="isMenuVisible === i" class="menu-options flex justify-content-center">
+                        <div class="col-10 flex justify-content-around">
+                            <button 
+                                (click)="openBudgetEditModl(i)"
+                                class="p-button-rounded p-button-raised" 
+                                [style]="{'width': '5rem', 'height': '1.2rem', 'background-color': '#426fef'}" 
+                                pButton 
+                                label='Edit'>
+                            </button>
+                            <button 
+                                class="p-button-rounded p-button-raised" 
+                                (click)="hideMenu()" 
+                                [style]="{'width': '5rem', 'height': '1.2rem', 'background-color': '#426fef'}" 
+                                label='Cancel' 
+                                pButton>
+                            </button>    
+                        </div>
+                    </div>        
                 </div>
             </div>
         </p-scrollPanel>    
