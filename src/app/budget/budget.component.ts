@@ -83,7 +83,7 @@ export class BudgetComponent implements OnInit {
     }
   }
 
-  showModal() {
+  showBudgetCategoryModal() {
     const ref = this.dialogService.open(BudgetAddComponent, this.budgetAddModalOptions)
     
     ref.onClose.subscribe((category) => {
