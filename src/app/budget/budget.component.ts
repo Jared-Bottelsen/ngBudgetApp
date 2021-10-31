@@ -18,6 +18,8 @@ export class BudgetComponent implements OnInit {
 
   testValue: number = 100;
 
+  isMenuVisible!: any;
+
   budgetCategory: any[] = [];
   budgetSubCategory: any[] = [];
 
@@ -30,6 +32,15 @@ export class BudgetComponent implements OnInit {
 
   constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { 
 
+  }
+
+
+  showMenu(index: number) {
+    this.isMenuVisible = index;
+  }
+
+  hideMenu() {
+    this.isMenuVisible = -1;
   }
 
   private createSubCategoryObj(subCatArray: any[]) {
@@ -53,7 +64,7 @@ export class BudgetComponent implements OnInit {
     }
   }
 
-  showModal() {
+  showBudgetCategoryModal() {
     const ref = this.dialogService.open(BudgetAddComponent, this.budgetAddModalOptions)
     
     ref.onClose.subscribe((category) => {
