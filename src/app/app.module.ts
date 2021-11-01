@@ -26,6 +26,7 @@ import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
 import { BudgetEditComponent } from './budget/budget-edit/budget-edit.component';
+import { InputTextModule } from 'primeng/inputtext'
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import { BudgetEditComponent } from './budget/budget-edit/budget-edit.component'
     SelectButtonModule,
     FormsModule,
     MultiSelectModule,
-    ButtonModule
+    ButtonModule,
+    InputTextModule
   ],
 
   entryComponents: [
