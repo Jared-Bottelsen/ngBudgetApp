@@ -22,6 +22,7 @@ export class BudgetComponent implements OnInit {
   isMenuVisible!: number;
 
   budgetCategory: any[] = [];
+
   budgetSubCategory: any[] = [];
 
   budgetAddModalOptions = {
@@ -31,26 +32,25 @@ export class BudgetComponent implements OnInit {
     styleClass: 'budget-add'  
   }
 
-  budgetEditModalOptions = {
-    header: 'Make Edits to Your Budget',
-    width: '100%',
-    height: '75%',
-    styleClass: ''
-  }
-
   constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { 
 
   }
 
-  openBudgetEditModl(index: number) {
+  openBudgetEditModal(index: number) {
     const ref = this.dialogService.open(BudgetEditComponent, {
       header: 'Make Edits to Your Budget',
       data: {
+        categoryTitle: this.budgetCategory[index].categoryTitle,
         subCategories: this.budgetCategory[index].subCategory
       },
       width: '100%',
-      height: '75%',
-      styleClass: ''
+      height: '60%',
+      styleClass: 'customDialogStyles',
+      closable: false,
+    });
+
+    ref.onClose.subscribe((options) => {
+      this.isMenuVisible = -1;
     })
   }
 
