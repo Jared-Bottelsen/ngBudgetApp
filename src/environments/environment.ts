@@ -5,16 +5,15 @@
 export const environment = {
   production: false,
 
-  firebaseConfig : {
-    apiKey: "AIzaSyAV1r6TEFPQZ5-n3XJ-5PNKVkV38t4L4dc",
-    authDomain: "ngbudgetapp.firebaseapp.com",
-    projectId: "ngbudgetapp",
-    storageBucket: "ngbudgetapp.appspot.com",
-    messagingSenderId: "527651190506",
-    appId: "1:527651190506:web:7fd047ac4cb484e205c993",
-    measurementId: "G-B4GH1EJ5JE"
+  firebaseConfig: {
+    apiKey: "AIzaSyDrmjICvsiIY4fp1yj82P2BlVMKTykSoCM",
+    authDomain: "ngbudgetapp--dev.firebaseapp.com",
+    projectId: "ngbudgetapp--dev",
+    storageBucket: "ngbudgetapp--dev.appspot.com",
+    messagingSenderId: "299139340960",
+    appId: "1:299139340960:web:04db75f0254c01b00c87c5",
+    measurementId: "G-ZLDNBPX0Q4"
   }
-  
 };
 
 /*
