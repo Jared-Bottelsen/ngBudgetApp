@@ -2,6 +2,10 @@ import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/compat/firestore";
 import * as _ from 'lodash'
 
+export interface BudgetCategory {
+  categoryTitle: string,
+  subCategory: Array<string>,
+}
 @Injectable({
   providedIn: 'root'
 })
@@ -32,6 +36,15 @@ export class FirebaseService {
   getCategories() {
     return this.database.collection('budgetCategory', ref => ref.orderBy("categoryTitle", "asc")).valueChanges()
 
+  }
+
+  deleteDocument(subCategories: any) {
+    let query = this.database.collection("budgetCategory", ref => ref.where("subCategory", "==", subCategories)).get();
+    query.subscribe(first => {
+      first.forEach(result => {
+        this.database.collection("budgetCategory").doc(result.id).delete();
+      })
+    })
   }
 
   getExpenseInfo(expenseValue: string, currentValue: string, fullCurrentBudgetCategory: any) {
@@ -65,6 +78,15 @@ export class FirebaseService {
         this.subCategoryCopy = this.queriedData.subCategory;
         this.manipulateCategory(this.subCategoryCopy, this.expenseValue, this.currentCategoryValue)
         this.database.collection("budgetCategory").doc(test.id).update(this.queriedData);
+      })
+    })
+  }
+
+  updateBudgetCategoryData(currentSubcategories: any[], editedPayload: BudgetCategory) {
+    let query = this.database.collection("budgetCategory", ref => ref.where("subCategory", "==", currentSubcategories)).get();
+    query.subscribe(results => {
+      results.forEach(result => {
+        this.database.collection("budgetCategory").doc(result.id).set(editedPayload, {merge: true})
       })
     })
   }
