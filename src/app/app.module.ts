@@ -2,8 +2,7 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 
 import { AngularFireDatabaseModule} from "@angular/fire/compat/database";
-// import { environment } from "../environments/environment";
-import { environmentProd } from '../environments/environment.prod';
+import { environment } from "../environments/environment";
 import { AngularFireModule } from '@angular/fire/compat';
 import { AngularFirestoreModule } from "@angular/fire/compat/firestore";
 import { AppRoutingModule } from './app-routing.module';
@@ -42,8 +41,7 @@ import { InputTextModule } from 'primeng/inputtext'
     BudgetEditComponent
   ],
   imports: [
-    AngularFireModule.initializeApp(environmentProd.firebaseConfig),
-    // AngularFireModule.initializeApp(environment.firebaseConfig),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     BrowserModule,
