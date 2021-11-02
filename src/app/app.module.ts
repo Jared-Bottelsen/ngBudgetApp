@@ -43,7 +43,7 @@ import { InputTextModule } from 'primeng/inputtext'
   ],
   imports: [
     AngularFireModule.initializeApp(environmentProd.firebaseConfig),
-    AngularFireModule.initializeApp(environment.firebaseConfig),
+    // AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireDatabaseModule,
     AngularFirestoreModule,
     BrowserModule,
