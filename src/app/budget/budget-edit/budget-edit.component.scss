@@ -9,4 +9,11 @@ input {
     text-align: left;
 }
 
+.p-scrollpanel {
+    :host ::ng-deep &.customScroll {
+        .p-scrollpanel-bar {
+            background-color: #4270ef59;
+        }
+    }
+}
 
