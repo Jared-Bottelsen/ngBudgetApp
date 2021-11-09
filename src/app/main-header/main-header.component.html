@@ -2,9 +2,7 @@
     <div class="header-logo">
     </div>
     <div class="sub-menu-container">
-        <!-- <fa-icon [icon]="faBars" class="sub-menu-header-icon"></fa-icon> -->
-        <div class="sub-menu-content">
-            
-        </div>
+        <fa-icon [icon]="faBars" class="sub-menu-header-icon" (click)="menu.toggle($event)"></fa-icon>
+        <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>
     </div>
 </div>

@@ -26,7 +26,10 @@ import { FormsModule } from '@angular/forms';
 import { MultiSelectModule } from 'primeng/multiselect';
 import { ButtonModule } from 'primeng/button';
 import { BudgetEditComponent } from './budget/budget-edit/budget-edit.component';
-import { InputTextModule } from 'primeng/inputtext'
+import { InputTextModule } from 'primeng/inputtext';
+import { LoginComponent } from './login/login.component';
+import { MenuModule } from 'primeng/menu';
+import { MenuItem } from 'primeng/api';
 
 @NgModule({
   declarations: [
@@ -38,7 +41,8 @@ import { InputTextModule } from 'primeng/inputtext'
     ProgressBarComponent,
     BudgetAddComponent,
     ExpenseAddComponent,
-    BudgetEditComponent
+    BudgetEditComponent,
+    LoginComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
@@ -57,7 +61,8 @@ import { InputTextModule } from 'primeng/inputtext'
     FormsModule,
     MultiSelectModule,
     ButtonModule,
-    InputTextModule
+    InputTextModule,
+    MenuModule
   ],
 
   entryComponents: [
