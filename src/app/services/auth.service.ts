@@ -29,8 +29,7 @@ export class AuthService {
 
   googleLogin() {
     if (!this.isLoggedIn) {
-      this.afAuth.signInWithRedirect(new firebase.auth.GoogleAuthProvider());
-      // this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
+      this.afAuth.signInWithPopup(new firebase.auth.GoogleAuthProvider());
     } else {
       this.router.navigate(['/overview']);
     }
@@ -38,7 +37,7 @@ export class AuthService {
 
   signOut() {
     this.afAuth.signOut()
-    this.router.navigate(['/login'])
+    this.router.navigate(['/'])
     console.log('No longer signed in');
   }
 }

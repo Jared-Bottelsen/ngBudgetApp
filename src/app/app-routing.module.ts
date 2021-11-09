@@ -7,8 +7,7 @@ import { LoginComponent } from './login/login.component';
 import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  {path: '', redirectTo: 'login', pathMatch: 'full'},
-  {path: 'login', component: LoginComponent},
+  {path: '', component: LoginComponent},
   {path: 'budget', component: BudgetComponent, canActivate: [AuthGuard]},
   {path: 'overview', component: BudgetOverviewComponent, canActivate: [AuthGuard]},
   {path: 'add-expense', component: ExpenseAddComponent, canActivate: [AuthGuard]}
