@@ -30,27 +30,30 @@ export class FirebaseService {
   }
 
   addCategory(categoryData: any) {
-    this.database.collection("budgetCategory").add(categoryData)
+    this.database.collection("users").doc(this.auth.userId).collection('budgetCategory').add(categoryData)
   }
 
   addExpense(expenseData: any) {
-    this.database.collection('budgetExpense').add(expenseData);
+    this.database.collection('users').doc(this.auth.userId).collection('budgetExpense').add(expenseData);
+    // this.database.collection('budgetExpense').add(expenseData);
   }
 
   getExpenses() {
-    return this.database.collection("budgetExpense", ref => ref.orderBy("expenseDate", "asc")).valueChanges();
+    return this.database.collection('users').doc(this.auth.userId).collection('budgetExpense', ref => ref.orderBy("expenseDate", "asc")).valueChanges();
+    // return this.database.collection("budgetExpense", ref => ref.orderBy("expenseDate", "asc")).valueChanges();
   }
 
   getCategories() {
-    return this.database.collection('budgetCategory', ref => ref.orderBy("categoryTitle", "asc")).valueChanges()
+    return this.database.collection('users').doc(this.auth.userId).collection('budgetCategory', ref => ref.orderBy("categoryTitle", "asc")).valueChanges();
+    // return this.database.collection('budgetCategory', ref => ref.orderBy("categoryTitle", "asc")).valueChanges()
 
   }
 
   deleteDocument(subCategories: any) {
-    let query = this.database.collection("budgetCategory", ref => ref.where("subCategory", "==", subCategories)).get();
+    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "==", subCategories)).get();
     query.subscribe(first => {
       first.forEach(result => {
-        this.database.collection("budgetCategory").doc(result.id).delete();
+        this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(result.id).delete();
       })
     })
   }
@@ -79,22 +82,22 @@ export class FirebaseService {
   }
 
   expenseQuery(currentBudgetValue: any) {
-    let query = this.database.collection("budgetCategory", ref => ref.where("subCategory", "array-contains", currentBudgetValue)).get()
+    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "array-contains", currentBudgetValue)).get()
     query.subscribe(results => {
       results.forEach(test => {
         this.queriedData = test.data();
         this.subCategoryCopy = this.queriedData.subCategory;
         this.manipulateCategory(this.subCategoryCopy, this.expenseValue, this.currentCategoryValue)
-        this.database.collection("budgetCategory").doc(test.id).update(this.queriedData);
+        this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(test.id).update(this.queriedData);
       })
     })
   }
 
   updateBudgetCategoryData(currentSubcategories: any[], editedPayload: BudgetCategory) {
-    let query = this.database.collection("budgetCategory", ref => ref.where("subCategory", "==", currentSubcategories)).get();
+    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "==", currentSubcategories)).get();
     query.subscribe(results => {
       results.forEach(result => {
-        this.database.collection("budgetCategory").doc(result.id).set(editedPayload, {merge: true})
+        this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(result.id).set(editedPayload, {merge: true})
       })
     })
   }
