@@ -1,14 +1,16 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { BudgetOverviewComponent } from './budget-overview/budget-overview.component';
-import { BudgetAddComponent } from './budget/budget-add/budget-add.component';
 import { BudgetComponent } from './budget/budget.component';
 import { ExpenseAddComponent } from './budget/expense-add/expense-add.component';
+import { LoginComponent } from './login/login.component';
+import { AuthGuard } from './services/auth.guard';
 
 const routes: Routes = [
-  {path: 'budget', component: BudgetComponent},
-  {path: 'overview', component: BudgetOverviewComponent},
-  {path: 'add-expense', component: ExpenseAddComponent}
+  {path: 'login', component: LoginComponent},
+  {path: 'budget', component: BudgetComponent, canActivate: [AuthGuard]},
+  {path: 'overview', component: BudgetOverviewComponent, canActivate: [AuthGuard]},
+  {path: 'add-expense', component: ExpenseAddComponent, canActivate: [AuthGuard]}
 ];
 
 @NgModule({
