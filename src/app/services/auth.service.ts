@@ -9,12 +9,16 @@ import { AngularFireAuth } from '@angular/fire/compat/auth';
 export class AuthService {
 
   public isLoggedIn: boolean = false;
+  public userId!: string;
+  public displayName: any;
 
   constructor(private afAuth: AngularFireAuth, private router: Router) { 
     this.afAuth.onAuthStateChanged(user => {
       if (user) {
         this.isLoggedIn = true
         this.router.navigate(['/overview'])
+        this.userId = user.uid;
+        this.displayName = user.displayName;
         console.log(user.uid, this.isLoggedIn);
       } else {
         this.isLoggedIn = false;
