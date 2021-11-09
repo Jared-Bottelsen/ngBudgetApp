@@ -1,7 +1,7 @@
-import { Component, OnInit } from '@angular/core';
-import { FontAwesomeModule } from '@fortawesome/angular-fontawesome';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
 import { DeviceDetectorService } from 'ngx-device-detector';
+import { Subscription } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
 
 @Component({
@@ -9,7 +9,8 @@ import { FirebaseService } from '../services/firebase.service';
   templateUrl: './budget-overview.component.html',
   styleUrls: ['./budget-overview.component.scss']
 })
-export class BudgetOverviewComponent implements OnInit {
+export class BudgetOverviewComponent implements OnInit, OnDestroy {
+  getExpensesObservable$!: Subscription;
 
   faHandHoldingUsd = faHandHoldingUsd
 
@@ -22,12 +23,16 @@ export class BudgetOverviewComponent implements OnInit {
   constructor(private deviceService: DeviceDetectorService, private db: FirebaseService) { }
 
   ngOnInit(): void {
-    let expenseList = this.db.getExpenses();
-    expenseList.subscribe((expenses) => {
+    this.getExpensesObservable$ = this.db.getExpenses()
+    .subscribe((expenses) => {
       expenses.map((expenseList) => {
         this.individualExpenses.push(expenseList);
       })
     })
     this.db.createUser();
+  }
+
+  ngOnDestroy(): void {
+    this.getExpensesObservable$.unsubscribe();
   }
 }

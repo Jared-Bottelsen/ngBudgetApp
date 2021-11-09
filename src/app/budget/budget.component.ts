@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -6,6 +6,7 @@ import { BudgetAddComponent } from './budget-add/budget-add.component';
 import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../services/firebase.service';
 import { BudgetEditComponent } from './budget-edit/budget-edit.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-budget',
@@ -13,7 +14,9 @@ import { BudgetEditComponent } from './budget-edit/budget-edit.component';
   styleUrls: ['./budget.component.scss'],
   providers: [DialogService, DynamicDialogRef]
 })
-export class BudgetComponent implements OnInit {
+export class BudgetComponent implements OnInit, OnDestroy {
+
+  getBudgetSubscription$!: Subscription;
 
   faPlusCircle = faPlusCircle
 
@@ -103,9 +106,13 @@ export class BudgetComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.db.getCategories()
+   this.getBudgetSubscription$ = this.db.getCategories()
     .subscribe((categories: any) => {
       this.budgetCategory = categories
     })
+  }
+
+  ngOnDestroy(): void {
+    this.getBudgetSubscription$.unsubscribe();
   }
 }

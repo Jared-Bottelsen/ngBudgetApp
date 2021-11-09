@@ -1,5 +1,6 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
+import { Subscription } from 'rxjs';
 import { FirebaseService } from 'src/app/services/firebase.service';
 
 @Component({
@@ -7,12 +8,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
   templateUrl: './expense-add.component.html',
   styleUrls: ['./expense-add.component.scss']
 })
-export class ExpenseAddComponent implements OnInit {
+export class ExpenseAddComponent implements OnInit, OnDestroy {
 
   selectedOption: string;
   categoryOptions: any;
   rawCateories: any = [];
   currentBudgetValue: any;
+  getCategoriesObservable$!: Subscription;
 
 
   expenseForm = this.fb.group({
@@ -80,10 +82,14 @@ export class ExpenseAddComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.db.getCategories()
+   this.getCategoriesObservable$ = this.db.getCategories()
     .subscribe((categories) => {
       this.rawCateories = categories
       this.categoryOptions = this.isolateOptions(this.rawCateories);
     })
+  }
+
+  ngOnDestroy(): void {
+    this.getCategoriesObservable$.unsubscribe();
   }
 }
