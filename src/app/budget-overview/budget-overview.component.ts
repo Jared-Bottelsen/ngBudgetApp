@@ -28,5 +28,6 @@ export class BudgetOverviewComponent implements OnInit {
         this.individualExpenses.push(expenseList);
       })
     })
+    this.db.createUser();
   }
 }

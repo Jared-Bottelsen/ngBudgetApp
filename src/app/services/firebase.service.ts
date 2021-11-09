@@ -1,5 +1,6 @@
 import { Injectable } from '@angular/core';
 import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { AuthService } from './auth.service';
 import * as _ from 'lodash'
 
 export interface BudgetCategory {
@@ -18,7 +19,14 @@ export class FirebaseService {
  fullCurrentBudgetCategory: any;
  queriedData: any;
 
-  constructor(private database: AngularFirestore) {
+  constructor(private database: AngularFirestore, private auth: AuthService) {
+  }
+
+  createUser() {
+    this.database.collection('users').doc(this.auth.userId).set({
+      userId: this.auth.userId,
+      displayName: this.auth.displayName
+    }, {merge: true})
   }
 
   addCategory(categoryData: any) {
