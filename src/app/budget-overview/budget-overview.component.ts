@@ -53,10 +53,15 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
   openEditModal(index: number) {
     const ref: DynamicDialogRef = this.dialogService.open(ExpenseEditComponent, {
       header: 'Make an Edit to an Expense',
+      data: {
+        expenseAmount: this.individualExpenses[index].expenseAmount,
+        expenseCategory: this.individualExpenses[index].expenseCategory,
+        expenseDate: this.individualExpenses[index].expenseDate
+      },  
       width: '90%',
       height: '50%',
     })
-    ref.onClose.subscribe((options: any) => {
+    ref.onClose.subscribe(() => {
       this.isButtonMenuVisible = -1
     })
   }

@@ -1,4 +1,11 @@
 import { Component, OnInit } from '@angular/core';
+import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
+
+interface ExpenseData {
+  expenseAmount: string,
+  expenseCategory: string,
+  expenseDate: string
+}
 
 @Component({
   selector: 'app-expense-edit',
@@ -7,9 +14,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ExpenseEditComponent implements OnInit {
 
-  constructor() { }
+  expenseData!: ExpenseData;
+
+  constructor(private config: DynamicDialogConfig) {
+    this.expenseData = this.config.data
+  }
 
   ngOnInit(): void {
+    console.log(this.expenseData);
   }
 
 }
