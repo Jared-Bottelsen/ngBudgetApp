@@ -3,7 +3,7 @@ import { AngularFirestore } from "@angular/fire/compat/firestore";
 import { AuthService } from './auth.service';
 import * as _ from 'lodash'
 
-export interface BudgetCategory {
+interface BudgetCategory {
   categoryTitle: string,
   subCategory: Array<string>,
 }
@@ -14,7 +14,7 @@ export class FirebaseService {
 
  subCategoryCopy: any;
  currentDocId!: string;
- expenseValue!: string;
+ expenseValue!: number;
  currentCategoryValue: any;
  fullCurrentBudgetCategory: any;
  queriedData: any;
@@ -58,20 +58,17 @@ export class FirebaseService {
     })
   }
 
-  getExpenseInfo(expenseValue: string, currentValue: string, fullCurrentBudgetCategory: any) {
+  getExpenseInfo(expenseValue: number, currentValue: string, fullCurrentBudgetCategory: any) {
     this.expenseValue = expenseValue
     this.currentCategoryValue = currentValue
     this.fullCurrentBudgetCategory = fullCurrentBudgetCategory
   }
 
-  private manipulateCategory(categoryCopy: any[], expenseValue: string, currentValue: any) {
+  private manipulateCategory(categoryCopy: any[], expenseValue: number, currentValue: any) {
     for (let i = 0; i < categoryCopy.length; i++) {
       if (_.isEqual(categoryCopy[i], this.fullCurrentBudgetCategory)) {
         categoryCopy.splice(i, 1);
-        let expenseNum = parseInt(expenseValue);
-        let currentNum = parseInt(currentValue);
-        let newVal = currentNum - expenseNum;
-        let newValString = newVal.toString();
+        let newValString = currentValue - expenseValue;
         this.currentCategoryValue = newValString;
         this.fullCurrentBudgetCategory.subCategoryValue = this.currentCategoryValue;
         this.subCategoryCopy.push(this.fullCurrentBudgetCategory);

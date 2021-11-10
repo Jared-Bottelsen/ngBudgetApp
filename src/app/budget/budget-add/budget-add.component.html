@@ -9,7 +9,8 @@
         <input id="subCategoryTitle" formControlName="subCategoryTitle">
     
         <label for="subCategoryValue">Amount</label>
-        <input id="subCategoryValue" formControlName="subCategoryValue">    
+        <input type="number" name="subCategoryValue" id="subCategoryValue" formControlName="subCategoryValue">
+        <!-- <input id="subCategoryValue" formControlName="subCategoryValue">     -->
     </div>
 </div>
 </form>
@@ -17,4 +18,3 @@
     <button (click)="addSubcategory()">Add New Subcategory</button>    
     <button (click)= "onSubmit(budgetForm)">OK</button>
 </div>
-

@@ -77,9 +77,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
     if(subCategories.startingValue === subCategories.subCategoryValue) {
       return 100;
     } else if (subCategories.startingValue !== subCategories.subCategoryValue && subCategories.subCategoryValue > 0) {
-      let starting = parseInt(subCategories.startingValue);
-      let remaining = parseInt(subCategories.subCategoryValue);
-      let calc = (remaining / starting) * 100
+      let calc = (subCategories.subCategoryValue / subCategories.startingValue) * 100
       return calc
     } else {
       return 0

@@ -6,7 +6,7 @@
         <label>Category</label>
         <p-multiSelect formControlName="expenseCategory" [options]="categoryOptions" [filter]="false" [showToggleAll]="false" [showHeader]="false" [selectionLimit]="1" [style]="{'width' : '100%'}"></p-multiSelect>
         <label for="expense-amount">Amount</label>
-        <input formControlName="expenseAmount" id="expense-amount" type="text">
+        <input formControlName="expenseAmount" id="expense-amount" type="number">
         <button (click)="onFormSubmit(expenseForm)">Create</button>
     </form>  
 
