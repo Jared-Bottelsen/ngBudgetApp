@@ -8,8 +8,9 @@
 .form-container {
     display: flex;
     justify-content: center;
+    margin-top: 10%;
 
-    .form-container__expense {
+    &__alignment {
         display: grid;
         grid-template-rows: repeat(1fr, auto);
     }

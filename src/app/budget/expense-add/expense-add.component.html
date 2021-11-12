@@ -1,18 +1,49 @@
 <div class="form-toggle-container">
-    <p-selectButton [options]="formOptions" [(ngModel)]="selectedOption" (ngModelChange)="optionValue($event)"></p-selectButton>
+    <p-selectButton 
+        [options]="formOptions" 
+        [(ngModel)]="selectedOption" 
+        (ngModelChange)="optionValue($event)">
+    </p-selectButton>
 </div>
 <div class="form-container">
-    <form *ngIf="selectedOption === 'expense'" [formGroup]="expenseForm" class="form-container__expense">
+    <form 
+    *ngIf="selectedOption === 'expense'" 
+    [formGroup]="expenseForm" 
+    class="form-container__alignment">
         <label>Category</label>
-        <p-multiSelect formControlName="expenseCategory" [options]="categoryOptions" [filter]="false" [showToggleAll]="false" [showHeader]="false" [selectionLimit]="1" [style]="{'width' : '100%'}"></p-multiSelect>
+        <p-multiSelect 
+            formControlName="expenseCategory" 
+            [options]="categoryOptions" 
+            [filter]="false" 
+            [showToggleAll]="false" 
+            [showHeader]="false" 
+            [selectionLimit]="1" 
+            [style]="{'width' : '100%'}">
+        </p-multiSelect>
+        <label for="expenseName">Expense Name</label>
+        <input 
+            pInputText 
+            type="text" 
+            id="expenseName" 
+            formControlName="expenseName">
         <label for="expense-amount">Amount</label>
-        <input formControlName="expenseAmount" id="expense-amount" type="number">
-        <button (click)="onFormSubmit(expenseForm)">Create</button>
+        <input 
+            pInputText 
+            formControlName="expenseAmount" 
+            id="expense-amount" 
+            type="number">
+        <button 
+            pButton 
+            class="p-button-rounded" 
+            [style]="{'background-color': '426fef', 'margin-top': '1rem'}" 
+            label="Submit" 
+            (click)="onFormSubmit(expenseForm)">
+        </button>
     </form>  
-
-    <form *ngIf="selectedOption === 'income'">
-        <input type="text">
-        <input type="text">
-        <input type="text">
-    </form>  
+    
+    <form class="form-container__alignment" *ngIf="selectedOption === 'income'">
+        <input pInputText type="text">
+        <input pInputText type="text">
+        <input pInputText type="text">
+    </form>      
 </div>
