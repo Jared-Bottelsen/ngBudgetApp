@@ -75,7 +75,7 @@ export class BudgetEditComponent implements OnInit {
   }
 
   deleteEntireCategory() {
-    this.db.deleteDocument(this.currentSubcategories);
+    this.db.deleteDocument(this.currentSubcategories, 'budgetCategory', 'subCategory');
     setTimeout(() => {
       this.ref.close();
     }, 500);
