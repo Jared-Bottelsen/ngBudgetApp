@@ -94,7 +94,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
         this.createSubCategoryObj(category.subCategory)
         this.budgetCategory.push({categoryTitle: category.categoryTitle, subCategory: this.budgetSubCategory});
         this.db.addCategory({categoryTitle: category.categoryTitle, subCategory: this.budgetSubCategory});
-        console.log(this.budgetCategory);
       }
     })
   }
