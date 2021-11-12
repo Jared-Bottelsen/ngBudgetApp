@@ -7,6 +7,15 @@ interface BudgetCategory {
   categoryTitle: string,
   subCategory: Array<string>,
 }
+
+interface BudgetExpense {
+  expenseAmount: number,
+  expenseCategory: string,
+  expenseDate: string,
+  expenseName: string,
+  fullDate: Date
+}
+
 @Injectable({
   providedIn: 'root'
 })
@@ -29,42 +38,39 @@ export class FirebaseService {
     }, {merge: true})
   }
 
-  addCategory(categoryData: any) {
+  addCategory(categoryData: BudgetCategory) {
     this.database.collection("users").doc(this.auth.userId).collection('budgetCategory').add(categoryData)
   }
 
-  addExpense(expenseData: any) {
+  addExpense(expenseData: BudgetExpense) {
     this.database.collection('users').doc(this.auth.userId).collection('budgetExpense').add(expenseData);
-    // this.database.collection('budgetExpense').add(expenseData);
   }
 
   getExpenses() {
-    return this.database.collection('users').doc(this.auth.userId).collection('budgetExpense', ref => ref.orderBy("expenseDate", "asc")).valueChanges();
-    // return this.database.collection("budgetExpense", ref => ref.orderBy("expenseDate", "asc")).valueChanges();
+    return this.database.collection('users').doc(this.auth.userId).collection('budgetExpense', ref => ref.orderBy("fullDate", "asc")).valueChanges();
   }
 
   getCategories() {
     return this.database.collection('users').doc(this.auth.userId).collection('budgetCategory', ref => ref.orderBy("categoryTitle", "asc")).valueChanges();
-    // return this.database.collection('budgetCategory', ref => ref.orderBy("categoryTitle", "asc")).valueChanges()
 
   }
 
-  deleteDocument(subCategories: any) {
-    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "==", subCategories)).get();
+  deleteDocument(data: Object, collection: string, queryParam: string) {
+    let query = this.database.collection("users").doc(this.auth.userId).collection(collection, ref => ref.where(queryParam, "==", data)).get();
     query.subscribe(first => {
       first.forEach(result => {
-        this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(result.id).delete();
+        this.database.collection("users").doc(this.auth.userId).collection(collection).doc(result.id).delete();
       })
     })
   }
 
-  getExpenseInfo(expenseValue: number, currentValue: string, fullCurrentBudgetCategory: any) {
+  getExpenseInfo(expenseValue: number, currentValue: string, fullCurrentBudgetCategory: Object) {
     this.expenseValue = expenseValue
     this.currentCategoryValue = currentValue
     this.fullCurrentBudgetCategory = fullCurrentBudgetCategory
   }
 
-  private manipulateCategory(categoryCopy: any[], expenseValue: number, currentValue: any) {
+  private manipulateCategory(categoryCopy: Array<any>, expenseValue: number, currentValue: number) {
     for (let i = 0; i < categoryCopy.length; i++) {
       if (_.isEqual(categoryCopy[i], this.fullCurrentBudgetCategory)) {
         categoryCopy.splice(i, 1);
@@ -78,7 +84,7 @@ export class FirebaseService {
     }
   }
 
-  expenseQuery(currentBudgetValue: any) {
+  expenseQuery(currentBudgetValue: number) {
     let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "array-contains", currentBudgetValue)).get()
     query.subscribe(results => {
       results.forEach(test => {
@@ -90,7 +96,7 @@ export class FirebaseService {
     })
   }
 
-  updateBudgetCategoryData(currentSubcategories: any[], editedPayload: BudgetCategory) {
+  updateBudgetCategoryData(currentSubcategories: Array<any>, editedPayload: BudgetCategory) {
     let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "==", currentSubcategories)).get();
     query.subscribe(results => {
       results.forEach(result => {
