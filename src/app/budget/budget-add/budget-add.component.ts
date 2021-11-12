@@ -32,7 +32,6 @@ export class BudgetAddComponent implements OnInit {
   }
 
   onSubmit(budgetForm: FormGroup) {
-    console.log(budgetForm.pristine);
     if (budgetForm.pristine) {
       this.ref.close();
     } else {
