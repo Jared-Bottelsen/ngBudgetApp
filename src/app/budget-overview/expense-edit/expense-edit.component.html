@@ -1,1 +1,53 @@
-<p>expense-edit works!</p>
+<div class="componentContainer">
+    <h2 class="componentHeader">Edit Expense</h2>
+    <h4 class="categoryHeader">Expense Category: {{expenseData.expenseCategory}}</h4>
+    <div class="grid grid-nogutter">
+        <form [formGroup]="expenseEditForm">
+            <label class="col-12 labelStyle" for="expenseDate">Expense Date</label>
+            <input 
+                formControlName="expenseDate"
+                class="col-12 inputDimensions" 
+                pInputText 
+                type="text" 
+                id="expenseDate">        
+            <label class="col-12 labelStyle" for="expenseName">Name of Expense</label>
+            <input 
+                formControlName="expenseName"
+                class="col-12 inputDimensions" 
+                pInputText 
+                type="text" 
+                id="expenseName">
+            <label class="col-12 labelStyle" for="expenseAmount">Amount</label>
+            <input 
+                formControlName="expenseAmount"
+                class="col-12 inputDimensions" 
+                pInputText 
+                type="number" 
+                id="expenseAmount">
+        </form>
+    </div>
+    <br>
+    <div class="flex justify-content-between">
+        <button 
+            class="p-button-rounded p-button-success" 
+            (click)="submitForm(expenseEditForm.value)"
+            [style]="{'width': '4.7rem', 'height': '1.2rem', 'font-size': '0.8rem'}" 
+            pButton 
+            label="Submit">
+        </button>
+        <button 
+            class="p-button-rounded p-button-warning" 
+            (click)="closeModal()"
+            [style]="{'width': '4.7rem', 'height': '1.2rem', 'font-size': '0.8rem'}" 
+            pButton 
+            label="Cancel">
+        </button>
+        <button 
+            class="p-button-rounded p-button-danger" 
+            (click)="deleteExpense()"
+            [style]="{'width': '4.7rem', 'height': '1.2rem', 'font-size': '0.8rem'}" 
+            pButton 
+            label="Delete">
+        </button>
+    </div>    
+</div>
