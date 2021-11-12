@@ -31,9 +31,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getExpensesObservable$ = this.db.getExpenses()
     .subscribe((expenses) => {
-      expenses.map((expenseList) => {
-        this.individualExpenses.push(expenseList);
-      })
+        this.individualExpenses = expenses;
     })
     this.db.createUser();
   }
@@ -47,22 +45,29 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
   }
 
   hideButtons() {
-     this.isButtonMenuVisible = -1
+     this.isButtonMenuVisible = -1;
   }
 
-  openEditModal(index: number) {
+  openEditExpenseModal(index: number) {
     const ref: DynamicDialogRef = this.dialogService.open(ExpenseEditComponent, {
-      header: 'Make an Edit to an Expense',
+      showHeader: false,
       data: {
         expenseAmount: this.individualExpenses[index].expenseAmount,
         expenseCategory: this.individualExpenses[index].expenseCategory,
+        expenseName: this.individualExpenses[index].expenseName,
         expenseDate: this.individualExpenses[index].expenseDate
       },  
       width: '90%',
-      height: '50%',
+      closable: false
     })
-    ref.onClose.subscribe(() => {
-      this.isButtonMenuVisible = -1
+    ref.onClose.subscribe((data: Object) => {
+      if (!data) {
+        this.isButtonMenuVisible = -1;
+        console.log("No Data Sent");
+      } else {
+        this.db.updateExpenseData(data);
+        this.isButtonMenuVisible = -1;
+      }
     })
   }
 }
