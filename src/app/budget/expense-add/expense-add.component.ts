@@ -19,11 +19,11 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
 
   expenseForm = this.fb.group({
     expenseCategory: '',
-    expenseAmount: ''
+    expenseAmount: '',
+    expenseName: ''
   })
 
   optionValue(event: any) {
-    console.log(event);
   }
 
   formOptions = [
@@ -54,8 +54,8 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
     }
   
 
-  isolateOptions (options: any) {
-    let categories: any = [];
+  isolateOptions (options: any[]) {
+    let categories: any[] = [];
     for (let i = 0; options.length > i; i++) {
       let subCategories = options[i].subCategory
       for (let j = 0; j < subCategories.length; j++) {
@@ -68,12 +68,16 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
   onFormSubmit(formData: FormGroup) {
     let categoryData = formData.value.expenseCategory.pop()
     formData.value.expenseCategory = categoryData;
-    console.log(formData.value);
-    this.db.addExpense({expenseCategory: formData.value.expenseCategory,
-    expenseAmount: formData.value.expenseAmount, expenseDate: this.createDate()});
+    this.db.addExpense({
+      expenseCategory: formData.value.expenseCategory,
+      expenseName : formData.value.expenseName,
+      expenseAmount: formData.value.expenseAmount, 
+      expenseDate: this.createDate(),
+      fullDate: new Date()
+    });
     this.findExpenseCategory(formData.value.expenseCategory)
     this.db.getExpenseInfo(formData.value.expenseAmount, this.currentBudgetValue.subCategoryValue, this.currentBudgetValue);
-    this.db.expenseQuery(this.currentBudgetValue)
+    this.db.expenseAddQuery(this.currentBudgetValue)
   }
 
   constructor(private fb: FormBuilder, private db: FirebaseService) { 
