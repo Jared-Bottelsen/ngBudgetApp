@@ -103,6 +103,7 @@ export class FirebaseService {
             subCategoryCopy.push(budgetCategoryObject.currentBudgetCategoryData)
             console.log(subCategoryCopy);
             this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(data.id).update(queriedData);
+            break
           }
         }
       })
@@ -132,6 +133,7 @@ export class FirebaseService {
             subCategoryCopy.push(budgetCategoryObject.currentBudgetCategoryData)
             console.log(subCategoryCopy);
             this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(data.id).update(queriedData);
+            break
           }
         }
       })
