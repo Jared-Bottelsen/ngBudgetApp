@@ -30,11 +30,11 @@
                 <div *ngIf="isButtonMenuVisible === i" class="individual-expense__button-group">
                     <div class="individual-expense__button-group--alignment">
                         <button 
-                            class="p-button-rounded" 
+                            class="p-button-rounded p-button-danger" 
                             pButton 
-                            (click)="openEditExpenseModal(i)"
-                            label="Edit" 
-                            [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#426fef',
+                            (click)="deleteExpense(i)"
+                            label="Delete" 
+                            [style]="{'width': '5rem', 'height': '1.5rem',
                             'font-size': '1.4rem'}">
                         </button>
                         <button 
