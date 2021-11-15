@@ -1,20 +1,66 @@
+<div class="header-group flex justify-content-between align-items-center">
+    <h2>Add to your Budget</h2>
+    <fa-icon (click)="closeModal()" [icon]="faTimes" class="header-group--icon-size"></fa-icon>
+</div>
 <form [formGroup]="budgetForm">
     <div class="form-group-container">
-        <label for="categoryTitle">New Category Title</label>
-        <input id="categoryTitle" formControlName="categoryTitle">
+        <label class="col-12" for="categoryTitle">New Category Title</label>
+        <input 
+            class="col-12"
+            pInputText 
+            type="text"
+            id="categoryTitle" 
+            formControlName="categoryTitle"
+        >
     </div>
 <div formArrayName="subCategory">
-    <div *ngFor="let subCat of subCategories.controls; let i = index" [formGroupName]="i" class="form-array-container">
-        <label for="subCategoryTitle">Item Label</label>
-        <input id="subCategoryTitle" formControlName="subCategoryTitle">
-    
-        <label for="subCategoryValue">Amount</label>
-        <input type="number" name="subCategoryValue" id="subCategoryValue" formControlName="subCategoryValue">
-        <!-- <input id="subCategoryValue" formControlName="subCategoryValue">     -->
+    <div 
+        (click)="showDeleteButton(i)"
+        *ngFor="let subCat of subCategories.controls; let i = index" 
+        [formGroupName]="i" 
+        class="grid col-12 grid-nogutter flex justify-content-between" 
+        style="padding: 0;"
+    >
+        <div class="col-7">
+            <label class="col-12" for="subCategoryTitle">Item Label</label>
+            <input 
+                class="col-12" 
+                pInputText 
+                type="text"
+                id="subCategoryTitle" 
+                formControlName="subCategoryTitle"
+            >    
+        </div>
+        <div class="col-3">
+            <label class="col-12" for="subCategoryValue">Amount</label>
+            <input 
+                class="col-11" 
+                pInputText 
+                type="number" 
+                name="subCategoryValue" 
+                id="subCategoryValue" 
+                formControlName="subCategoryValue"
+            >    
+        </div>
+        <div class="col-1 flex align-items-center">
+            <fa-icon *ngIf="indexOfSubCategoryDeleteButton === i"  (click)="deleteSubCategory(i)" [icon]="faTimes" [style]="{'font-size': '1.5rem', 'margin-top': '0.9rem'}" class="col-12"></fa-icon>
+        </div>
     </div>
 </div>
 </form>
 <div class="button-group-container">
-    <button (click)="addSubcategory()">Add New Subcategory</button>    
-    <button (click)= "onSubmit(budgetForm)">OK</button>
+    <button 
+        pButton
+        [style]="{'background-color': '#426fef', 'height': '1.4rem'}" 
+        class="p-button-rounded" 
+        (click)="addSubcategory()" 
+        label="Add Subcategory">
+    </button>    
+    <button 
+        pButton
+        [style]="{'background-color': '#426fef', 'height': '1.4rem'}" 
+        class="p-button-rounded" 
+        (click)= "onSubmit(budgetForm)" 
+        label="Create">
+    </button>
 </div>
