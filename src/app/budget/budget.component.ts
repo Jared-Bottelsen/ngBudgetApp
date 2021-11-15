@@ -7,6 +7,8 @@ import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../services/firebase.service';
 import { BudgetEditComponent } from './budget-edit/budget-edit.component';
 import { Subscription } from 'rxjs';
+import { MenuItem } from 'primeng/api';
+import { ExpenseAddComponent } from './expense-add/expense-add.component';
 
 @Component({
   selector: 'app-budget',
@@ -28,16 +30,41 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   budgetSubCategory: any[] = [];
 
+  menuItems!: MenuItem[];
+
   budgetAddModalOptions = {
     header: 'Add to Your Budget',
-    width: '100%',
+    width: '95%',
     height: '75%',
     styleClass: 'budget-add'  
   }
 
-  constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { 
-
+  expenseAddModalOptions = {
+    header: 'Add an Expense',
+    width: '95%',
+    showHeader: false,
+    data: {
+      formName: 'expense',
+    }
   }
+
+  constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { }
+
+  ngOnInit(): void {
+    this.getBudgetSubscription$ = this.db.getCategories()
+     .subscribe((categories: any) => {
+       this.budgetCategory = categories
+     })
+     this.menuItems = [
+       {label: 'New Budget Category', command: () => { this.showBudgetCategoryModal(); }},
+       {label: 'Add Expense', command: () => { this.showExpenseModal(); }}
+     ]
+   }
+ 
+   ngOnDestroy(): void {
+     this.getBudgetSubscription$.unsubscribe();
+   }
+ 
 
   openBudgetEditModal(index: number) {
     const ref = this.dialogService.open(BudgetEditComponent, {
@@ -47,7 +74,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
         subCategories: this.budgetCategory[index].subCategory
       },
       width: '100%',
-      height: '60%',
       styleClass: 'customDialogStyles',
       closable: false,
     });
@@ -98,18 +124,17 @@ export class BudgetComponent implements OnInit, OnDestroy {
     })
   }
 
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.budgetCategory, event.previousIndex, event.currentIndex);
-  }
+  showExpenseModal() {
+    const ref = this.dialogService.open(ExpenseAddComponent, this.expenseAddModalOptions);
 
-  ngOnInit(): void {
-   this.getBudgetSubscription$ = this.db.getCategories()
-    .subscribe((categories: any) => {
-      this.budgetCategory = categories
+    ref.onClose.subscribe(result => {
+      if (result) {
+        this.db.expenseSubtractOperation(result)
+      }
     })
   }
 
-  ngOnDestroy(): void {
-    this.getBudgetSubscription$.unsubscribe();
+  drop(event: CdkDragDrop<string[]>) {
+    moveItemInArray(this.budgetCategory, event.previousIndex, event.currentIndex);
   }
 }

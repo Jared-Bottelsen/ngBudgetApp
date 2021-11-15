@@ -1,8 +1,9 @@
 <div>
     <div class="header-container">
         <h1 class="header-container__text">Monthly Budget</h1>
-        <fa-icon [icon]="faPlusCircle" class="header-container__add-icon" (click)="showBudgetCategoryModal()"></fa-icon>    
+        <fa-icon [icon]="faPlusCircle" class="header-container__add-icon" (click)="menu.toggle($event)"></fa-icon> 
     </div>
+    <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>   
     <div class="category-panel-container">
         <p-scrollPanel styleClass="customScrollStyles">
             <div 
