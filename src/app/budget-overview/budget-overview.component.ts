@@ -4,7 +4,6 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { ExpenseEditComponent } from './expense-edit/expense-edit.component';
 
 @Component({
   selector: 'app-budget-overview',
@@ -18,13 +17,17 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   getExpensesObservable$!: Subscription;
 
+  getBudgetCategoriesObservable$!: Subscription;
+
   faHandHoldingUsd = faHandHoldingUsd
 
   isMobile: boolean = this.deviceService.isMobile();
 
   isDesktop: boolean = this.deviceService.isDesktop();
 
-  individualExpenses:any = []; 
+  individualExpenses: Array<any> = []; 
+
+  budgetCategories: Array<any> = []
 
   constructor(private deviceService: DeviceDetectorService, private db: FirebaseService, private dialogService: DialogService, private ref: DynamicDialogRef) { }
 
@@ -33,11 +36,16 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
     .subscribe((expenses) => {
         this.individualExpenses = expenses;
     })
+    this.getBudgetCategoriesObservable$ = this.db.getCategories()
+    .subscribe(categories => {
+      this.budgetCategories = categories
+    })
     this.db.createUser();
   }
 
   ngOnDestroy(): void {
     this.getExpensesObservable$.unsubscribe();
+    this.getBudgetCategoriesObservable$.unsubscribe();
   }
 
   showButtons(index: number) {
@@ -48,26 +56,25 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
      this.isButtonMenuVisible = -1;
   }
 
-  openEditExpenseModal(index: number) {
-    const ref: DynamicDialogRef = this.dialogService.open(ExpenseEditComponent, {
-      showHeader: false,
-      data: {
-        expenseAmount: this.individualExpenses[index].expenseAmount,
-        expenseCategory: this.individualExpenses[index].expenseCategory,
-        expenseName: this.individualExpenses[index].expenseName,
-        expenseDate: this.individualExpenses[index].expenseDate
-      },  
-      width: '90%',
-      closable: false
-    })
-    ref.onClose.subscribe((data: Object) => {
-      if (!data) {
-        this.isButtonMenuVisible = -1;
-        console.log("No Data Sent");
-      } else {
-        this.db.updateExpenseData(data);
-        this.isButtonMenuVisible = -1;
+  findBudgetCategoryObject(categoryTitle: string) {
+    for (let i = 0; i < this.budgetCategories.length; i++) {
+      let index = this.budgetCategories[i].subCategory.find((x: any) => x.subCategoryTitle === categoryTitle)
+      if (index) {
+        return index
       }
-    })
+    }
+  }
+
+  deleteExpense(index: number) {
+    let payload = {
+      currentBudgetCategoryData: this.findBudgetCategoryObject(this.individualExpenses[index].expenseCategory),
+      submittedData: {
+        expenseAmount: this.individualExpenses[index].expenseAmount
+      }
+    }
+    this.isButtonMenuVisible = -1;
+    this.db.expenseDeleteOperation(payload);
+    this.db.deleteExpense(this.individualExpenses[index].expenseName, this.individualExpenses[index].expenseAmount, this.individualExpenses[index].expenseCategory)
+   
   }
 }
