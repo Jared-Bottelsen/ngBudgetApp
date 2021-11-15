@@ -82,7 +82,6 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
   }
 
   onFormSubmit(formData: FormGroup) {
-    console.log(formData.value);
     if (!formData.pristine) {
       let expenseCat = formData.value.expenseCategory.pop();
       this.db.addExpense({

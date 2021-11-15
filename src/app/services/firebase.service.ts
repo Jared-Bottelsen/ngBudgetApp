@@ -98,10 +98,8 @@ export class FirebaseService {
           if (_.isEqual(subCategoryCopy[i], budgetCategoryObject.currentBudgetCategoryData)) {
             subCategoryCopy.splice(i, 1);
             let newCategoryValue = budgetCategoryObject.currentBudgetCategoryData.subCategoryValue - budgetCategoryObject.submittedData.expenseAmount;
-            console.log(newCategoryValue);
             budgetCategoryObject.currentBudgetCategoryData.subCategoryValue = newCategoryValue;
             subCategoryCopy.push(budgetCategoryObject.currentBudgetCategoryData)
-            console.log(subCategoryCopy);
             this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(data.id).update(queriedData);
             break
           }
@@ -128,10 +126,8 @@ export class FirebaseService {
           if (_.isEqual(subCategoryCopy[i], budgetCategoryObject.currentBudgetCategoryData)) {
             subCategoryCopy.splice(i, 1);
             let newCategoryValue = budgetCategoryObject.currentBudgetCategoryData.subCategoryValue + budgetCategoryObject.submittedData.expenseAmount;
-            console.log(newCategoryValue);
             budgetCategoryObject.currentBudgetCategoryData.subCategoryValue = newCategoryValue;
             subCategoryCopy.push(budgetCategoryObject.currentBudgetCategoryData)
-            console.log(subCategoryCopy);
             this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(data.id).update(queriedData);
             break
           }
