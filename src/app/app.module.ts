@@ -29,9 +29,6 @@ import { BudgetEditComponent } from './budget/budget-edit/budget-edit.component'
 import { InputTextModule } from 'primeng/inputtext';
 import { LoginComponent } from './login/login.component';
 import { MenuModule } from 'primeng/menu';
-import { MenuItem } from 'primeng/api';
-import { ExpenseEditComponent } from './budget-overview/expense-edit/expense-edit.component';
-
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,7 +41,6 @@ import { ExpenseEditComponent } from './budget-overview/expense-edit/expense-edi
     ExpenseAddComponent,
     BudgetEditComponent,
     LoginComponent,
-    ExpenseEditComponent
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
