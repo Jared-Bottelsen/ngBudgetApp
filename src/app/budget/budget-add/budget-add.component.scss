@@ -1,20 +1,18 @@
-.form-group-container {
-    display: grid;
-    grid-template-columns: 1fr;
-    grid-gap: 5px;
+.header-group {
+    margin-top: 1rem;
 
-    #categoryTitle {
-        margin-bottom: 5px;
+    &--icon-size {
+        font-size: 1.5rem;
     }
 }
 
-.form-array-container {
+.form-group-container {
     display: grid;
-    grid-template-columns: 1fr 1fr;
+    grid-template-columns: 1fr;
+}
 
-    label {
-        font-size: .8rem;
-    }
+label {
+    margin-left: -0.3rem;
 }
 
 .button-group-container {
