@@ -21,13 +21,6 @@ interface BudgetExpense {
 })
 export class FirebaseService {
 
- subCategoryCopy: any;
- currentDocId!: string;
- expenseValue!: number;
- currentCategoryValue: any;
- fullCurrentBudgetCategory: any;
- queriedData: any;
-
   constructor(private database: AngularFirestore, private auth: AuthService) {
   }
 
@@ -76,80 +69,6 @@ export class FirebaseService {
   }
 
 /**
- * Delete an entire document from the database. This is mostly used for the budget categories in the budget component.
- * The delete button in the budget edit modal fires off this method.
- * @param data 
- * @param collection 
- * @param queryParam 
- */
-  deleteDocument(data: Object, collection: string, queryParam: string) {
-    let query = this.database.collection("users").doc(this.auth.userId).collection(collection, ref => ref.where(queryParam, "==", data)).get();
-    query.subscribe(first => {
-      first.forEach(result => {
-        this.database.collection("users").doc(this.auth.userId).collection(collection).doc(result.id).delete();
-      })
-    })
-  }
-
- /**
-  * Method used pull data from the expense-add component to be used in the expense add methods. This simply updates component
-  * variables here to be used in both expenseAddQuery and performExpenseSubtraction.
-  * @param expenseValue 
-  * @param currentValue 
-  * @param fullCurrentBudgetCategory 
-  */ 
-  getExpenseInfo(expenseValue: number, currentValue: string, fullCurrentBudgetCategory: Object) {
-    this.expenseValue = expenseValue
-    this.currentCategoryValue = currentValue
-    this.fullCurrentBudgetCategory = fullCurrentBudgetCategory
-  }
-
- /**
-  * Pulls in a copy of the queried subCategory from expenseAddQuery and performs a loop on the array until it finds
-  * the subCategory we want to perform an update to. It then takes the current value and the expense value and subtracts them
-  * to receive the new value that we will insert back into the db. With this new value, we set the currentCategoryValue to 
-  * the new value and then set the fullCurrentBudgetCategory current value to the newly calculated value and push the updated
-  * fullCurrentBudgetCategory into the subCategoryCopy which is then set to equal the queried data's subcategory with the 
-  * updated information. This updated queriedData is what is used to make the database update at the end of the 
-  * expenseAddQuery method. 
-  * @param categoryCopy 
-  * @param expenseValue 
-  * @param currentValue 
-  */ 
-  private performExpenseSubtraction(categoryCopy: Array<any>, expenseValue: number, currentValue: number) {
-    for (let i = 0; i < categoryCopy.length; i++) {
-      if (_.isEqual(categoryCopy[i], this.fullCurrentBudgetCategory)) {
-        categoryCopy.splice(i, 1);
-        let newValString = currentValue - expenseValue;
-        this.currentCategoryValue = newValString;
-        this.fullCurrentBudgetCategory.subCategoryValue = this.currentCategoryValue;
-        this.subCategoryCopy.push(this.fullCurrentBudgetCategory);
-        this.queriedData.subCategory = this.subCategoryCopy;
-        break
-      }     
-    }
-  }
-
- /**
-  * Takes in an object that contains the current budget object that is being targeted with a new expense. It then
-  * runs a query against the database to pull in the document that contains the budget sub category in question. Makes a 
-  * copy of the subCategory data and performs the subtraction using the performExpenseSubtraction method. The result of that 
-  * method is then used to make a destructive update to the db document to insert the updated version.
-  * @param currentBudgetValue 
-  */ 
-  expenseAddQuery(currentBudgetValue: number) {
-    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "array-contains", currentBudgetValue)).get()
-    query.subscribe(results => {
-      results.forEach(test => {
-        this.queriedData = test.data();
-        this.subCategoryCopy = this.queriedData.subCategory;
-        this.performExpenseSubtraction(this.subCategoryCopy, this.expenseValue, this.currentCategoryValue)
-        this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(test.id).update(this.queriedData);
-      })
-    })
-  }
-
-/**
  * Make edits to the expense data for individual expense from the budget overview component view
  * @param data 
  */
@@ -159,6 +78,62 @@ export class FirebaseService {
     query.subscribe(start => {
       start.forEach(result => {
         this.database.collection("users").doc(this.auth.userId).collection("budgetExpense").doc(result.id).set(data.new, {merge: true});
+      })
+    })
+  }
+
+/**
+ * When an expense is added, this method queries the database using the subCategory the expense was logged against. With the returned data
+ * the method performs a subtraction operation to take the expense amount away from the subCategory value. It then updates the database accordingly
+ * @param budgetCategoryObject 
+ */
+  expenseSubtractOperation(budgetCategoryObject: any) {
+    let query = this.database.collection("users").doc(this.auth.userId)
+    .collection("budgetCategory", ref => ref.where("subCategory", "array-contains", budgetCategoryObject.currentBudgetCategoryData)).get();
+    query.subscribe(result => {
+      result.forEach(data => {
+        let queriedData = data.data();
+        let subCategoryCopy = queriedData.subCategory;
+        for (let i = 0; i < subCategoryCopy.length; i++) {
+          if (_.isEqual(subCategoryCopy[i], budgetCategoryObject.currentBudgetCategoryData)) {
+            subCategoryCopy.splice(i, 1);
+            let newCategoryValue = budgetCategoryObject.currentBudgetCategoryData.subCategoryValue - budgetCategoryObject.submittedData.expenseAmount;
+            console.log(newCategoryValue);
+            budgetCategoryObject.currentBudgetCategoryData.subCategoryValue = newCategoryValue;
+            subCategoryCopy.push(budgetCategoryObject.currentBudgetCategoryData)
+            console.log(subCategoryCopy);
+            this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(data.id).update(queriedData);
+          }
+        }
+      })
+    })
+  }
+
+/**
+ * When an expense is deleted this method queries the database using the subCategory the expense was logged against. With the returned data
+ * the method performs an addition operation to add the money back to that subCategory value since the expense has been deleted and is no longer 
+ * effecting the value of the subCategory. The final step of the method is to make the change to the database to reflect the value of the subCategory 
+ * after the operation has been completed. 
+ * @param budgetCategoryObject 
+ */
+  expenseDeleteOperation(budgetCategoryObject: any) {
+    let query = this.database.collection("users").doc(this.auth.userId)
+    .collection("budgetCategory", ref => ref.where("subCategory", "array-contains", budgetCategoryObject.currentBudgetCategoryData)).get();
+    query.subscribe(result => {
+      result.forEach(data => {
+        let queriedData = data.data();
+        let subCategoryCopy = queriedData.subCategory;
+        for (let i = 0; i < subCategoryCopy.length; i++) {
+          if (_.isEqual(subCategoryCopy[i], budgetCategoryObject.currentBudgetCategoryData)) {
+            subCategoryCopy.splice(i, 1);
+            let newCategoryValue = budgetCategoryObject.currentBudgetCategoryData.subCategoryValue + budgetCategoryObject.submittedData.expenseAmount;
+            console.log(newCategoryValue);
+            budgetCategoryObject.currentBudgetCategoryData.subCategoryValue = newCategoryValue;
+            subCategoryCopy.push(budgetCategoryObject.currentBudgetCategoryData)
+            console.log(subCategoryCopy);
+            this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(data.id).update(queriedData);
+          }
+        }
       })
     })
   }
@@ -190,6 +165,22 @@ export class FirebaseService {
     query.subscribe(results => {
       results.forEach(result => {
         this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(result.id).set(editedPayload, {merge: true})
+      })
+    })
+  }
+
+  /**
+ * Delete an entire document from the database. This is mostly used for the budget categories in the budget component.
+ * The delete button in the budget edit modal fires off this method.
+ * @param data 
+ * @param collection 
+ * @param queryParam 
+ */
+   deleteDocument(data: Object, collection: string, queryParam: string) {
+    let query = this.database.collection("users").doc(this.auth.userId).collection(collection, ref => ref.where(queryParam, "==", data)).get();
+    query.subscribe(first => {
+      first.forEach(result => {
+        this.database.collection("users").doc(this.auth.userId).collection(collection).doc(result.id).delete();
       })
     })
   }
