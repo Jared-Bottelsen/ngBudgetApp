@@ -2,6 +2,7 @@ import { Component, OnInit, OnDestroy } from '@angular/core';
 import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from 'src/app/services/firebase.service';
+import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
 
 @Component({
   selector: 'app-expense-add',
@@ -10,12 +11,13 @@ import { FirebaseService } from 'src/app/services/firebase.service';
 })
 export class ExpenseAddComponent implements OnInit, OnDestroy {
 
-  selectedOption: string;
   categoryOptions: any;
+
   rawCateories: any = [];
-  currentBudgetValue: any;
+
   getCategoriesObservable$!: Subscription;
 
+  formName: string;
 
   expenseForm = this.fb.group({
     expenseCategory: '',
@@ -23,66 +25,9 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
     expenseName: ''
   })
 
-  optionValue(event: any) {
-  }
-
-  formOptions = [
-    {
-      label: 'Expense',
-      value: 'expense'
-    },
-    {
-      label: 'Income',
-      value: 'income'
-    }
-  ]
-
-  createDate() {
-    let newDate = new Date();
-    let month = newDate.getMonth() + 1;
-    let day = newDate.getDate();
-    return `${month}/${day}`
-  }
-
-  findExpenseCategory(budgetCategory: string) {
-      for(let i = 0; i < this.rawCateories.length; i++) {
-        let index = this.rawCateories[i].subCategory.find((x: any) => x.subCategoryTitle === budgetCategory)
-        if (index) {
-          this.currentBudgetValue = index
-        }
-      }
-    }
-  
-
-  isolateOptions (options: any[]) {
-    let categories: any[] = [];
-    for (let i = 0; options.length > i; i++) {
-      let subCategories = options[i].subCategory
-      for (let j = 0; j < subCategories.length; j++) {
-        categories.push(subCategories[j].subCategoryTitle)       
-      }
-    }
-    return categories
-  }
-
-  onFormSubmit(formData: FormGroup) {
-    let categoryData = formData.value.expenseCategory.pop()
-    formData.value.expenseCategory = categoryData;
-    this.db.addExpense({
-      expenseCategory: formData.value.expenseCategory,
-      expenseName : formData.value.expenseName,
-      expenseAmount: formData.value.expenseAmount, 
-      expenseDate: this.createDate(),
-      fullDate: new Date()
-    });
-    this.findExpenseCategory(formData.value.expenseCategory)
-    this.db.getExpenseInfo(formData.value.expenseAmount, this.currentBudgetValue.subCategoryValue, this.currentBudgetValue);
-    this.db.expenseAddQuery(this.currentBudgetValue)
-  }
-
-  constructor(private fb: FormBuilder, private db: FirebaseService) { 
-    this.selectedOption = 'expense'
+  constructor(private fb: FormBuilder, private db: FirebaseService, private config: DynamicDialogConfig, private ref: DynamicDialogRef) { 
     this.categoryOptions = [];
+    this.formName = this.config.data.formName;
   }
 
   ngOnInit(): void {
@@ -95,5 +40,71 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
 
   ngOnDestroy(): void {
     this.getCategoriesObservable$.unsubscribe();
+  }
+
+  createDate() {
+    let newDate = new Date();
+    let month = newDate.getMonth() + 1;
+    let day = newDate.getDate();
+    return `${month}/${day}`
+  }
+
+/**
+ * Used to find the entire subCategory entry that we are targetting an expense withdraw from to be used in
+ * the query to firebase
+ * @param budgetCategory 
+ * @returns the object value of the current budget subcategory {subCategoryValue: number, subCategoryTitle: string, startingValue: number}
+ */
+  findExpenseCategory(budgetCategory: string) {
+    for(let i = 0; i < this.rawCateories.length; i++) {
+      let index = this.rawCateories[i].subCategory.find((x: any) => x.subCategoryTitle === budgetCategory)
+      if (index) {
+        return index
+      }
+    }
+  }
+
+/**
+ * Takes in the getCategories data from the database and isolates the subCategoryTitle's to be used in the dropdown in the
+ * expenseForm expenseCategory control
+ * @param options 
+ * @returns the array used in the expenseCategory control multiSelect dropdown
+ */
+  isolateOptions (options: any[]) {
+    let categories: any[] = [];
+    for (let i = 0; options.length > i; i++) {
+      let subCategories = options[i].subCategory
+      for (let j = 0; j < subCategories.length; j++) {
+        categories.push(subCategories[j].subCategoryTitle)       
+      }
+    }
+    return categories
+  }
+
+  onFormSubmit(formData: FormGroup) {
+    console.log(formData.value);
+    if (!formData.pristine) {
+      let expenseCat = formData.value.expenseCategory.pop();
+      this.db.addExpense({
+        expenseCategory: expenseCat,
+        expenseName : formData.value.expenseName,
+        expenseAmount: formData.value.expenseAmount, 
+        expenseDate: this.createDate(),
+        fullDate: new Date()
+      });
+      let expensePayload = {
+        currentBudgetCategoryData: this.findExpenseCategory(expenseCat),
+        submittedData: {
+          subCategoryTitle: expenseCat,
+          expenseName: formData.value.expenseName,
+          expenseAmount: formData.value.expenseAmount
+        }
+      }
+      this.ref.close(expensePayload);
+    }
+  }
+
+  closeModal() {
+    this.ref.close();
   }
 }
