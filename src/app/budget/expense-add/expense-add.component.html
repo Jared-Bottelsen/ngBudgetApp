@@ -1,47 +1,50 @@
-<div class="form-toggle-container">
-    <p-selectButton 
-        [options]="formOptions" 
-        [(ngModel)]="selectedOption" 
-        (ngModelChange)="optionValue($event)">
-    </p-selectButton>
-</div>
+<h2>Add an Expense</h2>
+
 <div class="form-container">
-    <form 
-    *ngIf="selectedOption === 'expense'" 
-    [formGroup]="expenseForm" 
-    class="form-container__alignment">
-        <label>Category</label>
-        <p-multiSelect 
-            formControlName="expenseCategory" 
-            [options]="categoryOptions" 
-            [filter]="false" 
-            [showToggleAll]="false" 
-            [showHeader]="false" 
-            [selectionLimit]="1" 
-            [style]="{'width' : '100%'}">
-        </p-multiSelect>
-        <label for="expenseName">Expense Name</label>
-        <input 
-            pInputText 
-            type="text" 
-            id="expenseName" 
-            formControlName="expenseName">
-        <label for="expense-amount">Amount</label>
-        <input 
-            pInputText 
-            formControlName="expenseAmount" 
-            id="expense-amount" 
-            type="number">
-        <button 
-            pButton 
-            class="p-button-rounded" 
-            [style]="{'background-color': '426fef', 'margin-top': '1rem'}" 
-            label="Submit" 
-            (click)="onFormSubmit(expenseForm)">
-        </button>
-    </form>  
+    <div class="expense-form" *ngIf="formName === 'expense'">
+        <form [formGroup]="expenseForm" class="form-container__alignment">
+            <label>Category</label>
+            <p-multiSelect 
+                formControlName="expenseCategory" 
+                [options]="categoryOptions" 
+                [filter]="false" 
+                [showToggleAll]="false" 
+                [showHeader]="false" 
+                [selectionLimit]="1" 
+                [style]="{'width' : '100%'}">
+            </p-multiSelect>
+            <label for="expenseName">Expense Name</label>
+            <input 
+                pInputText 
+                type="text" 
+                id="expenseName" 
+                formControlName="expenseName">
+            <label for="expense-amount">Amount</label>
+            <input 
+                pInputText 
+                formControlName="expenseAmount" 
+                id="expense-amount" 
+                type="number">
+        </form>  
+        <div class="flex justify-content-between">
+                <button 
+                pButton 
+                class="p-button-rounded" 
+                [style]="{'background-color': '426fef', 'margin-top': '1rem'}" 
+                label="Submit" 
+                (click)="onFormSubmit(expenseForm)">
+            </button>
+            <button 
+                pButton 
+                class="p-button-rounded" 
+                [style]="{'background-color': '426fef', 'margin-top': '1rem'}" 
+                label="Cancel"
+                (click)="closeModal()">
+            </button>
+        </div>    
+    </div>
     
-    <form class="form-container__alignment" *ngIf="selectedOption === 'income'">
+    <form class="form-container__alignment" *ngIf="formName === 'income'">
         <input pInputText type="text">
         <input pInputText type="text">
         <input pInputText type="text">
