@@ -1,16 +1,19 @@
-<h1 class="overview-header-text">Overview</h1>
+<div class="flex justify-content-between">
+    <h1 class="overview-header-text">Overview</h1>
+    <fa-icon (click)="openIncomeModal()" style="margin: 0.5rem 0.5rem 0 0 ;font-size: 1.8rem" [icon]="faPlusCircle"></fa-icon>
+</div>
 
 <div class="flex justify-content-center">
     <div class="budget-overview-information-container">
         <div class="flex flex-column align-items-center">
-            <p>Budget Remaining</p>
-            <p>$3,000</p>
+            <p>Total Spent this Month</p>
+            <p>{{expenseTotal | currency}}</p>
         </div> 
             <div class="budget-income-overview-container flex justify-content-between">
                 <div class="budget-income-overview-container__children">
                     <div>
-                        <p class="">Budgeted</p>
-                        <p class="">$3,000</p>    
+                        <p>Budgeted</p>
+                        <p>{{budgetCategoryTotal | currency}}</p>    
                     </div>
                 </div>  
                 <div class="budget-income-overview-container__children">     
@@ -50,7 +53,7 @@
                 <div (click)="showButtons(i)" class="individual-expense__label-container" style="height: inherit;">
                     <p style="justify-self: center;">{{expense.expenseDate}}</p>
                     <p>{{expense.expenseName}}</p>
-                    <p style="justify-self: start;">${{expense.expenseAmount}}</p>
+                    <p style="justify-self: start; margin-right: 0.8rem;">{{expense.expenseAmount | currency}}</p>
                 </div>
             </div>
         </div>
