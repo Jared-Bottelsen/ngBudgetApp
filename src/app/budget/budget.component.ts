@@ -43,9 +43,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
     header: 'Add an Expense',
     width: '95%',
     showHeader: false,
-    data: {
-      formName: 'expense',
-    }
   }
 
   constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { }

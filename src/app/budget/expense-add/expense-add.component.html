@@ -1,7 +1,7 @@
 <h2>Add an Expense</h2>
 
 <div class="form-container">
-    <div class="expense-form" *ngIf="formName === 'expense'">
+    <div class="expense-form">
         <form [formGroup]="expenseForm" class="form-container__alignment">
             <label>Category</label>
             <p-multiSelect 
@@ -43,10 +43,4 @@
             </button>
         </div>    
     </div>
-    
-    <form class="form-container__alignment" *ngIf="formName === 'income'">
-        <input pInputText type="text">
-        <input pInputText type="text">
-        <input pInputText type="text">
-    </form>      
 </div>
