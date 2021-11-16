@@ -17,8 +17,6 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
 
   getCategoriesObservable$!: Subscription;
 
-  formName: string;
-
   expenseForm = this.fb.group({
     expenseCategory: '',
     expenseAmount: '',
@@ -27,7 +25,6 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
 
   constructor(private fb: FormBuilder, private db: FirebaseService, private config: DynamicDialogConfig, private ref: DynamicDialogRef) { 
     this.categoryOptions = [];
-    this.formName = this.config.data.formName;
   }
 
   ngOnInit(): void {
