@@ -1,5 +1,5 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore } from "@angular/fire/compat/firestore";
+import { AngularFirestore, DocumentData } from "@angular/fire/compat/firestore";
 import { AuthService } from './auth.service';
 import * as _ from 'lodash'
 
@@ -49,6 +49,22 @@ export class FirebaseService {
  */  
   addExpense(expenseData: BudgetExpense) {
     this.database.collection('users').doc(this.auth.userId).collection('budgetExpense').add(expenseData);
+  }
+
+/**
+ * Adds a new income document to the database for the current user
+ * @param incomeData 
+ */
+  addIncome(incomeData: DocumentData) {
+    this.database.collection("users").doc(this.auth.userId).set(incomeData, {merge: true});
+  }
+
+/**
+ * 
+ * @returns Income data from the budgetIncome collection for the logged in user.
+ */
+  getIncome() {
+    return this.database.collection("users").doc(this.auth.userId).valueChanges();
   }
 
 /**
