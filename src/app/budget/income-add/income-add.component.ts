@@ -51,6 +51,7 @@ export class IncomeAddComponent implements OnInit {
     }
     this.biWeeklyForm.reset();
     this.monthlyForm.reset();
+    this.closeModal();
   }
 
   closeModal() {
