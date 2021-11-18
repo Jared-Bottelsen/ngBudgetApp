@@ -1,0 +1,53 @@
+<div class="flex justify-content-between align-items-end">
+    <h2 style="margin-top: 0.5rem;">Add Income</h2>
+    <fa-icon (click)="closeModal()" [icon]="faTimes" [style]="{'font-size': '1.5rem'}"></fa-icon>
+</div>
+
+<div class="select-button-container">
+    <p-selectButton 
+        [(ngModel)]="selectedOption" 
+        [options]="options" 
+        optionLabel="optionName" 
+        optionValue="optionCode">
+    </p-selectButton>
+</div>
+
+<div class="form-container">
+    <div *ngIf="selectedOption === 'MO'">
+        <form class="grid col-12 grid-nogutter" [formGroup]="monthlyForm">
+            <label class="col-12" for="monthlyIncome">Monthly Income</label>
+            <input
+                class="col-12 input-sizing"
+                formControlName="monthlyInput"
+                pInputText 
+                type="number" 
+                id="monthlyIcome"
+            >
+        </form>          
+    </div>
+    
+    <div class="" *ngIf="selectedOption === 'BI'">
+        <form class="grid col-12 grid-nogutter" [formGroup]="biWeeklyForm">
+            <label class="col-12" for="check1">Check 1</label>
+            <input 
+                class="col-12 input-sizing" 
+                formControlName="check1"
+                pInputText 
+                type="number" 
+                id="check1"
+            >
+            <label class="col-12" for="check2">Check 2</label>
+            <input 
+                class="col-12 input-sizing" 
+                formControlName="check2"
+                pInputText 
+                type="number" 
+                id="check2"
+            >
+        </form>
+    </div>    
+</div>
+
+<div class="button-group">
+    <button (click)="selectedOption === 'MO' ? submitForm(monthlyForm) : submitForm(biWeeklyForm)" pButton label="Submit"></button>
+</div>
