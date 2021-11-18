@@ -38,7 +38,9 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   income!: number;
 
-  overBudgeted!: boolean;
+  overBudgeted: boolean = false
+
+  overSpent: boolean = false
 
   constructor(private deviceService: DeviceDetectorService, private db: FirebaseService, private dialogService: DialogService, private ref: DynamicDialogRef) { }
 
@@ -52,6 +54,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
     .subscribe(categories => {
       this.budgetCategories = categories;
       this.budgetCategoryTotal = this.addUpBudgetCategories();
+      this.isOverSpent();
     })
     this.db.getIncome().subscribe((result: any) => {
       this.income = result.income;
@@ -69,6 +72,12 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
   isOverBudget() {
     if (this.budgetCategoryTotal > this.income) {
       this.overBudgeted = true;
+    }
+  }
+
+  isOverSpent() {
+    if (this.expenseTotal > this.budgetCategoryTotal) {
+      this.overSpent = true;
     }
   }
 
