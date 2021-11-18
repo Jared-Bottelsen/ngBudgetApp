@@ -1,0 +1,33 @@
+.select-button-container {
+    display: flex;
+    justify-content: center;
+    margin: 1rem 0 1rem 0;
+}
+
+.input-sizing {
+    height: 2rem;
+    font-size: 1rem;
+}
+
+.col-12 {
+    padding: 0.2rem;
+}
+
+.button-group {
+    padding: 0.2rem;
+    float: right;
+}
+
+.form-container {
+    height: 50%;
+}
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+  -moz-appearance: textfield;
+}
