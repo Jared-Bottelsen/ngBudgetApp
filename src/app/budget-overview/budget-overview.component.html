@@ -13,13 +13,13 @@
                 <div class="budget-income-overview-container__children">
                     <div>
                         <p>Budgeted</p>
-                        <p>{{budgetCategoryTotal | currency}}</p>    
+                        <p [ngClass]="{'budget-income-overview-container__children--over-budget' : overBudgeted}">{{budgetCategoryTotal | currency}}</p>    
                     </div>
                 </div>  
                 <div class="budget-income-overview-container__children">     
                     <div>
                         <p class="">Income</p>
-                        <p class="">$3,000</p>
+                        <p>{{income | currency}}</p>
                     </div>    
                 </div>  
         </div>

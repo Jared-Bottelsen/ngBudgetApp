@@ -22,7 +22,11 @@
     &__children {
         line-height: 1.2em;
         height: 2.4em;
-        overflow: hidden;    
+        overflow: hidden; 
+        
+        &--over-budget {
+            color: red;
+        }
     }
 }
 
