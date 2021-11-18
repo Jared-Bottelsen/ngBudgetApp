@@ -1,3 +1,8 @@
+<div class="header flex justify-content-between align-items-center">
+    <h2>Make Edits to your Budget</h2>
+    <fa-icon [icon]="faTimes" [style]="{'font-size': '1.5rem'}" (click)="close()"></fa-icon>
+</div>
+
 <form [formGroup]="editForm">
     <div class="col-9">
         <label 
@@ -130,14 +135,6 @@
         [style]="{'width': '4.5rem', 'height': '1.2rem', 'background-color': '#426fef', 'font-size': '0.7rem'}"
         (click)='addNewSubCategory()'
         label="Add"
-    >
-    </button>
-    <button 
-        pButton 
-        class="p-button-rounded"
-        [style]="{'width': '4.5rem', 'height': '1.2rem', 'background-color': '#426fef', 'font-size': '0.7rem'}" 
-        (click)="close()"
-        label="Cancel"
     >
     </button>
     <button 

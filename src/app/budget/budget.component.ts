@@ -65,14 +65,13 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   openBudgetEditModal(index: number) {
     const ref = this.dialogService.open(BudgetEditComponent, {
-      header: 'Make Edits to Your Budget',
       data: {
         categoryTitle: this.budgetCategory[index].categoryTitle,
         subCategories: this.budgetCategory[index].subCategory
       },
       width: '100%',
       styleClass: 'customDialogStyles',
-      closable: false,
+      showHeader: false
     });
 
     ref.onClose.subscribe((options) => {

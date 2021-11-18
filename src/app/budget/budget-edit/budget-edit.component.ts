@@ -3,6 +3,7 @@ import { DynamicDialogRef, DynamicDialogConfig } from 'primeng/dynamicdialog';
 import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as _ from 'lodash';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-budget-edit',
@@ -18,6 +19,8 @@ export class BudgetEditComponent implements OnInit {
   isDeleteButtonVisibleCurrent: number = -1;
 
   isDeleteButtonVisibleNew: number = -1;
+
+  faTimes = faTimes;
 
   constructor(private ref: DynamicDialogRef, private config: DynamicDialogConfig, private fb: FormBuilder, private db: FirebaseService) { 
     this.currentSubcategories = this.config.data.subCategories
