@@ -1,9 +1,10 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { faHandHoldingUsd } from '@fortawesome/free-solid-svg-icons';
+import { faHandHoldingUsd, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { IncomeAddComponent } from '../budget/income-add/income-add.component';
 
 @Component({
   selector: 'app-budget-overview',
@@ -19,7 +20,9 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   getBudgetCategoriesObservable$!: Subscription;
 
-  faHandHoldingUsd = faHandHoldingUsd
+  faHandHoldingUsd = faHandHoldingUsd;
+
+  faPlusCircle = faPlusCircle;
 
   isMobile: boolean = this.deviceService.isMobile();
 
@@ -27,7 +30,15 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   individualExpenses: Array<any> = []; 
 
-  budgetCategories: Array<any> = []
+  budgetCategories: Array<any> = [];
+
+  budgetCategoryTotal!: number;
+
+  expenseTotal!: number;
+
+  income!: number;
+
+  overBudgeted!: boolean;
 
   constructor(private deviceService: DeviceDetectorService, private db: FirebaseService, private dialogService: DialogService, private ref: DynamicDialogRef) { }
 
@@ -35,11 +46,18 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
     this.getExpensesObservable$ = this.db.getExpenses()
     .subscribe((expenses) => {
         this.individualExpenses = expenses;
+        this.expenseTotal = this.addExpenses();
     })
     this.getBudgetCategoriesObservable$ = this.db.getCategories()
     .subscribe(categories => {
-      this.budgetCategories = categories
+      this.budgetCategories = categories;
+      this.budgetCategoryTotal = this.addUpBudgetCategories();
     })
+    this.db.getIncome().subscribe((result: any) => {
+      this.income = result.income;
+      this.isOverBudget();
+    })
+
     this.db.createUser();
   }
 
@@ -48,12 +66,45 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
     this.getBudgetCategoriesObservable$.unsubscribe();
   }
 
+  isOverBudget() {
+    if (this.budgetCategoryTotal > this.income) {
+      this.overBudgeted = true;
+    }
+  }
+
   showButtons(index: number) {
       this.isButtonMenuVisible = index;
   }
 
   hideButtons() {
      this.isButtonMenuVisible = -1;
+  }
+
+  addUpBudgetCategories() {
+    let budgetTotal: number = 0
+    for (let i = 0; i < this.budgetCategories.length; i++) {
+      let subCategories = this.budgetCategories[i].subCategory
+      for (let j = 0; j < subCategories.length; j++) {
+        budgetTotal += subCategories[j].startingValue     
+      }
+    }
+    return budgetTotal
+  }
+
+  addExpenses() {
+    let expenseTotal: number = 0;
+    for (let i = 0; i < this.individualExpenses.length; i++) {
+      expenseTotal += this.individualExpenses[i].expenseAmount
+    }
+    return expenseTotal
+  }
+
+  openIncomeModal() {
+    let ref = this.dialogService.open(IncomeAddComponent, {
+      width: '90%',
+      height: '50%',
+      showHeader: false
+    })
   }
 
   findBudgetCategoryObject(categoryTitle: string) {
@@ -75,6 +126,5 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
     this.isButtonMenuVisible = -1;
     this.db.expenseDeleteOperation(payload);
     this.db.deleteExpense(this.individualExpenses[index].expenseName, this.individualExpenses[index].expenseAmount, this.individualExpenses[index].expenseCategory)
-   
   }
 }
