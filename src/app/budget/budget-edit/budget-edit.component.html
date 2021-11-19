@@ -4,19 +4,21 @@
 </div>
 
 <form [formGroup]="editForm">
-    <div class="col-9">
-        <label 
-            for="categoryTitle" 
-            class="col-12">
-            Category Title
-        </label>
-        <input 
-            pInputText 
-            id="categoryTitle"
-            formControlName="categoryTitle" 
-            type="text" 
-            class="col-12"
-        >
+    <div class="grid grid-nogutter col-12">
+        <div class="col-7">
+            <label 
+                for="categoryTitle" 
+                class="col-12">
+                Category Title
+            </label>
+            <input 
+                pInputText 
+                id="categoryTitle"
+                formControlName="categoryTitle" 
+                type="text" 
+                class="col-12"
+            >
+        </div>    
     </div>
     <p-scrollPanel [style]="{'width': '100%', 'height': '190px'}" styleClass="customScroll">
         <div formArrayName="currentCategories">
@@ -25,7 +27,7 @@
                     class="grid col-12 grid-nogutter flex align-items-end" 
                     (click)="showDeleteButtonCurrent(i)"
                 >
-                    <div class="col-5">
+                    <div class="col-7">
                         <label class="col-12" for="title">Subcategory Title</label>
                         <input
                             formControlName='subCategoryTitle' 
@@ -40,26 +42,16 @@
                             class="col-10" 
                             style="margin-left: 0.1rem;" 
                             for="startingValue">
-                            Starting
+                            Value
                         </label>
-                        <input 
+                        <input
+                            [style]="{'margin-left': '1rem'}" 
                             formControlName='startingValue'
                             pInputText 
                             class="col-10"  
-                            style="margin-left: 0.4rem;" 
                             id="startingValue" 
                             type="number" 
                         >    
-                    </div>
-                    <div class="col-3">
-                        <label class="col-10" for="currentValue">Current</label>
-                        <input 
-                            formControlName='subCategoryValue'
-                            pInputText 
-                            class="col-10" 
-                            id="currentValue" 
-                            type="number" 
-                        > 
                     </div>
                     <button 
                         *ngIf="isDeleteButtonVisibleCurrent === i"
@@ -68,7 +60,7 @@
                         (click)="deleteCurrentSubcategory(i)" 
                         class="col-1 p-button-rounded" 
                         [style]="{'width': '1.5rem', 'height': '1.5rem', 'background-color': '#426fef',
-                        'font-size': '0.8rem', 'margin-bottom': '0.1rem'}"
+                        'font-size': '0.8rem', 'margin-left': '1rem'}"
                     >
                     </button>       
                 </div>
@@ -77,7 +69,7 @@
         <div formArrayName='newSubCategories'>
             <div *ngFor='let control of newSubCats.controls; let i= index' [formGroupName]="i">
                 <div class="grid col-12 grid-nogutter flex align-items-end" (click)="showDeleteButtonNew(i)">
-                    <div class="col-5">
+                    <div class="col-7">
                         <label class="col-12" for="title">Title</label>
                         <input 
                             class="col-12" 
@@ -87,23 +79,19 @@
                         >    
                     </div>
                     <div class="col-3">
-                        <label class="col-10" style="margin-left: 0.1rem;" for="startingValue">Starting</label>
-                        <input 
+                        <label 
                             class="col-10" 
-                            style="margin-left: 0.4rem;" 
+                            style="margin-left: 0.1rem;" 
+                            for="startingValue">
+                            Value
+                        </label>
+                        <input
+                            [style]="{'margin-left': '1rem'}" 
+                            class="col-10" 
                             pInputText 
                             formControlName="startingValue" 
                             type="number"
                         >    
-                    </div>
-                    <div class="col-3">
-                        <label class="col-10" for="subCategoryValue">Current</label>
-                        <input 
-                            class="col-10" 
-                            pInputText 
-                            formControlName="subCategoryValue" 
-                            type="number"
-                        >        
                     </div>
                     <button
                         *ngIf="isDeleteButtonVisibleNew === i"
@@ -112,7 +100,7 @@
                         (click)="deleteNewSubcategory(i)" 
                         class="col-1 p-button-rounded" 
                         [style]="{'width': '1.5rem', 'height': '1.5rem', 'background-color': '#426fef',
-                        'font-size': '0.8rem', 'margin-bottom': '0.1rem'}"
+                        'font-size': '0.8rem', 'margin-left': '1rem'}"
                     >
                     </button>       
                 </div>
