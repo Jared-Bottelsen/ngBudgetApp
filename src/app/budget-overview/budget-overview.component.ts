@@ -4,7 +4,7 @@ import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
-import { IncomeAddComponent } from '../budget/income-add/income-add.component';
+import { IncomeAddComponent } from './income-add/income-add.component';
 
 @Component({
   selector: 'app-budget-overview',

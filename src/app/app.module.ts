@@ -29,7 +29,7 @@ import { BudgetEditComponent } from './budget/budget-edit/budget-edit.component'
 import { InputTextModule } from 'primeng/inputtext';
 import { LoginComponent } from './login/login.component';
 import { MenuModule } from 'primeng/menu';
-import { IncomeAddComponent } from './budget/income-add/income-add.component';
+import { IncomeAddComponent } from './budget-overview/income-add/income-add.component';
 @NgModule({
   declarations: [
     AppComponent,
