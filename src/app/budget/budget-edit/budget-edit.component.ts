@@ -100,6 +100,17 @@ export class BudgetEditComponent implements OnInit {
       this.ref.close();
       console.log("No updates were made");
     } else {
+     for (let i = 0; i < payload.currentCategories.length; i++) {
+       if(payload.currentCategories[i].subCategoryValue === null) {
+        payload.currentCategories[i].subCategoryValue = payload.currentCategories[i].startingValue;
+       } else if (this.config.data.subCategories[i].subCategoryValue < this.config.data.subCategories[i].startingValue) {
+         let difference = this.config.data.subCategories[i].startingValue - this.config.data.subCategories[i].subCategoryValue;
+         payload.currentCategories[i].subCategoryValue = payload.currentCategories[i].startingValue - difference;
+       }
+     }
+     for (let i = 0; i < payload.newSubCategories.length; i++) {
+        payload.newSubCategories[i].subCategoryValue = payload.newSubCategories[i].startingValue;
+     }
     let newArray = [...payload.currentCategories, ...payload.newSubCategories];
     let returnedObject = {
       categoryTitle: payload.categoryTitle,
