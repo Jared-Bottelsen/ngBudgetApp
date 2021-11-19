@@ -1,10 +1,15 @@
+* {
+    font-family: 'Alumni Sans', sans-serif;
+}
+
 .header-container {
     margin-bottom: 5%;
     display: flex;
     justify-content: space-between;
 
     &__text {
-        margin: 0.5rem 0 0 0.5rem;
+        margin: 0 0 0 1rem;
+        font-size: 3rem;
     }
     
     &__add-icon {
@@ -33,10 +38,12 @@
 
     &__balance-header {
         margin: 3px 5px 0 0;
+        font-size: 1.4rem;
     }
 
     &__category-title {
         margin: 0 0 0 5px;
+        font-size: 1.5rem;
     }
     
 }
@@ -49,10 +56,12 @@
 
     &__item-title {
         margin: 0 0 0 5px;
+        font-size: 1.2rem;
     }
 
     &__balance-remaining {
         margin: 0 5px 0 0;
+        font-size: 1.2rem;
     }
 }
 

@@ -24,8 +24,8 @@
                         <hr>
                         <div *ngFor="let subCat of budgetCategory[i].subCategory">
                             <div class="budget-item-individual-expense-container">
-                            <h5 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h5>
-                            <h5 class="budget-item-individual-expense-container__balance-remaining">{{subCat.subCategoryValue | currency}}</h5>
+                            <h4 class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</h4>
+                            <h4 class="budget-item-individual-expense-container__balance-remaining">{{subCat.subCategoryValue | currency}}</h4>
                             </div>
                             <app-progress-bar [value]="calcRemainingPercent(subCat)"></app-progress-bar>
                         </div>    
@@ -35,14 +35,14 @@
                             <button 
                                 (click)="openBudgetEditModal(i)"
                                 class="p-button-rounded p-button-raised" 
-                                [style]="{'width': '5rem', 'height': '1.2rem', 'background-color': '#426fef'}" 
+                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#426fef', 'font-size': '1.5rem'}" 
                                 pButton 
                                 label='Edit'>
                             </button>
                             <button 
                                 class="p-button-rounded p-button-raised" 
                                 (click)="hideMenu()" 
-                                [style]="{'width': '5rem', 'height': '1.2rem', 'background-color': '#426fef'}" 
+                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#426fef', 'font-size': '1.5rem'}" 
                                 label='Cancel' 
                                 pButton>
                             </button>    
