@@ -109,13 +109,15 @@ export class BudgetEditComponent implements OnInit {
     if (_.isEqual(payload.currentCategories, this.currentSubcategories) && this.config.data.categoryTitle === payload.categoryTitle && payload.newSubCategories.length === 0) {
       this.ref.close();
       console.log("No updates were made");
-    } else {
+    }
      for (let i = 0; i < payload.currentCategories.length; i++) {
        if(payload.currentCategories[i].subCategoryValue === null) {
         payload.currentCategories[i].subCategoryValue = payload.currentCategories[i].startingValue;
        } else if (this.config.data.subCategories[i].subCategoryValue < this.config.data.subCategories[i].startingValue) {
          let difference = this.config.data.subCategories[i].startingValue - this.config.data.subCategories[i].subCategoryValue;
          payload.currentCategories[i].subCategoryValue = payload.currentCategories[i].startingValue - difference;
+       } else {
+         payload.currentCategories[i].subCategoryValue = payload.currentCategories[i].startingValue
        }
      }
      for (let i = 0; i < payload.newSubCategories.length; i++) {
@@ -128,7 +130,6 @@ export class BudgetEditComponent implements OnInit {
     }
     this.db.updateBudgetCategoryData(this.currentSubcategories, returnedObject);
     this.ref.close()  
-  }
 }
 
   close() {
