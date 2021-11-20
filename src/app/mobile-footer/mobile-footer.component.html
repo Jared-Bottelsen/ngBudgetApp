@@ -2,16 +2,12 @@
     <a 
         routerLink="/overview" 
         class="nav-icon-container" 
-        (click)="changeActiveLink()" 
-        [ngClass]="{'nav-icon-container--active' : isActiveLink === 'overview'}"
     >
         <fa-icon [icon]="faReceipt" class="navigation-icon"></fa-icon>
     </a>
     <a 
         routerLink="/budget" 
-        (click)="changeActiveLink()" 
         class="nav-icon-container" 
-        [ngClass]="{'nav-icon-container--active' : isActiveLink === 'budget'}"
     >
         <fa-icon [icon]="faWallet" class="navigation-icon"></fa-icon>
     </a>
