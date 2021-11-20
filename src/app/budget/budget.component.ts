@@ -9,12 +9,13 @@ import { BudgetEditComponent } from './budget-edit/budget-edit.component';
 import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { ExpenseAddComponent } from './expense-add/expense-add.component';
+import { ConfirmationService } from 'primeng/api';
 
 @Component({
   selector: 'app-budget',
   templateUrl: './budget.component.html',
   styleUrls: ['./budget.component.scss'],
-  providers: [DialogService, DynamicDialogRef]
+  providers: [DialogService, DynamicDialogRef, ConfirmationService]
 })
 export class BudgetComponent implements OnInit, OnDestroy {
 
@@ -26,7 +27,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   isMenuVisible!: number;
 
-  budgetCategory: any[] = [];
+  budgetCategory: any = [];
 
   budgetSubCategory: any[] = [];
 
@@ -45,7 +46,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
     showHeader: false,
   }
 
-  constructor(public dialogService: DialogService, public ref: DynamicDialogRef, public db: FirebaseService) { }
+  constructor(private dialogService: DialogService, private ref: DynamicDialogRef, private db: FirebaseService, private confirmationService: ConfirmationService) { }
 
   ngOnInit(): void {
     this.getBudgetSubscription$ = this.db.getCategories()
@@ -54,14 +55,32 @@ export class BudgetComponent implements OnInit, OnDestroy {
      })
      this.menuItems = [
        {label: 'New Budget Category', command: () => { this.showBudgetCategoryModal(); }},
-       {label: 'Add Expense', command: () => { this.showExpenseModal(); }}
+       {label: 'Add Expense', command: () => { this.showExpenseModal(); }},
      ]
    }
  
    ngOnDestroy(): void {
      this.getBudgetSubscription$.unsubscribe();
    }
+
+   confirmBudgetReset(event: any) {
+     this.confirmationService.confirm({
+       target: event.target,
+       message: "Are you sure you want to reset your budget? All of your budget values will be reset and all expenses logged will be deleted",
+       icon: 'pi pi-exclamation-triangle',
+       accept: () => {
+         this.db.resetWholeBudget();
+         this.confirmationService.close();
+       },
+       reject: () => {
+         this.confirmationService.close();
+       }
+     })
+   }
  
+   resetEntireBudget() {
+     this.db.resetWholeBudget();
+   }
 
   openBudgetEditModal(index: number) {
     const ref = this.dialogService.open(BudgetEditComponent, {
