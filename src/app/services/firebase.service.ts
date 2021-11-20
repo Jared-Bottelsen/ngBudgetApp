@@ -132,7 +132,6 @@ export class FirebaseService {
  * @param budgetCategoryObject 
  */
   expenseDeleteOperation(budgetCategoryObject: any) {
-    console.log(budgetCategoryObject);
     let query = this.database.collection("users").doc(this.auth.userId)
     .collection("budgetCategory", ref => ref.where("subCategory", "array-contains", budgetCategoryObject.currentBudgetCategoryData)).get();
     query.subscribe(result => {
