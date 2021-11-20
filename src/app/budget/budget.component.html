@@ -4,8 +4,16 @@
         <fa-icon [icon]="faPlusCircle" class="header-container__add-icon" (click)="menu.toggle($event)"></fa-icon> 
     </div>
     <div *ngIf="budgetCategory.length > 0" class="flex justify-content-center">
-        <p-confirmPopup [showTransitionOptions]="'100ms'" [hideTransitionOptions]="'100ms'"></p-confirmPopup>
-        <button (click)="confirmBudgetReset($event)" pButton label="Reset Budget" [style]="{'margin-bottom' : '0.5rem', 'font-size': '1.2rem', 'height': '1.4rem'}" class="p-button-danger p-button-round"></button>
+        <p-confirmPopup 
+            [showTransitionOptions]="'100ms'" 
+            [hideTransitionOptions]="'100ms'">
+        </p-confirmPopup>
+        <button 
+            (click)="confirmBudgetReset($event)" 
+            pButton label="Reset Budget" 
+            [style]="{'margin-bottom' : '0.5rem', 'font-size': '1.2rem', 'height': '1.4rem'}" 
+            class="p-button-danger p-button-round">
+        </button>
     </div>
     <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>   
     <div class="category-panel-container">
