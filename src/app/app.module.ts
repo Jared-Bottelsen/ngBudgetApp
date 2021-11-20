@@ -31,6 +31,7 @@ import { InputTextModule } from 'primeng/inputtext';
 import { LoginComponent } from './login/login.component';
 import { MenuModule } from 'primeng/menu';
 import { IncomeAddComponent } from './budget-overview/income-add/income-add.component';
+import { AutofocusDirective } from './directives/autofocus.directive';
 @NgModule({
   declarations: [
     AppComponent,
@@ -44,6 +45,7 @@ import { IncomeAddComponent } from './budget-overview/income-add/income-add.comp
     BudgetEditComponent,
     LoginComponent,
     IncomeAddComponent,
+    AutofocusDirective,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
