@@ -148,8 +148,4 @@ export class BudgetComponent implements OnInit, OnDestroy {
       }
     })
   }
-
-  drop(event: CdkDragDrop<string[]>) {
-    moveItemInArray(this.budgetCategory, event.previousIndex, event.currentIndex);
-  }
 }
