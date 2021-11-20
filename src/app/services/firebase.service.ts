@@ -3,9 +3,9 @@ import { AngularFirestore, DocumentData } from "@angular/fire/compat/firestore";
 import { AuthService } from './auth.service';
 import * as _ from 'lodash'
 
-interface BudgetCategory {
+export interface BudgetCategory {
   categoryTitle: string,
-  subCategory: Array<string>,
+  subCategory: any[],
 }
 
 interface BudgetExpense {
@@ -210,6 +210,23 @@ export class FirebaseService {
     query.subscribe(first => {
       first.forEach(result => {
         this.database.collection("users").doc(this.auth.userId).collection(collection).doc(result.id).delete();
+      })
+    })
+  }
+
+  resetWholeBudget() {
+    this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").get().subscribe(options => {
+      options.forEach(result => {
+        let category = result.data()
+        for (let i = 0; i < category.subCategory.length; i++) { 
+          category.subCategory[i].subCategoryValue = category.subCategory[i].startingValue;
+        }
+        this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(result.id).set(category, {merge: true});
+      })
+    })
+    this.database.collection("users").doc(this.auth.userId).collection("budgetExpense").get().subscribe(result => {
+      result.forEach(final => {
+        this.database.collection("users").doc(this.auth.userId).collection("budgetExpense").doc(final.id).delete();
       })
     })
   }
