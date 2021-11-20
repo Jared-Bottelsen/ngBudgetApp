@@ -13,6 +13,16 @@ export class MobileFooterComponent implements OnInit {
   faChartPie = faChartPie;
   faBalanceScale = faBalanceScale;
   faPlusSquare = faPlusSquare;
+
+  isActiveLink: string = 'overview'
+
+  changeActiveLink() {
+    if (this.isActiveLink === 'overview') {
+      this.isActiveLink = 'budget'
+    } else {
+      this.isActiveLink = 'overview'
+    }
+  }
   
   constructor() { }
 

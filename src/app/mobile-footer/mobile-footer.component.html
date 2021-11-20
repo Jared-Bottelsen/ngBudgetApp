@@ -1,22 +1,18 @@
 <div class="mobile-footer-container">
-    <div routerLink="/overview" class="nav-icon-container">
-        <div>
-            <fa-icon [icon]="faReceipt" class="navigation-icon"></fa-icon>
-        </div>    
-    </div>
-    <!-- <div routerLink="/add-expense" class="nav-icon-container">
-        <div>
-            <fa-icon [icon]="faPlusSquare" class="navigation-icon"></fa-icon>
-        </div>    
-    </div> -->
-    <div routerLink="/budget" class="nav-icon-container">
-        <div>
-            <fa-icon [icon]="faWallet" class="navigation-icon"></fa-icon>
-        </div>    
-    </div>
-    <!-- <a class="nav-icon-container">
-        <div>
-            <fa-icon [icon]="faBalanceScale" class="navigation-icon"></fa-icon>
-        </div>
-    </a> -->
-</div>
+    <a 
+        routerLink="/overview" 
+        class="nav-icon-container" 
+        (click)="changeActiveLink()" 
+        [ngClass]="{'nav-icon-container--active' : isActiveLink === 'overview'}"
+    >
+        <fa-icon [icon]="faReceipt" class="navigation-icon"></fa-icon>
+    </a>
+    <a 
+        routerLink="/budget" 
+        (click)="changeActiveLink()" 
+        class="nav-icon-container" 
+        [ngClass]="{'nav-icon-container--active' : isActiveLink === 'budget'}"
+    >
+        <fa-icon [icon]="faWallet" class="navigation-icon"></fa-icon>
+    </a>
+</div> 

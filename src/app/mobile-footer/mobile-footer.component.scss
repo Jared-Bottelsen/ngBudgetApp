@@ -19,8 +19,13 @@
         align-items: center;
         background-color: rgb(252, 250, 248);
 
-        &:focus, &:visited, &:active {
-            outline: none
+        &--active {
+            background-color: rgb(66, 111, 239);
+        }
+        
+        &:focus, &:visited, &:active, &:link {
+            outline: none;
+            color: black;
         }
     }   
 }
