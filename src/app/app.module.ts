@@ -15,6 +15,7 @@ import { ScrollPanelModule } from 'primeng/scrollpanel';
 import { ProgressBarModule } from 'primeng/progressbar';
 import { BudgetComponent } from './budget/budget.component';
 import { ProgressBarComponent } from './budget/progress-bar/progress-bar.component';
+import { ConfirmPopupModule } from 'primeng/confirmpopup';
 import { BudgetAddComponent } from './budget/budget-add/budget-add.component';
 import { DynamicDialogModule } from 'primeng/dynamicdialog';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations'; 
@@ -62,7 +63,8 @@ import { IncomeAddComponent } from './budget-overview/income-add/income-add.comp
     MultiSelectModule,
     ButtonModule,
     InputTextModule,
-    MenuModule
+    MenuModule,
+    ConfirmPopupModule
   ],
 
   entryComponents: [
