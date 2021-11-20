@@ -132,6 +132,7 @@ export class FirebaseService {
  * @param budgetCategoryObject 
  */
   expenseDeleteOperation(budgetCategoryObject: any) {
+    console.log(budgetCategoryObject);
     let query = this.database.collection("users").doc(this.auth.userId)
     .collection("budgetCategory", ref => ref.where("subCategory", "array-contains", budgetCategoryObject.currentBudgetCategoryData)).get();
     query.subscribe(result => {
@@ -161,6 +162,21 @@ export class FirebaseService {
   deleteExpense(expenseName: string, expenseAmount: number, expenseCategory: string) {
     let query = this.database.collection("users").doc(this.auth.userId)
     .collection("budgetExpense", ref => ref.where("expenseName", "==", expenseName).where("expenseAmount", "==", expenseAmount).where("expenseCategory", "==", expenseCategory)).get();
+    query.subscribe(result => {
+      result.forEach(final => {
+        this.database.collection("users").doc(this.auth.userId).collection("budgetExpense").doc(final.id).delete();
+      })
+    })
+  }
+
+/**
+ * Used to delete all related expenses to a subCategory that is being deleted. This is needed 
+ * because if the subCategory is deleted then the left over expenses logged against that 
+ * subCategory will not be deletable because their subCategory parent is gone.
+ * @param subCategoryTitle 
+ */
+  deleteExpensesOfDeletedSubCategory(subCategoryTitle: string) {
+    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetExpense", ref => ref.where("expenseCategory", '==', subCategoryTitle)).get();
     query.subscribe(result => {
       result.forEach(final => {
         this.database.collection("users").doc(this.auth.userId).collection("budgetExpense").doc(final.id).delete();

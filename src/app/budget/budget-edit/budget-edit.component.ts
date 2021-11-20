@@ -66,6 +66,14 @@ export class BudgetEditComponent implements OnInit {
   }
 
   deleteCurrentSubcategory(i: number) {
+    if (this.config.data.subCategories[i].subCategoryValue < this.config.data.subCategories[i].startingValue) {
+      console.log('Cant Delete without removing expenses');
+      this.db.deleteExpensesOfDeletedSubCategory(this.config.data.subCategories[i].subCategoryTitle);
+      this.currentSubCats.removeAt(i);
+      this.isDeleteButtonVisibleCurrent = -1;
+      this.isDeleteButtonVisibleNew = -1;  
+      return
+    }
     this.currentSubCats.removeAt(i);
     this.isDeleteButtonVisibleCurrent = -1;
     this.isDeleteButtonVisibleNew = -1;
