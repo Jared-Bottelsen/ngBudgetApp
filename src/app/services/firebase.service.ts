@@ -90,20 +90,6 @@ export class FirebaseService {
   }
 
 /**
- * Make edits to the expense data for individual expense from the budget overview component view
- * @param data 
- */
-  updateExpenseData(data: any) {
-    let query = this.database.collection("users").doc(this.auth.userId)
-    .collection("budgetExpense", ref => ref.where('expenseCategory', '==', data.original.expenseCategory).where('expenseName', '==', data.original.expenseName).where('expenseAmount', '==', data.original.expenseAmount)).get();
-    query.subscribe(start => {
-      start.forEach(result => {
-        this.database.collection("users").doc(this.auth.userId).collection("budgetExpense").doc(result.id).set(data.new, {merge: true});
-      })
-    })
-  }
-
-/**
  * When an expense is added, this method queries the database using the subCategory the expense was logged against. With the returned data
  * the method performs a subtraction operation to take the expense amount away from the subCategory value. It then updates the database accordingly
  * @param budgetCategoryObject 
