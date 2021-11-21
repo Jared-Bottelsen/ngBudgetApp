@@ -5,16 +5,18 @@
 export const environment = {
   production: false,
 
+  /**
+   * This configuration is for the --dev version of the project that only works on localhost
+   */
   firebaseConfig : {
-    apiKey: "AIzaSyAV1r6TEFPQZ5-n3XJ-5PNKVkV38t4L4dc",
-    authDomain: "ngbudgetapp.firebaseapp.com",
-    databaseURL: "https://ngbudgetapp-default-rtdb.firebaseio.com",
-    projectId: "ngbudgetapp",
-    storageBucket: "ngbudgetapp.appspot.com",
-    messagingSenderId: "527651190506",
-    appId: "1:527651190506:web:1731715c9b36cb9f05c993",
-    measurementId: "G-0XD81FMWPP"
-  }
+    apiKey: "AIzaSyCrxVV8wNLc81RKfGjgObMn-tiqS0tMnEI",
+    authDomain: "ngbudgetapp--dev-a4ff4.firebaseapp.com",
+    projectId: "ngbudgetapp--dev-a4ff4",
+    storageBucket: "ngbudgetapp--dev-a4ff4.appspot.com",
+    messagingSenderId: "1083681305135",
+    appId: "1:1083681305135:web:a67012947c50e6dee00cda",
+    measurementId: "G-4LCRZ4ERJ7"
+      }    
 };
 
 /*
