@@ -72,7 +72,7 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
     for (let i = 0; options.length > i; i++) {
       let subCategories = options[i].subCategory
       for (let j = 0; j < subCategories.length; j++) {
-        categories.push(subCategories[j].subCategoryTitle)       
+        categories.push(`${subCategories[j].subCategoryTitle} ($${subCategories[j].subCategoryValue})`)       
       }
     }
     return categories
