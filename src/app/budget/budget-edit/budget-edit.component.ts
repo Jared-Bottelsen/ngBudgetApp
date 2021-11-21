@@ -128,7 +128,7 @@ export class BudgetEditComponent implements OnInit {
       categoryTitle: payload.categoryTitle,
       subCategory: newArray
     }
-    this.db.updateBudgetCategoryData(this.currentSubcategories, returnedObject);
+    this.db.updateBudgetCategoryData(this.config.data.docId, returnedObject);
     this.ref.close()  
 }
 

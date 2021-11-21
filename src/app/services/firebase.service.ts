@@ -40,7 +40,12 @@ export class FirebaseService {
  * @param categoryData 
  */  
   addCategory(categoryData: BudgetCategory) {
-    this.database.collection("users").doc(this.auth.userId).collection('budgetCategory').add(categoryData)
+    let newCategory = this.database.collection("users").doc(this.auth.userId).collection('budgetCategory').doc();
+    newCategory.set({
+      docId: newCategory.ref.id,
+      categoryTitle: categoryData.categoryTitle,
+      subCategory: categoryData.subCategory,
+    })
   }
 
 /**
@@ -189,13 +194,8 @@ export class FirebaseService {
  * @param currentSubcategories 
  * @param editedPayload 
  */
-  updateBudgetCategoryData(currentSubcategories: Array<any>, editedPayload: BudgetCategory) {
-    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetCategory", ref => ref.where("subCategory", "==", currentSubcategories)).get();
-    query.subscribe(results => {
-      results.forEach(result => {
-        this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(result.id).set(editedPayload, {merge: true})
-      })
-    })
+  updateBudgetCategoryData(docId: string, editedPayload: BudgetCategory) {
+    this.database.collection("users").doc(this.auth.userId).collection("budgetCategory").doc(docId).set(editedPayload, {merge: true});
   }
 
   /**

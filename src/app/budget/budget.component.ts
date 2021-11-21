@@ -29,8 +29,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   budgetCategory: any = [];
 
-  budgetSubCategory: any[] = [];
-
   menuItems!: MenuItem[];
 
   budgetAddModalOptions = {
@@ -85,6 +83,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
   openBudgetEditModal(index: number) {
     const ref = this.dialogService.open(BudgetEditComponent, {
       data: {
+        docId: this.budgetCategory[index].docId,
         categoryTitle: this.budgetCategory[index].categoryTitle,
         subCategories: this.budgetCategory[index].subCategory
       },
@@ -106,12 +105,13 @@ export class BudgetComponent implements OnInit, OnDestroy {
     this.isMenuVisible = -1;
   }
 
-  private createSubCategoryObj(subCatArray: any[]) {
+  private addStartingValueToSubCategory(subCatArray: any[]) {
+    let budgetSubCategory: any[] = [];
     for (let i = 0; i < subCatArray.length; i++) {
       subCatArray[i].startingValue = subCatArray[i].subCategoryValue
-      this.budgetSubCategory.push(subCatArray[i])
+      budgetSubCategory.push(subCatArray[i])
     }
-    return this.budgetSubCategory;
+    return budgetSubCategory;
   }
 
   calcRemainingPercent(subCategories: any) {
@@ -132,9 +132,8 @@ export class BudgetComponent implements OnInit, OnDestroy {
       if (category === undefined) {
         console.log('No form data sent');
       } else {
-        this.createSubCategoryObj(category.subCategory)
-        this.budgetCategory.push({categoryTitle: category.categoryTitle, subCategory: this.budgetSubCategory});
-        this.db.addCategory({categoryTitle: category.categoryTitle, subCategory: this.budgetSubCategory});
+        this.budgetCategory.push({categoryTitle: category.categoryTitle, subCategory: this.addStartingValueToSubCategory(category.subCategory)});
+        this.db.addCategory({categoryTitle: category.categoryTitle, subCategory: this.addStartingValueToSubCategory(category.subCategory)});
       }
     })
   }
