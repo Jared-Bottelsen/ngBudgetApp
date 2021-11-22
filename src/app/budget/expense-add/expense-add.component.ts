@@ -13,7 +13,7 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
 
   categoryOptions: any;
 
-  rawCateories: any = [];
+  rawCategories: any = [];
 
   getCategoriesObservable$!: Subscription;
 
@@ -30,8 +30,8 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
    this.getCategoriesObservable$ = this.db.getCategories()
     .subscribe((categories) => {
-      this.rawCateories = categories
-      this.categoryOptions = this.isolateOptions(this.rawCateories);
+      this.rawCategories = categories
+      this.categoryOptions = this.isolateOptions(this.rawCategories);
     })
   }
 
@@ -53,8 +53,8 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
  * @returns the object value of the current budget subcategory {subCategoryValue: number, subCategoryTitle: string, startingValue: number}
  */
   findExpenseCategory(budgetCategory: string) {
-    for(let i = 0; i < this.rawCateories.length; i++) {
-      let index = this.rawCateories[i].subCategory.find((x: any) => x.subCategoryTitle === budgetCategory)
+    for(let i = 0; i < this.rawCategories.length; i++) {
+      let index = this.rawCategories[i].subCategory.find((x: any) => x.subCategoryTitle === budgetCategory)
       if (index) {
         return index
       }
