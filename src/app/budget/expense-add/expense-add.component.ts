@@ -81,7 +81,9 @@ export class ExpenseAddComponent implements OnInit, OnDestroy {
   onFormSubmit(formData: FormGroup) {
     if (!formData.pristine) {
       let expenseCat = formData.value.expenseCategory.pop();
+      let docId = this.findExpenseCategory(expenseCat)
       this.db.addExpense({
+        parentDocId: docId.parentDocId,
         expenseCategory: expenseCat,
         expenseName : formData.value.expenseName,
         expenseAmount: formData.value.expenseAmount, 

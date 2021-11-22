@@ -67,8 +67,7 @@ export class BudgetEditComponent implements OnInit {
 
   deleteCurrentSubcategory(i: number) {
     if (this.config.data.subCategories[i].subCategoryValue < this.config.data.subCategories[i].startingValue) {
-      console.log('Cant Delete without removing expenses');
-      this.db.deleteExpensesOfDeletedSubCategory(this.config.data.subCategories[i].subCategoryTitle);
+      this.db.deleteExpensesOfDeletedSubCategory(this.config.data.subCategories[i].subCategoryTitle, this.config.data.docId);
       this.currentSubCats.removeAt(i);
       this.isDeleteButtonVisibleCurrent = -1;
       this.isDeleteButtonVisibleNew = -1;  
@@ -87,9 +86,9 @@ export class BudgetEditComponent implements OnInit {
 
   deleteEntireCategory() {
     for (let i = 0; i < this.currentSubcategories.length; i++) {
-      this.db.deleteExpensesOfDeletedSubCategory(this.currentSubcategories[i].subCategoryTitle);
+      this.db.deleteExpensesOfDeletedSubCategory(this.currentSubcategories[i].subCategoryTitle, this.config.data.docId);
     }
-    this.db.deleteDocument(this.currentSubcategories, 'budgetCategory', 'subCategory');
+    this.db.deleteDocument(this.config.data.docId, 'budgetCategory');
     setTimeout(() => {
       this.ref.close();
     }, 500);
@@ -111,6 +110,7 @@ export class BudgetEditComponent implements OnInit {
       console.log("No updates were made");
     }
      for (let i = 0; i < payload.currentCategories.length; i++) {
+       payload.currentCategories[i].parentDocId = this.config.data.docId;
        if(payload.currentCategories[i].subCategoryValue === null) {
         payload.currentCategories[i].subCategoryValue = payload.currentCategories[i].startingValue;
        } else if (this.config.data.subCategories[i].subCategoryValue < this.config.data.subCategories[i].startingValue) {
@@ -121,6 +121,7 @@ export class BudgetEditComponent implements OnInit {
        }
      }
      for (let i = 0; i < payload.newSubCategories.length; i++) {
+        payload.newSubCategories[i].parentDocId = this.config.data.docId;
         payload.newSubCategories[i].subCategoryValue = payload.newSubCategories[i].startingValue;
      }
     let newArray = [...payload.currentCategories, ...payload.newSubCategories];

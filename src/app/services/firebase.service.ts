@@ -9,6 +9,7 @@ export interface BudgetCategory {
 }
 
 interface BudgetExpense {
+  parentDocId: string,
   expenseAmount: number,
   expenseCategory: string,
   expenseDate: string,
@@ -41,6 +42,9 @@ export class FirebaseService {
  */  
   addCategory(categoryData: BudgetCategory) {
     let newCategory = this.database.collection("users").doc(this.auth.userId).collection('budgetCategory').doc();
+    for (let i = 0; i < categoryData.subCategory.length; i++) {
+      categoryData.subCategory[i].parentDocId = newCategory.ref.id
+    }
     newCategory.set({
       docId: newCategory.ref.id,
       categoryTitle: categoryData.categoryTitle,
@@ -165,8 +169,9 @@ export class FirebaseService {
  * subCategory will not be deletable because their subCategory parent is gone.
  * @param subCategoryTitle 
  */
-  deleteExpensesOfDeletedSubCategory(subCategoryTitle: string) {
-    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetExpense", ref => ref.where("expenseCategory", '==', subCategoryTitle)).get();
+  deleteExpensesOfDeletedSubCategory(subCategoryTitle: string, parentDocId: string) {
+    let query = this.database.collection("users").doc(this.auth.userId).collection("budgetExpense", ref => ref.where("expenseCategory", '==', subCategoryTitle).where("parentDocId", 
+  "==", parentDocId)).get();
     query.subscribe(result => {
       result.forEach(final => {
         this.database.collection("users").doc(this.auth.userId).collection("budgetExpense").doc(final.id).delete();
@@ -191,13 +196,8 @@ export class FirebaseService {
  * @param collection 
  * @param queryParam 
  */
-   deleteDocument(data: Object, collection: string, queryParam: string) {
-    let query = this.database.collection("users").doc(this.auth.userId).collection(collection, ref => ref.where(queryParam, "==", data)).get();
-    query.subscribe(first => {
-      first.forEach(result => {
-        this.database.collection("users").doc(this.auth.userId).collection(collection).doc(result.id).delete();
-      })
-    })
+   deleteDocument(docId: string, collection: string) {
+    this.database.collection("users").doc(this.auth.userId).collection(collection).doc(docId).delete();
   }
 
   resetWholeBudget() {
