@@ -32,9 +32,9 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   budgetCategories: Array<any> = [];
 
-  budgetCategoryTotal!: number;
+  budgetCategoryTotal: number = 0
 
-  expenseTotal!: number;
+  expenseTotal: number = 0
 
   income!: number;
 
@@ -73,7 +73,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
   }
 
   isOverSpent() {
-    if (this.expenseTotal < this.budgetCategoryTotal) return
+    if (this.expenseTotal <= this.budgetCategoryTotal || this.expenseTotal === 0) return
     return this.overSpent = true;
   }
 
