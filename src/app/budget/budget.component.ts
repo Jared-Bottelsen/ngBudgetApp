@@ -87,8 +87,8 @@ export class BudgetComponent implements OnInit, OnDestroy {
         categoryTitle: this.budgetCategory[index].categoryTitle,
         subCategories: this.budgetCategory[index].subCategory
       },
-      width: '100%',
-      styleClass: 'customDialogStyles',
+      width: '95%',
+      styleClass: 'dialog-style',
       showHeader: false
     });
 

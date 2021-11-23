@@ -1,6 +1,6 @@
 <div class="flex justify-content-between">
     <h1 class="overview-header-text">Overview</h1>
-    <fa-icon (click)="openIncomeModal()" style="margin: 0.5rem 0.5rem 0 0 ;font-size: 1.8rem" [icon]="faPlusCircle"></fa-icon>
+    <fa-icon (click)="openIncomeModal()" style="margin: 0.5rem 0.5rem 0 0 ;font-size: 1.8rem; color: rgba(255, 255, 255, 0.765);" [icon]="faPlusCircle"></fa-icon>
 </div>
 
 <div class="flex justify-content-center">
@@ -50,7 +50,7 @@
                         </button>    
                     </div>
                 </div>        
-                <div (click)="showButtons(i)" class="individual-expense__label-container" style="height: inherit;">
+                <div *ngIf="isButtonMenuVisible !== i" (click)="showButtons(i)" class="individual-expense__label-container" style="height: inherit;">
                     <p style="justify-self: center;">{{expense.expenseDate}}</p>
                     <p>{{expense.expenseName}}</p>
                     <p style="justify-self: start; margin-right: 0.8rem;">{{expense.expenseAmount | currency}}</p>

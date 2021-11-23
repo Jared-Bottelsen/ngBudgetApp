@@ -11,8 +11,8 @@
         <button 
             (click)="confirmBudgetReset($event)" 
             pButton label="Reset Budget" 
-            [style]="{'margin-bottom' : '0.5rem', 'font-size': '1.2rem', 'height': '1.4rem'}" 
-            class="p-button-danger p-button-round">
+            [style]="{'margin-bottom' : '0.5rem', 'font-size': '1.2rem', 'height': '1.4rem', 'background-color': '#001127', 'border': '1px solid #001127'}" 
+            class="p-button-round">
         </button>
     </div>
     <p-menu #menu [popup]="true" [model]="menuItems"></p-menu>   
@@ -44,14 +44,14 @@
                             <button 
                                 (click)="openBudgetEditModal(i)"
                                 class="p-button-rounded p-button-raised" 
-                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#426fef', 'font-size': '1.5rem'}" 
+                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': '1px solid #001127', 'font-size': '1.5rem'}" 
                                 pButton 
                                 label='Edit'>
                             </button>
                             <button 
                                 class="p-button-rounded p-button-raised" 
                                 (click)="hideMenu()" 
-                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#426fef', 'font-size': '1.5rem'}" 
+                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': '1px solid #001127', 'font-size': '1.5rem'}" 
                                 label='Cancel' 
                                 pButton>
                             </button>    

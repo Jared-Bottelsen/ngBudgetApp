@@ -1,7 +1,6 @@
 @media only screen and (max-width: 600px){
     .header-main-container {
         height: 50px;
-        background-color: rgb(66, 111, 239);
             
         .sub-menu-container {
             display: flex;
@@ -13,6 +12,7 @@
     
             .sub-menu-header-icon {
                 font-size: 1.6rem;
+                color: rgba(255, 255, 255, 0.765);
             }
         }
     }       

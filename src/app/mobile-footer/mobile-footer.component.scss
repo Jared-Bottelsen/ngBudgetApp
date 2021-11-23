@@ -9,6 +9,7 @@
     
     .navigation-icon {
         font-size: 1.6rem;
+        color: rgba(255, 255, 255, 0.765);
     }
     
     .nav-icon-container {
@@ -16,7 +17,7 @@
         display: flex;
         justify-content: center;
         align-items: center;
-        background-color: rgb(66, 111, 239);
+        background-color: #183047;
         
         &:focus, &:visited, &:active, &:link {
             outline: none;
