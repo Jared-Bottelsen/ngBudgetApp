@@ -5,11 +5,14 @@
 .overview-header-text {
     font-size: 3rem;
     margin: 0 0 0 1rem;
+    color: rgba(255, 255, 255, 0.765);
 }
 
 .budget-overview-information-container {
-    background-color: rgb(252, 250, 248);
+    background: rgba( 255, 255, 255, 0.15 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
     font-size: 1.5rem;
+    color: rgba(255, 255, 255, 0.765);
     width: 70%;
     height: 160px;
     box-shadow: 0px 2px 7px black;
@@ -32,7 +35,8 @@
 
 .expenses-header {
     margin: 5% 0 2% 15%;
-    font-size: 2rem;
+    font-size: 2rem;  
+    color: rgba(255, 255, 255, 0.765);  
 }
 
 .expenses-container {
@@ -45,11 +49,13 @@
 .individual-expense {
     position: relative;
     height: 3.5rem;
-    background-color: rgb(252, 250, 248);
+    background: rgba( 255, 255, 255, 0.15 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
     box-shadow: 0px 2px 7px black;
     border-radius: 5px;
     font-size: 25px;
     width: 95%;
+    color: rgba(255, 255, 255, 0.765);
 
     &__button-group {
         display: flex;
@@ -57,8 +63,6 @@
         position: absolute;
         height: inherit;
         width: 100%;
-        background-color: rgb(252, 250, 248);
-
         &--alignment {
             height: inherit;
             width: 70%;
