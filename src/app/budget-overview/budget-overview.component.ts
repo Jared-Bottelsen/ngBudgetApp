@@ -36,7 +36,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   expenseTotal: number = 0
 
-  income!: number;
+  income: number = 0
 
   overBudgeted: boolean = false
 
@@ -56,7 +56,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
       this.budgetCategoryTotal = this.addUpBudgetCategories();
     })
     this.db.getIncome().subscribe((result: any) => {
-      this.income = result.income;
+      this.income = result.income || 0
     })
 
     this.db.createUser();
@@ -68,7 +68,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
   }
 
   isOverBudget() {
-    if (this.budgetCategoryTotal < this.income) return
+    if (this.budgetCategoryTotal < this.income || this.income === 0) return
     return this.overBudgeted = true;
   }
 
