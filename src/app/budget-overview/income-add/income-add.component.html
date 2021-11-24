@@ -8,7 +8,9 @@
         [(ngModel)]="selectedOption" 
         [options]="options" 
         optionLabel="optionName" 
-        optionValue="optionCode">
+        optionValue="optionCode"
+        styleClass="select-button-style"
+    >
     </p-selectButton>
 </div>
 
@@ -51,5 +53,5 @@
 </div>
 
 <div class="button-group">
-    <button (click)="selectedOption === 'MO' ? submitForm(monthlyForm) : submitForm(biWeeklyForm)" pButton label="Submit"></button>
+    <button (click)="selectedOption === 'MO' ? submitForm(monthlyForm) : submitForm(biWeeklyForm)" pButton [style]="{'background-color' : '#001127', 'border': 'none'}" label="Submit"></button>
 </div>

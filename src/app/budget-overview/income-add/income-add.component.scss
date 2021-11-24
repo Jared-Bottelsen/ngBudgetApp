@@ -31,3 +31,19 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+::ng-deep {
+
+    .select-button-style {
+
+        .p-button.p-highlight {
+            background-color : #001127;
+            border: solid 2px #001127;
+
+            &:hover {
+                background-color: #001127;
+                border-color: #001127;
+            }
+        }
+    }
+}
