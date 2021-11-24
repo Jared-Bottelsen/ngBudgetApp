@@ -106,9 +106,10 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   openIncomeModal() {
     let ref = this.dialogService.open(IncomeAddComponent, {
-      width: '90%',
-      height: '50%',
-      showHeader: false
+      width: '95%',
+      height: '40%',
+      showHeader: false,
+      styleClass: 'income-add-modal-container'
     })
   }
 

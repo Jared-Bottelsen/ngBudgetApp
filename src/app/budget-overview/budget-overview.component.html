@@ -33,20 +33,20 @@
                 <div *ngIf="isButtonMenuVisible === i" class="individual-expense__button-group">
                     <div class="individual-expense__button-group--alignment">
                         <button 
-                            class="p-button-rounded p-button-danger" 
+                            class="p-button-rounded" 
                             pButton 
                             (click)="deleteExpense(i)"
                             label="Delete" 
-                            [style]="{'width': '5rem', 'height': '1.5rem',
-                            'font-size': '1.4rem'}">
+                            [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#3b2637',
+                            'font-size': '1.4rem', 'border': 'none'}">
                         </button>
                         <button 
                             class="p-button-rounded" 
                             pButton 
                             (click)="hideButtons()"
                             label="Cancel" 
-                            [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#426fef',
-                            'font-size': '1.4rem'}">
+                            [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#011229',
+                            'font-size': '1.4rem', 'border': 'none'}">
                         </button>    
                     </div>
                 </div>        
