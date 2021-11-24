@@ -20,7 +20,7 @@ export class IncomeAddComponent implements OnInit {
 
   options!: Option[];
 
-  selectedOption: string = 'MO';
+  selectedOption: string = 'BI';
 
   monthlyForm: FormGroup = this.fb.group({
     monthlyInput: ''
