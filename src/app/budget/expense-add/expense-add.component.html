@@ -1,4 +1,7 @@
-<h2>Add an Expense</h2>
+<div class="flex justify-content-between align-items-center" style="margin: 1rem 0.5rem 0 1rem;">
+    <h2>Add an Expense</h2>
+    <fa-icon [icon]="faTimes" class="header-group--icon-size" [style]="{'font-size': '1.5rem'}" (click)="closeModal()"></fa-icon>     
+</div>
 
 <div class="form-container">
     <div class="expense-form">
@@ -26,20 +29,13 @@
                 id="expense-amount" 
                 type="number">
         </form>  
-        <div class="flex justify-content-between">
+        <div class="flex justify-content-end">
                 <button 
                 pButton 
                 class="p-button-rounded" 
-                [style]="{'background-color': '426fef', 'margin-top': '1rem'}" 
+                [style]="{'background-color': '#001127', 'margin-top': '1rem', 'height': '1.5rem', 'border': 'none'}" 
                 label="Submit" 
                 (click)="onFormSubmit(expenseForm)">
-            </button>
-            <button 
-                pButton 
-                class="p-button-rounded" 
-                [style]="{'background-color': '426fef', 'margin-top': '1rem'}" 
-                label="Cancel"
-                (click)="closeModal()">
             </button>
         </div>    
     </div>

@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, FormArray } from '@angular/forms';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
 
 @Component({
   selector: 'app-expense-add',
@@ -10,6 +11,8 @@ import { DynamicDialogConfig, DynamicDialogRef } from 'primeng/dynamicdialog';
   styleUrls: ['./expense-add.component.scss']
 })
 export class ExpenseAddComponent implements OnInit, OnDestroy {
+
+  faTimes = faTimes;
 
   categoryOptions: any;
 
