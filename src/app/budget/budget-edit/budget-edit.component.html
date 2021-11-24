@@ -53,16 +53,7 @@
                             type="number" 
                         >    
                     </div>
-                    <button 
-                        *ngIf="isDeleteButtonVisibleCurrent === i"
-                        pButton 
-                        icon="pi pi-times"
-                        (click)="deleteCurrentSubcategory(i)" 
-                        class="col-1 p-button-rounded" 
-                        [style]="{'width': '1.5rem', 'height': '1.5rem', 'background-color': '#426fef',
-                        'font-size': '0.8rem', 'margin-left': '1rem'}"
-                    >
-                    </button>       
+                    <fa-icon (click)="deleteCurrentSubcategory(i)"  class="col-1" [icon]="faTimes" [style]="{'font-size': '1.3rem', 'margin-left': '1rem'}"></fa-icon>
                 </div>
             </div>    
         </div>
@@ -94,16 +85,7 @@
                             type="number"
                         >    
                     </div>
-                    <button
-                        *ngIf="isDeleteButtonVisibleNew === i"
-                        pButton 
-                        icon="pi pi-times"
-                        (click)="deleteNewSubcategory(i)" 
-                        class="col-1 p-button-rounded" 
-                        [style]="{'width': '1.5rem', 'height': '1.5rem', 'background-color': '#426fef',
-                        'font-size': '0.8rem', 'margin-left': '1rem'}"
-                    >
-                    </button>       
+                    <fa-icon (click)="deleteNewSubcategory(i)" class="col-1" [icon]="faTimes" [style]="{'font-size': '1.3rem', 'margin-left': '1rem'}"></fa-icon>
                 </div>
             </div>        
         </div>        
@@ -114,14 +96,14 @@
         pButton 
         (click)="onSubmit(editForm.value)"
         class="p-button-rounded"
-        [style]="{'width': '4.5rem', 'height': '1.2rem', 'background-color': '#426fef', 'font-size': '0.7rem'}"
+        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '0.7rem'}"
         label="Submit"
     >
     </button>
     <button 
         pButton 
         class="p-button-rounded"
-        [style]="{'width': '4.5rem', 'height': '1.2rem', 'background-color': '#426fef', 'font-size': '0.7rem'}"
+        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '0.7rem'}"
         (click)='addNewSubCategory()'
         label="Add"
     >
@@ -131,7 +113,7 @@
         (click)="deleteEntireCategory()" 
         label="Delete" 
         class="p-button-rounded p-button-danger" 
-        [style]="{'width': '4.5rem', 'height': '1.2rem', 'font-size': '0.7rem'}"
+        [style]="{'width': '4.5rem', 'height': '1.5rem', 'font-size': '0.7rem'}"
     >
     </button>
 </div>
