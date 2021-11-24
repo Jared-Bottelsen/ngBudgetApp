@@ -30,3 +30,11 @@ input::-webkit-inner-spin-button {
 input[type=number] {
   -moz-appearance: textfield;
 }
+
+::ng-deep {
+    .scroll-panel-styles {
+        .p-scrollpanel-bar.p-scrollpanel-bar-y {
+            display: none;
+        }
+    }
+}

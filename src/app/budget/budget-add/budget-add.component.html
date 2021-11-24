@@ -3,7 +3,7 @@
     <fa-icon (click)="closeModal()" [icon]="faTimes" class="header-group--icon-size"></fa-icon>
 </div>
 <form [formGroup]="budgetForm">
-    <div class="form-group-container">
+    <div class="form-group-container" style="margin-bottom: 0.5rem;">
         <label class="col-12" for="categoryTitle">New Category Title</label>
         <input 
             class="col-12"
@@ -14,41 +14,43 @@
             appAutofocus
         >
     </div>
-<div formArrayName="subCategory">
-    <div 
-        (click)="showDeleteButton(i)"
-        *ngFor="let subCat of subCategories.controls; let i = index" 
-        [formGroupName]="i" 
-        class="grid col-12 grid-nogutter flex justify-content-between" 
-        style="padding: 0;"
-    >
-        <div class="col-7">
-            <label class="col-12" for="subCategoryTitle">Item Label</label>
-            <input 
-                class="col-12" 
-                pInputText 
-                type="text"
-                id="subCategoryTitle" 
-                formControlName="subCategoryTitle"
-                appAutofocus
-            >    
-        </div>
-        <div class="col-3">
-            <label class="col-12" for="subCategoryValue">Amount</label>
-            <input 
-                class="col-11" 
-                pInputText 
-                type="number" 
-                name="subCategoryValue" 
-                id="subCategoryValue" 
-                formControlName="subCategoryValue"
-            >    
-        </div>
-        <div class="col-1 flex align-items-center">
-            <fa-icon *ngIf="indexOfSubCategoryDeleteButton === i"  (click)="deleteSubCategory(i)" [icon]="faTimes" [style]="{'font-size': '1.5rem', 'margin-top': '0.9rem'}" class="col-12"></fa-icon>
-        </div>
-    </div>
-</div>
+        <div formArrayName="subCategory">
+            <p-scrollPanel [style]="{'width': '100%', 'height': '180px'}" styleClass="scroll-panel-styles">
+                <div 
+                    (click)="showDeleteButton(i)"
+                    *ngFor="let subCat of subCategories.controls; let i = index" 
+                    [formGroupName]="i" 
+                    class="grid col-12 grid-nogutter flex justify-content-between" 
+                    style="padding: 0;"
+                >
+                    <div class="col-7">
+                        <label class="col-12" for="subCategoryTitle">Item Label</label>
+                        <input 
+                            class="col-12" 
+                            pInputText 
+                            type="text"
+                            id="subCategoryTitle" 
+                            formControlName="subCategoryTitle"
+                            appAutofocus
+                        >    
+                    </div>
+                    <div class="col-3">
+                        <label class="col-12" for="subCategoryValue">Amount</label>
+                        <input 
+                            class="col-11" 
+                            pInputText 
+                            type="number" 
+                            name="subCategoryValue" 
+                            id="subCategoryValue" 
+                            formControlName="subCategoryValue"
+                        >    
+                    </div>
+                    <div class="col-1 flex align-items-center">
+                        <fa-icon *ngIf="indexOfSubCategoryDeleteButton === i"  (click)="deleteSubCategory(i)" [icon]="faTimes" [style]="{'font-size': '1.5rem', 'margin-top': '0.9rem'}" class="col-12"></fa-icon>
+                    </div>
+                </div>
+            </p-scrollPanel>
+        </div>        
 </form>
 <div class="button-group-container">
     <button 
