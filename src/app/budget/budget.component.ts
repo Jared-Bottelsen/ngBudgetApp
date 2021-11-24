@@ -3,7 +3,6 @@ import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BudgetAddComponent } from './budget-add/budget-add.component';
-import { CdkDragDrop, moveItemInArray } from '@angular/cdk/drag-drop';
 import { FirebaseService } from '../services/firebase.service';
 import { BudgetEditComponent } from './budget-edit/budget-edit.component';
 import { Subscription } from 'rxjs';
