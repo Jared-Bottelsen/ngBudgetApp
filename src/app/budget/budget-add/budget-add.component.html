@@ -15,7 +15,7 @@
         >
     </div>
         <div formArrayName="subCategory">
-            <p-scrollPanel [style]="{'width': '100%', 'height': '180px'}" styleClass="scroll-panel-styles">
+            <p-scrollPanel [style]="{'width': '100%', 'height': '185px'}" styleClass="scroll-panel-styles">
                 <div 
                     (click)="showDeleteButton(i)"
                     *ngFor="let subCat of subCategories.controls; let i = index" 
@@ -46,7 +46,7 @@
                         >    
                     </div>
                     <div class="col-1 flex align-items-center">
-                        <fa-icon *ngIf="indexOfSubCategoryDeleteButton === i"  (click)="deleteSubCategory(i)" [icon]="faTimes" [style]="{'font-size': '1.5rem', 'margin-top': '0.9rem'}" class="col-12"></fa-icon>
+                        <fa-icon (click)="deleteSubCategory(i)" [icon]="faTimes" [style]="{'font-size': '1.5rem', 'margin-top': '0.9rem'}" class="col-12"></fa-icon>
                     </div>
                 </div>
             </p-scrollPanel>

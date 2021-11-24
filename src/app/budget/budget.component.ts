@@ -34,7 +34,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
   budgetAddModalOptions = {
     header: 'Add to Your Budget',
     width: '95%',
-    height: '50%',
+    height: '52%',
     showHeader: false,
     styleClass: 'dynamic-dialog-wrapper'
   }

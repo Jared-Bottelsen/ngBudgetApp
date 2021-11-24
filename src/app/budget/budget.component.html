@@ -34,7 +34,7 @@
                         <div *ngFor="let subCat of budgetCategory[i].subCategory">
                             <div class="budget-item-individual-expense-container">
                             <p class="budget-item-individual-expense-container__item-title">{{subCat.subCategoryTitle}}</p>
-                            <p class="budget-item-individual-expense-container__balance-remaining">{{subCat.subCategoryValue | currency}}</p>
+                            <p [ngClass]="{'over-spent-color' : subCat.subCategoryValue < 0}" class="budget-item-individual-expense-container__balance-remaining">{{subCat.subCategoryValue | currency}}</p>
                             </div>
                             <app-progress-bar [value]="calcRemainingPercent(subCat)"></app-progress-bar>
                         </div>    

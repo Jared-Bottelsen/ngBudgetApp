@@ -74,6 +74,10 @@ hr {
     background-color: black;
 }
 
+.over-spent-color {
+    color: red;
+}
+
 .p-scrollpanel {
     :host ::ng-deep &.customScrollStyles {
         .p-scrollpanel-wrapper {
@@ -92,7 +96,10 @@ hr {
             border: 1px solid rgba( 255, 255, 255, 0.30 );
             box-shadow: 0px 2px 7px black;
             border-radius: 5%;
-            color: white;        
+            
+            h2, label, fa-icon {
+                color: white;
+            }
         }
     }
 }
