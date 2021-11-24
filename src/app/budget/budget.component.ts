@@ -35,13 +35,15 @@ export class BudgetComponent implements OnInit, OnDestroy {
     header: 'Add to Your Budget',
     width: '95%',
     height: '50%',
-    showHeader: false
+    showHeader: false,
+    styleClass: 'dynamic-dialog-wrapper'
   }
 
   expenseAddModalOptions = {
     header: 'Add an Expense',
     width: '95%',
     showHeader: false,
+    styleClass: 'dynamic-dialog-wrapper'
   }
 
   constructor(private dialogService: DialogService, private ref: DynamicDialogRef, private db: FirebaseService, private confirmationService: ConfirmationService) { }
@@ -88,7 +90,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
         subCategories: this.budgetCategory[index].subCategory
       },
       width: '95%',
-      styleClass: 'dialog-style',
+      styleClass: 'dynamic-dialog-wrapper',
       showHeader: false
     });
 
