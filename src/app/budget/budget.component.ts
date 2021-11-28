@@ -9,6 +9,7 @@ import { Subscription } from 'rxjs';
 import { MenuItem } from 'primeng/api';
 import { ExpenseAddComponent } from './expense-add/expense-add.component';
 import { ConfirmationService } from 'primeng/api';
+import { ArchiveTitleComponent } from './archive-title/archive-title.component';
 
 @Component({
   selector: 'app-budget',
@@ -20,18 +21,25 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   getBudgetSubscription$!: Subscription;
 
+  getExpensesSubscription$!: Subscription;
+
+  getIncomeSubscription$!: Subscription;
+
   faPlusCircle = faPlusCircle
 
   testValue: number = 100;
 
   isMenuVisible!: number;
 
-  budgetCategory: any = [];
+  budgetCategories: any = [];
+
+  expenses: any = [];
+
+  income: any;
 
   menuItems!: MenuItem[];
 
   budgetAddModalOptions = {
-    header: 'Add to Your Budget',
     width: '95%',
     height: '52%',
     showHeader: false,
@@ -39,7 +47,12 @@ export class BudgetComponent implements OnInit, OnDestroy {
   }
 
   expenseAddModalOptions = {
-    header: 'Add an Expense',
+    width: '95%',
+    showHeader: false,
+    styleClass: 'dynamic-dialog-wrapper'
+  }
+
+  archiveTitleModalOptions = {
     width: '95%',
     showHeader: false,
     styleClass: 'dynamic-dialog-wrapper'
@@ -50,16 +63,27 @@ export class BudgetComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getBudgetSubscription$ = this.db.getCategories()
      .subscribe((categories: any) => {
-       this.budgetCategory = categories
+       this.budgetCategories = categories
      })
      this.menuItems = [
        {label: 'New Budget Category', command: () => { this.showBudgetCategoryModal(); }},
        {label: 'Add Expense', command: () => { this.showExpenseModal(); }},
      ]
+     this.getExpensesSubscription$ = this.db.getExpenses().subscribe(result => {
+       result.forEach(final => {
+        this.expenses.push(final);
+        console.log(this.expenses);
+       })
+     })
+     this.getIncomeSubscription$ = this.db.getIncome().subscribe((result: any) => {
+       this.income = result.income;
+     })
    }
  
    ngOnDestroy(): void {
      this.getBudgetSubscription$.unsubscribe();
+     this.getExpensesSubscription$.unsubscribe();
+     this.getIncomeSubscription$.unsubscribe();
    }
 
    confirmBudgetReset(event: any) {
@@ -68,8 +92,8 @@ export class BudgetComponent implements OnInit, OnDestroy {
        message: "Are you sure you want to reset your budget? All of your budget values will be reset and all expenses logged will be deleted",
        icon: 'pi pi-exclamation-triangle',
        accept: () => {
-         this.db.resetWholeBudget();
-         this.confirmationService.close();
+        this.showArchiveTitleModal();
+        this.confirmationService.close();
        },
        reject: () => {
          this.confirmationService.close();
@@ -84,9 +108,9 @@ export class BudgetComponent implements OnInit, OnDestroy {
   openBudgetEditModal(index: number) {
     const ref = this.dialogService.open(BudgetEditComponent, {
       data: {
-        docId: this.budgetCategory[index].docId,
-        categoryTitle: this.budgetCategory[index].categoryTitle,
-        subCategories: this.budgetCategory[index].subCategory
+        docId: this.budgetCategories[index].docId,
+        categoryTitle: this.budgetCategories[index].categoryTitle,
+        subCategories: this.budgetCategories[index].subCategory
       },
       width: '95%',
       styleClass: 'dynamic-dialog-wrapper',
@@ -124,6 +148,39 @@ export class BudgetComponent implements OnInit, OnDestroy {
     } else {
       return 0
     }
+  }
+
+  addUpBudgetCategories() {
+    let budgetTotal: number = 0
+    for (let i = 0; i < this.budgetCategories.length; i++) {
+      let subCategories = this.budgetCategories[i].subCategory
+      for (let j = 0; j < subCategories.length; j++) {
+        budgetTotal += subCategories[j].startingValue     
+      }
+    }
+    return budgetTotal
+  }
+
+  addExpenses() {
+    let expenseTotal: number = 0;
+    for (let i = 0; i < this.expenses.length; i++) {
+      expenseTotal += this.expenses[i].expenseAmount
+    }
+    return expenseTotal
+  }
+
+  showArchiveTitleModal() {
+    const ref = this.dialogService.open(ArchiveTitleComponent, this.archiveTitleModalOptions);
+
+    ref.onClose.subscribe(result => {
+      if (!result) {
+        this.db.resetWholeBudget()
+        return
+      } else {
+        console.log(result);
+        this.db.addBudgetToArchive(result.budgetName ,this.addUpBudgetCategories(), this.income, this.expenses, this.addExpenses());
+      }
+    })
   }
 
   showBudgetCategoryModal() {
