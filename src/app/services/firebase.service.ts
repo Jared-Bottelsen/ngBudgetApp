@@ -82,7 +82,7 @@ export class FirebaseService {
   }
 
   getBudgetArchive() {
-    this.database.collection("users").doc(this.auth.userId). collection("budgetArchive", ref => ref.orderBy("dateArchived", "desc")).valueChanges();
+    return this.database.collection("users").doc(this.auth.userId).collection("budgetArchive", ref => ref.orderBy("dateArchived", "desc")).valueChanges();
   }
 
 /**
