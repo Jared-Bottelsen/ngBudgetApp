@@ -10,18 +10,23 @@
     .navigation-icon {
         font-size: 1.6rem;
         color: rgba(255, 255, 255, 0.765);
+        pointer-events: none;
     }
     
     .nav-icon-container {
-        width: 50%;
+        width: 33.33%;
         display: flex;
         justify-content: center;
         align-items: center;
         background-color: #183047;
         
-        &:focus, &:visited, &:active, &:link {
+        &:focus, &:visited, &:link {
             outline: none;
-            color: black;
+            // color: black;
         }
-    }   
+    }
+    
+    .active {
+        background-color: #081329;
+    }
 }

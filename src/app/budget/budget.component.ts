@@ -72,7 +72,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
      this.getExpensesSubscription$ = this.db.getExpenses().subscribe(result => {
        result.forEach(final => {
         this.expenses.push(final);
-        console.log(this.expenses);
        })
      })
      this.getIncomeSubscription$ = this.db.getIncome().subscribe((result: any) => {

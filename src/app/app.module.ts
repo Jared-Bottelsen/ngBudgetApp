@@ -33,6 +33,7 @@ import { MenuModule } from 'primeng/menu';
 import { IncomeAddComponent } from './budget-overview/income-add/income-add.component';
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { ArchiveTitleComponent } from './budget/archive-title/archive-title.component';
+import { BudgetArchiveComponent } from './budget/budget-archive/budget-archive.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -48,6 +49,7 @@ import { ArchiveTitleComponent } from './budget/archive-title/archive-title.comp
     IncomeAddComponent,
     AutofocusDirective,
     ArchiveTitleComponent,
+    BudgetArchiveComponent,
   ],
   imports: [
     AngularFireModule.initializeApp(environment.firebaseConfig),
