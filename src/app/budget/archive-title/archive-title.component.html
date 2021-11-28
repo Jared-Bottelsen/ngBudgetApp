@@ -1,0 +1,54 @@
+<div class="flex justify-content-between" style="margin: 1rem 0 1rem 0;">
+    <h3>Archive this Month's Budget?</h3>
+    <fa-icon 
+        (click)="closeModal()" 
+        [icon]="faTimes" 
+        [style]="{'font-size': '1.2rem'}"
+    >
+    </fa-icon>   
+</div>
+
+<div *ngIf="!selectedYes" class="grid col-12 flex justify-content-around">
+    <button 
+        (click)="selectYes()" 
+        pButton 
+        class="col-5 p-button-rounded" 
+        label="Yes" 
+        [style]="{'height': '1.5rem', 'background-color' : '#001127', 'border': 'none'}"
+    >
+    </button>
+    <button 
+        (click)="closeModal()" 
+        pButton 
+        class="col-5 p-button-rounded" 
+        label="No" 
+        [style]="{'height': '1.5rem', 'background-color' : '#001127', 'border': 'none'}"
+    >
+</button>
+</div>
+
+<div 
+    [formGroup]="archiveTitleForm" 
+    *ngIf="selectedYes" 
+    class="grid col-12"
+>
+    <label class="col-12" for="archiveTitle">Name of Budget</label>
+    <input 
+        formControlName="budgetName" 
+        class="col-12" 
+        type="text" 
+        id="archiveTitle" 
+        pInputText 
+        appAutofocus
+    >
+    <div class="col-12 flex justify-content-end" style="padding: 0;">
+        <button 
+            (click)="submitForm(archiveTitleForm.value)" 
+            class="col-4 p-button-rounded" 
+            pButton 
+            [style]="{'background-color': '#001127', 'border': 'none', 'margin-top': '1rem', 'height': '1.5rem'}" 
+            label="Submit"
+        >
+        </button>    
+    </div> 
+</div>
