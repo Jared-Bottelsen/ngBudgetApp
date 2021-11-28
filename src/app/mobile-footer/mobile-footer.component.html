@@ -1,15 +1,23 @@
 <div class="mobile-footer-container">
-    <a 
-        routerLink="/overview" 
-        class="nav-icon-container"
-        style="border-right : 1px solid black" 
-    >
-        <fa-icon [icon]="faReceipt" class="navigation-icon"></fa-icon>
-    </a>
+
     <a 
         routerLink="/budget" 
+        routerLinkActive="active"
+        [routerLinkActiveOptions]="{exact:true}"
         class="nav-icon-container" 
     >
         <fa-icon [icon]="faWallet" class="navigation-icon"></fa-icon>
+    </a>
+    <a 
+    routerLink="/overview" 
+    routerLinkActive="active"
+    class="nav-icon-container">
+    <fa-icon [icon]="faBook" class="navigation-icon"></fa-icon>
+    </a>
+    <a 
+    class="nav-icon-container"
+    routerLink="/budget-archive"
+    routerLinkActive="active">
+    <fa-icon [icon]="faChartPie" class="navigation-icon"></fa-icon>
     </a>
 </div> 
