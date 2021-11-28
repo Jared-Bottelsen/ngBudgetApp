@@ -68,6 +68,23 @@ export class FirebaseService {
     this.database.collection("users").doc(this.auth.userId).set(incomeData, {merge: true});
   }
 
+  addBudgetToArchive(archiveTitle: string ,budgetTotal: number, totalIncome: number, expenses: Array<any>, totalSpent: number) {
+    let archive = this.database.collection("users").doc(this.auth.userId).collection("budgetArchive").doc();
+    archive.set({
+      archiveTitle: archiveTitle,
+      docId: archive.ref.id,
+      dateArchived: new Date(),
+      totalBudgeted: budgetTotal,
+      income: totalIncome,
+      expenses: expenses,
+      totalSpent: totalSpent
+    })
+  }
+
+  getBudgetArchive() {
+    this.database.collection("users").doc(this.auth.userId). collection("budgetArchive", ref => ref.orderBy("dateArchived", "desc")).valueChanges();
+  }
+
 /**
  * 
  * @returns Income data from the budgetIncome collection for the logged in user.
