@@ -1,0 +1,63 @@
+<h1 class="archive-header-text">Budget Archive</h1>
+
+<div class="form-container">
+    <form [formGroup]="archiveSelectionForm">
+        <div class="grid grid-nogutter col-12">
+            <label class="col-12" for="archiveSelect">Select Past Budget</label>
+            <p-multiSelect 
+                formControlName="archiveSelection"
+                id="archiveSelect" 
+                class="col-12" 
+                [options]="dropDownOptions"
+                optionLabel="archiveTitle" 
+                placeholder="Select a Budget"
+                [selectionLimit]="1" 
+                [showHeader]="false" 
+                [style]="{'width': 'inherit'}"
+                (onChange)="submitForm(archiveSelectionForm)"
+            >
+            </p-multiSelect>
+        </div>    
+    </form>
+</div>
+
+<div *ngIf="selectedOption">
+    <div class="flex justify-content-center">
+        <div class="archive-info">
+            <div class="archive-info__overall">
+                <table>
+                    <tr>
+                        <th>Income</th>
+                        <th>Budgeted</th>
+                        <th>Spent</th>
+                    </tr>
+                    <tr>
+                        <td>{{selectedOption.income | currency}}</td>
+                        <td [ngClass]="{'archive-info__overall--over-spent' : selectedOption.totalBudgeted > selectedOption.income}">{{selectedOption.totalBudgeted | currency}}</td>
+                        <td [ngClass]="{'archive-info__overall--over-spent' : selectedOption.totalSpent > selectedOption.totalBudgeted}">{{selectedOption.totalSpent | currency}}</td>
+                    </tr>
+                </table>
+            </div>
+        </div>    
+    </div>
+
+    <div class="expenses">
+        <h2 class="expenses__header">This Months Expenses</h2>
+        <div class="expenses-table">
+            <table class="expenses-table__body">
+                <tr>
+                    <th>Date</th>
+                    <th>Category</th>
+                    <th>Name</th>
+                    <th>Amount</th>
+                </tr>
+                <tr *ngFor="let expense of selectedOption.expenses">
+                    <td>{{expense.expenseDate}}</td>
+                    <td>{{expense.expenseCategory}}</td>
+                    <td>{{expense.expenseName}}</td>
+                    <td>{{expense.expenseAmount | currency}}</td>
+                </tr>
+            </table>
+        </div>
+    </div>
+</div>

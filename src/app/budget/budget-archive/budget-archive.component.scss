@@ -1,0 +1,103 @@
+* {
+    font-family: 'Alumni Sans', sans-serif;
+}
+
+.archive-header-text { 
+    font-size: 3rem;
+    margin: 0 0 0 1rem;
+    color: rgba(255, 255, 255, 0.765);
+}
+
+.form-container {
+    display: flex;
+    justify-content: center;
+
+    label {
+        color: rgba(255, 255, 255, 0.765);
+        font-size: 1.2rem;
+    }
+}
+
+.archive-info {
+    margin-top: 1rem;
+    width: 80%;
+    height: 5rem;
+    background: rgba( 255, 255, 255, 0.15 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 5px;
+    box-shadow: 0px 2px 7px black;
+    color: rgba(255, 255, 255, 0.765);
+
+    &__overall {
+        display: flex;
+        justify-content: center;
+        height: inherit;
+        align-items: center;
+    
+        table {
+            width: 100%;
+            font-size: 1.2rem;
+        }
+
+        th {
+            font-size: 1.5rem;
+            text-decoration: underline;
+        }
+    
+        td, th {
+            width: 4rem;
+            text-align: center;
+        }  
+        
+        &--over-spent {
+            color: red;
+        }
+    }
+}
+
+.expenses {
+
+    &__header {
+        font-size: 2rem;
+        color: rgba(255, 255, 255, 0.765);
+        margin: 0.5rem 0 0 10%;
+    }
+
+    &__individual-expense-container {
+        display: flex;
+        justify-content: center;
+
+        &__expense {    
+            width: 90%;
+            background: rgba( 255, 255, 255, 0.15 );
+            border: 1px solid rgba( 255, 255, 255, 0.18 );
+            border-radius: 5px;
+            box-shadow: 0px 2px 7px black;
+            color: rgba(255, 255, 255, 0.765);        
+        }
+    }
+}
+
+.expenses-table {
+    display: flex;
+    justify-content: center;
+    
+    &__body {
+        width: 90%;
+        background: rgba( 255, 255, 255, 0.15 );
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        border-radius: 5px;
+        box-shadow: 0px 2px 7px black;
+        color: rgba(255, 255, 255, 0.765); 
+        border-collapse: collapse;   
+        overflow: hidden; 
+        margin-bottom: 5rem; 
+
+        th, td {
+            border: 1px white solid;  
+            border-collapse: collapse;     
+            padding: 0.2rem;
+            text-align: center;
+        }    
+    }
+}
