@@ -69,11 +69,11 @@ export class BudgetComponent implements OnInit, OnDestroy {
        {label: 'New Budget Category', command: () => { this.showBudgetCategoryModal(); }},
        {label: 'Add Expense', command: () => { this.showExpenseModal(); }},
      ]
+
      this.getExpensesSubscription$ = this.db.getExpenses().subscribe(result => {
-       result.forEach(final => {
-        this.expenses.push(final);
-       })
+      this.expenses = result;
      })
+     
      this.getIncomeSubscription$ = this.db.getIncome().subscribe((result: any) => {
        this.income = result.income;
      })
