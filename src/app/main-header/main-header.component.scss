@@ -1,19 +1,17 @@
-@media only screen and (max-width: 600px){
-    .header-main-container {
-        height: 50px;
-            
-        .sub-menu-container {
-            display: flex;
-            justify-content: center;
-            float: right;
-            margin: 0 10px 0 0;
-            align-items: center;
-            height: inherit;
-    
-            .sub-menu-header-icon {
-                font-size: 1.6rem;
-                color: rgba(255, 255, 255, 0.765);
-            }
+.header-main-container {
+    height: 50px;
+        
+    .sub-menu-container {
+        display: flex;
+        justify-content: center;
+        float: right;
+        margin: 0 10px 0 0;
+        align-items: center;
+        height: inherit;
+
+        .sub-menu-header-icon {
+            font-size: 1.6rem;
+            color: rgba(255, 255, 255, 0.765);
         }
-    }       
-}
+    }
+}       
