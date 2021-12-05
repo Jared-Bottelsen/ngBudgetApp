@@ -107,7 +107,6 @@ export class BudgetEditComponent implements OnInit {
   onSubmit(payload: any) {
     if (_.isEqual(payload.currentCategories, this.currentSubcategories) && this.config.data.categoryTitle === payload.categoryTitle && payload.newSubCategories.length === 0) {
       this.ref.close();
-      console.log("No updates were made");
     }
      for (let i = 0; i < payload.currentCategories.length; i++) {
        payload.currentCategories[i].parentDocId = this.config.data.docId;

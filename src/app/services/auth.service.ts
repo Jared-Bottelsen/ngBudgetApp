@@ -19,10 +19,8 @@ export class AuthService {
         this.router.navigate(['/overview'])
         this.userId = user.uid;
         this.displayName = user.displayName;
-        console.log(user.uid, this.isLoggedIn);
       } else {
         this.isLoggedIn = false;
-        console.log('No user signed in', this.isLoggedIn);
       }
     })
   }
@@ -39,6 +37,5 @@ export class AuthService {
   signOut() {
     this.afAuth.signOut()
     this.router.navigate(['/'])
-    console.log('No longer signed in');
   }
 }

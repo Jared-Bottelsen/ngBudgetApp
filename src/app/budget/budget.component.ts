@@ -199,7 +199,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
     
     ref.onClose.subscribe((category) => {
       if (category === undefined) {
-        console.log('No form data sent');
       } else {
         this.db.addCategory({categoryTitle: category.categoryTitle, subCategory: this.addStartingValueToSubCategory(category.subCategory)});
       }
