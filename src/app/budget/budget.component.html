@@ -6,7 +6,8 @@
     <div *ngIf="budgetCategories.length > 0" class="flex justify-content-center">
         <p-confirmPopup 
             [showTransitionOptions]="'100ms'" 
-            [hideTransitionOptions]="'100ms'">
+            [hideTransitionOptions]="'100ms'"
+            styleClass="popup-menu-style">
         </p-confirmPopup>
         <button 
             (click)="confirmBudgetReset($event)" 

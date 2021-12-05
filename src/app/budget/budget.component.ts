@@ -92,6 +92,9 @@ export class BudgetComponent implements OnInit, OnDestroy {
        target: event.target,
        message: "Are you sure you want to reset your budget? All of your budget values will be reset and all expenses logged will be deleted",
        icon: 'pi pi-exclamation-triangle',
+       acceptButtonStyleClass: 'popup-menu-buttons',
+       rejectButtonStyleClass: 'popup-menu-buttons',
+       defaultFocus: 'none', 
        accept: () => {
         this.showArchiveTitleModal();
         this.confirmationService.close();
@@ -185,7 +188,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
     ref.onClose.subscribe(result => {
       if (!result) {
-        this.db.resetWholeBudget()
         return
       } else {
         this.db.addBudgetToArchive(result.budgetName ,this.addUpBudgetCategories(), this.income, this.expenses, this.lumpSubcategories(), this.addExpenses());
