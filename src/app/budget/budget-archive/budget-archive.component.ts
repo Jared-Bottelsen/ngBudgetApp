@@ -14,20 +14,30 @@ export class BudgetArchiveComponent implements OnInit, OnDestroy {
 
   dropDownOptions: any = [];
 
-  selectedOption: any;
+  archiveSelected: any;
 
   archiveSelectionForm: FormGroup;
+
+  menuSelectOptions: any;
+
+  selectedButtonOption: string = 'expenses'
 
   constructor(private db: FirebaseService, private fb: FormBuilder) {
     this.archiveSelectionForm = this.fb.group({
       archiveSelection: ''
     })
+    this.menuSelectOptions = [{
+      label: "Expenses",
+      value: "expenses"
+    }, {
+      label: "Budget",
+      value: "budget"
+    }]
    }
 
   ngOnInit(): void {
     this.getArchiveSubscription$ = this.db.getBudgetArchive().subscribe(result => {
       result.forEach(final => {
-        console.log(final);
         this.dropDownOptions.push(final);
       })
     })
@@ -38,7 +48,7 @@ export class BudgetArchiveComponent implements OnInit, OnDestroy {
   }
 
   submitForm(formData: any) {
-    this.selectedOption = formData.value.archiveSelection[0];
+    this.archiveSelected = formData.value.archiveSelection[0];
   }
 
 }

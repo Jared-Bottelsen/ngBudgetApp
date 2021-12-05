@@ -1,3 +1,37 @@
+%table-body {
+    width: 90%;
+    border-collapse: collapse;   
+    overflow: hidden; 
+    margin-bottom: 5rem; 
+    @extend %glass-background;
+}
+
+%table-header-data {
+    border: 1px white solid;  
+    border-collapse: collapse;     
+    padding: 0.2rem;
+    text-align: center;
+}
+
+%glass-background {
+    background: rgba( 255, 255, 255, 0.15 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 5px;
+    box-shadow: 0px 2px 7px black;
+    color: rgba(255, 255, 255, 0.765);
+}
+
+%flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+%header-text {
+    font-size: 2rem;
+    color: rgba(255, 255, 255, 0.765);
+    margin: 0.5rem 0 0 10%;
+}
+
 * {
     font-family: 'Alumni Sans', sans-serif;
 }
@@ -9,8 +43,7 @@
 }
 
 .form-container {
-    display: flex;
-    justify-content: center;
+    @extend %flex-center;
 
     label {
         color: rgba(255, 255, 255, 0.765);
@@ -22,15 +55,10 @@
     margin-top: 1rem;
     width: 80%;
     height: 5rem;
-    background: rgba( 255, 255, 255, 0.15 );
-    border: 1px solid rgba( 255, 255, 255, 0.18 );
-    border-radius: 5px;
-    box-shadow: 0px 2px 7px black;
-    color: rgba(255, 255, 255, 0.765);
+    @extend %glass-background;
 
     &__overall {
-        display: flex;
-        justify-content: center;
+        @extend %flex-center;
         height: inherit;
         align-items: center;
     
@@ -45,6 +73,7 @@
         }
     
         td, th {
+            font-size: 1.2rem;
             width: 4rem;
             text-align: center;
         }  
@@ -58,46 +87,65 @@
 .expenses {
 
     &__header {
-        font-size: 2rem;
-        color: rgba(255, 255, 255, 0.765);
-        margin: 0.5rem 0 0 10%;
+        @extend %header-text;
     }
+}
 
-    &__individual-expense-container {
-        display: flex;
-        justify-content: center;
+.budget {
 
-        &__expense {    
-            width: 90%;
-            background: rgba( 255, 255, 255, 0.15 );
-            border: 1px solid rgba( 255, 255, 255, 0.18 );
-            border-radius: 5px;
-            box-shadow: 0px 2px 7px black;
-            color: rgba(255, 255, 255, 0.765);        
+    &__header {
+        @extend %header-text;
+    }
+}
+
+.budget-table {
+    @extend %flex-center;
+
+    &__body {
+        @extend %table-body;
+
+        th, td {
+            font-size: 1.2rem;
+            @extend %table-header-data;
+        } 
+        
+        &--over-spent {
+            color: red;
         }
     }
 }
 
 .expenses-table {
-    display: flex;
-    justify-content: center;
+    @extend %flex-center;
     
     &__body {
-        width: 90%;
-        background: rgba( 255, 255, 255, 0.15 );
-        border: 1px solid rgba( 255, 255, 255, 0.18 );
-        border-radius: 5px;
-        box-shadow: 0px 2px 7px black;
-        color: rgba(255, 255, 255, 0.765); 
-        border-collapse: collapse;   
-        overflow: hidden; 
-        margin-bottom: 5rem; 
+        @extend %table-body;
 
         th, td {
-            border: 1px white solid;  
-            border-collapse: collapse;     
-            padding: 0.2rem;
-            text-align: center;
+            font-size: 1.2rem;
+            @extend %table-header-data
         }    
+    }
+}
+
+::ng-deep {
+
+    .select-button-style {
+
+        .p-button.p-highlight {
+            background-color : #001127;
+            border: solid 2px #001127;
+
+            &:hover {
+                background-color: #001127;
+                border-color: #001127;
+            }
+        }
+        .p-button {
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
     }
 }

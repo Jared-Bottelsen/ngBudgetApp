@@ -21,7 +21,11 @@
     </form>
 </div>
 
-<div *ngIf="selectedOption">
+<div *ngIf="archiveSelected">
+    <div class="flex justify-content-center">
+        <p-selectButton styleClass="select-button-style" [(ngModel)]="selectedButtonOption" [options]="menuSelectOptions" optionLabel="label" optionValue="value"></p-selectButton>
+    </div>
+    
     <div class="flex justify-content-center">
         <div class="archive-info">
             <div class="archive-info__overall">
@@ -32,17 +36,17 @@
                         <th>Spent</th>
                     </tr>
                     <tr>
-                        <td>{{selectedOption.income | currency}}</td>
-                        <td [ngClass]="{'archive-info__overall--over-spent' : selectedOption.totalBudgeted > selectedOption.income}">{{selectedOption.totalBudgeted | currency}}</td>
-                        <td [ngClass]="{'archive-info__overall--over-spent' : selectedOption.totalSpent > selectedOption.totalBudgeted}">{{selectedOption.totalSpent | currency}}</td>
+                        <td>{{archiveSelected.income | currency}}</td>
+                        <td [ngClass]="{'archive-info__overall--over-spent' : archiveSelected.totalBudgeted > archiveSelected.income}">{{archiveSelected.totalBudgeted | currency}}</td>
+                        <td [ngClass]="{'archive-info__overall--over-spent' : archiveSelected.totalSpent > archiveSelected.totalBudgeted}">{{archiveSelected.totalSpent | currency}}</td>
                     </tr>
                 </table>
             </div>
         </div>    
     </div>
 
-    <div class="expenses">
-        <h2 class="expenses__header">This Months Expenses</h2>
+    <div class="expenses" *ngIf="selectedButtonOption === 'expenses'">
+        <h2 class="expenses__header">{{archiveSelected.archiveTitle}} Expenses</h2>
         <div class="expenses-table">
             <table class="expenses-table__body">
                 <tr>
@@ -51,12 +55,32 @@
                     <th>Name</th>
                     <th>Amount</th>
                 </tr>
-                <tr *ngFor="let expense of selectedOption.expenses">
+                <tr *ngFor="let expense of archiveSelected.expenses">
                     <td>{{expense.expenseDate}}</td>
                     <td>{{expense.expenseCategory}}</td>
                     <td>{{expense.expenseName}}</td>
                     <td>{{expense.expenseAmount | currency}}</td>
                 </tr>
+            </table>
+        </div>
+    </div>
+
+    <div class="budget" *ngIf="selectedButtonOption === 'budget'">
+        <h2 class="budget__header">{{archiveSelected.archiveTitle}} Budget</h2>
+        <div class="budget-table">
+            <table class="budget-table__body">
+                <tr>
+                    <th>Category Title</th>
+                    <th>Starting Value</th>
+                    <th>Ending Value</th>
+                    <th>Total Spent</th>
+                </tr>
+                <tr *ngFor="let subCategory of archiveSelected.budget">
+                    <td>{{subCategory.subCategoryTitle}}</td>
+                    <td>{{subCategory.startingValue | currency}}</td>
+                    <td>{{subCategory.subCategoryValue | currency}}</td>
+                    <td [ngClass]="{'budget-table__body--over-spent' : subCategory.subCategoryValue < 0}">{{subCategory.startingValue - subCategory.subCategoryValue | currency}}</td>
+                </tr>    
             </table>
         </div>
     </div>
