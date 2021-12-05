@@ -188,8 +188,8 @@ export class BudgetComponent implements OnInit, OnDestroy {
         this.db.resetWholeBudget()
         return
       } else {
-        console.log(result);
         this.db.addBudgetToArchive(result.budgetName ,this.addUpBudgetCategories(), this.income, this.expenses, this.lumpSubcategories(), this.addExpenses());
+        this.db.resetWholeBudget();
       }
     })
   }
