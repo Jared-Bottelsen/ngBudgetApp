@@ -68,7 +68,7 @@ export class FirebaseService {
     this.database.collection("users").doc(this.auth.userId).set(incomeData, {merge: true});
   }
 
-  addBudgetToArchive(archiveTitle: string ,budgetTotal: number, totalIncome: number, expenses: Array<any>, totalSpent: number) {
+  addBudgetToArchive(archiveTitle: string ,budgetTotal: number, totalIncome: number, expenses: Array<any>, budgetCategories: Array<any>, totalSpent: number) {
     let archive = this.database.collection("users").doc(this.auth.userId).collection("budgetArchive").doc();
     archive.set({
       archiveTitle: archiveTitle,
@@ -77,6 +77,7 @@ export class FirebaseService {
       totalBudgeted: budgetTotal,
       income: totalIncome,
       expenses: expenses,
+      budget: budgetCategories,
       totalSpent: totalSpent
     })
   }

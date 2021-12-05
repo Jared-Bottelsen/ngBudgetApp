@@ -33,6 +33,8 @@ export class BudgetComponent implements OnInit, OnDestroy {
 
   budgetCategories: any = [];
 
+  subCategories: any = [];
+
   expenses: any = [];
 
   income: any;
@@ -63,7 +65,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
   ngOnInit(): void {
     this.getBudgetSubscription$ = this.db.getCategories()
      .subscribe((categories: any) => {
-       this.budgetCategories = categories
+       this.budgetCategories = categories;
      })
      this.menuItems = [
        {label: 'New Budget Category', command: () => { this.showBudgetCategoryModal(); }},
@@ -73,7 +75,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
      this.getExpensesSubscription$ = this.db.getExpenses().subscribe(result => {
       this.expenses = result;
      })
-     
+
      this.getIncomeSubscription$ = this.db.getIncome().subscribe((result: any) => {
        this.income = result.income;
      })
@@ -168,6 +170,16 @@ export class BudgetComponent implements OnInit, OnDestroy {
     return expenseTotal
   }
 
+  lumpSubcategories() {
+    let subCategories = [];
+    for (let i = 0; i < this.budgetCategories.length; i++) {
+      for (let j = 0; j < this.budgetCategories[i].subCategory.length; j++) {
+        subCategories.push(this.budgetCategories[i].subCategory[j]);
+      }      
+    }
+    return subCategories
+  }
+
   showArchiveTitleModal() {
     const ref = this.dialogService.open(ArchiveTitleComponent, this.archiveTitleModalOptions);
 
@@ -177,7 +189,7 @@ export class BudgetComponent implements OnInit, OnDestroy {
         return
       } else {
         console.log(result);
-        this.db.addBudgetToArchive(result.budgetName ,this.addUpBudgetCategories(), this.income, this.expenses, this.addExpenses());
+        this.db.addBudgetToArchive(result.budgetName ,this.addUpBudgetCategories(), this.income, this.expenses, this.lumpSubcategories(), this.addExpenses());
       }
     })
   }
