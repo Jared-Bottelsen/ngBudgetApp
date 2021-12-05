@@ -45,5 +45,11 @@ input[type=number] {
                 border-color: #001127;
             }
         }
+        .p-button {
+
+            &:focus {
+                box-shadow: none;
+            }
+        }
     }
 }
