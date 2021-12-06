@@ -1,3 +1,10 @@
+%glass-background-dialogs {
+    background: rgba( 33, 51, 73, 0.90);
+    border: 1px solid rgba( 255, 255, 255, 0.30 );
+    box-shadow: 0px 2px 7px black;
+    border-radius: 5px;
+}
+
 .header-main-container {
     height: 50px;
         
@@ -15,3 +22,42 @@
         }
     }
 }       
+
+::ng-deep {
+
+    .p-menu-styling {
+
+        &.p-menu-overlay {
+            @extend %glass-background-dialogs;
+            width: 60%;
+
+            &:hover {
+                background: rgba( 33, 51, 73, 0.90 );
+            }
+
+            .p-menuitem-text {
+                color: rgba(255, 255, 255, 0.765);
+
+            }
+
+            .p-menuitem-link {
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+                &:not(.p-disabled):hover {
+                    background: none;
+
+                    .p-menuitem-text {
+                        color: rgba(255, 255, 255, 0.765);
+                    }    
+                }
+            }
+
+            .p-menuitem-icon {
+                color: rgba(255, 255, 255, 0.765);
+            }
+        }
+    }
+}
