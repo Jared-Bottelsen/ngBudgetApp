@@ -75,7 +75,7 @@ export class FirebaseService {
       docId: archive.ref.id,
       dateArchived: new Date(),
       totalBudgeted: budgetTotal,
-      income: totalIncome,
+      income: totalIncome === undefined ? 0 : totalIncome,
       expenses: expenses,
       budget: budgetCategories,
       totalSpent: totalSpent
