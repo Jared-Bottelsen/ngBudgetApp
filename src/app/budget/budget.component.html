@@ -4,7 +4,7 @@
         <!-- <fa-icon [icon]="faPlusCircle" class="header-container__add-icon" (click)="menu.toggle($event)"></fa-icon>  -->
         <button (click)="menu.toggle($event)" pButton label="Update Budget" class="p-button-rounded header-container__add-button"></button>
     </div>
-    <div *ngIf="budgetCategories.length > 0" class="flex justify-content-center">
+    <div *ngIf="budgetCategories.length > 0" class="flex justify-content-start">
         <p-confirmPopup 
             [showTransitionOptions]="'100ms'" 
             [hideTransitionOptions]="'100ms'"
@@ -12,8 +12,8 @@
         </p-confirmPopup>
         <button 
             (click)="confirmBudgetReset($event)" 
-            pButton label="Reset Budget" 
-            [style]="{'margin-bottom' : '0.5rem', 'font-size': '1.2rem', 'height': '1.5rem', 'background-color': '#001127', 'border': '1px solid #001127', 'box-shadow': 'none'}" 
+            pButton label="Reset" 
+            [style]="{'margin' : '0 0 0.5rem 10%', 'font-size': '1.2rem', 'height': '1.5rem',         'color' : 'black', 'background-color' : 'rgba(255, 255, 255, 0.765)' , 'border': 'none', 'box-shadow': 'none'}" 
             class="p-button-rounded">
         </button>
     </div>
