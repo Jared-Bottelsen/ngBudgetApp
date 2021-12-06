@@ -1,5 +1,5 @@
 <div class="header-group flex justify-content-between align-items-center">
-    <h2>Add to your Budget</h2>
+    <h1>Add to your Budget</h1>
     <fa-icon (click)="closeModal()" [icon]="faTimes" class="header-group--icon-size"></fa-icon>
 </div>
 <form [formGroup]="budgetForm">
@@ -54,14 +54,14 @@
 <div class="button-group-container">
     <button 
         pButton
-        [style]="{'background-color': '#001127', 'border': 'none', 'height': '1.5rem'}" 
+        [style]="{'background-color': '#001127', 'border': 'none', 'height': '1.5rem', 'font-size' : '1.2rem'}" 
         class="p-button-rounded" 
         (click)="addSubcategory()" 
         label="Add Subcategory">
     </button>    
     <button 
         pButton
-        [style]="{'background-color': '#001127', 'border': 'none', 'height': '1.5rem'}" 
+        [style]="{'background-color': '#001127', 'border': 'none', 'height': '1.5rem', 'font-size' : '1.2rem'}" 
         class="p-button-rounded" 
         (click)= "onSubmit(budgetForm)" 
         label="Create">

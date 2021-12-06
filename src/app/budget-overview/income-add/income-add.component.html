@@ -1,5 +1,5 @@
 <div class="flex justify-content-between align-items-end">
-    <h2 style="margin-top: 0.5rem;">Add Income</h2>
+    <h1 style="margin-top: 0.5rem;">Add Income</h1>
     <fa-icon (click)="closeModal()" [icon]="faTimes" [style]="{'font-size': '1.5rem'}"></fa-icon>
 </div>
 
@@ -17,7 +17,7 @@
 <div class="form-container">
     <div *ngIf="selectedOption === 'MO'">
         <form class="grid col-12 grid-nogutter" [formGroup]="monthlyForm">
-            <label class="col-12" for="monthlyIncome">Monthly Income</label>
+            <label class="col-12 labels" for="monthlyIncome">Monthly Income</label>
             <input
                 class="col-12 input-sizing"
                 formControlName="monthlyInput"
@@ -31,7 +31,7 @@
     
     <div class="" *ngIf="selectedOption === 'BI'">
         <form class="grid col-12 grid-nogutter" [formGroup]="biWeeklyForm">
-            <label class="col-12" for="check1">Check 1</label>
+            <label class="col-12 labels" for="check1">Check 1</label>
             <input 
                 class="col-12 input-sizing" 
                 formControlName="check1"
@@ -40,7 +40,7 @@
                 id="check1"
                 appAutofocus
             >
-            <label class="col-12" for="check2">Check 2</label>
+            <label class="col-12 labels" for="check2">Check 2</label>
             <input 
                 class="col-12 input-sizing" 
                 formControlName="check2"
@@ -53,5 +53,5 @@
 </div>
 
 <div class="button-group">
-    <button (click)="selectedOption === 'MO' ? submitForm(monthlyForm) : submitForm(biWeeklyForm)" pButton [style]="{'background-color' : '#001127', 'border': 'none'}" label="Submit"></button>
+    <button (click)="selectedOption === 'MO' ? submitForm(monthlyForm) : submitForm(biWeeklyForm)" pButton [style]="{'background-color' : '#001127', 'border': 'none', 'font-size' : '1.2rem'}" label="Submit"></button>
 </div>

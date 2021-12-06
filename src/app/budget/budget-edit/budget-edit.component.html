@@ -1,5 +1,5 @@
 <div class="header flex justify-content-between align-items-center">
-    <h3>Make Edits to your Budget</h3>
+    <h1>Make Edits to your Budget</h1>
     <fa-icon [icon]="faTimes" [style]="{'font-size': '1.5rem'}" (click)="close()"></fa-icon>
 </div>
 
@@ -96,14 +96,14 @@
         pButton 
         (click)="onSubmit(editForm.value)"
         class="p-button-rounded"
-        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '0.7rem'}"
+        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '1.2rem'}"
         label="Submit"
     >
     </button>
     <button 
         pButton 
         class="p-button-rounded"
-        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '0.7rem'}"
+        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '1.2rem'}"
         (click)='addNewSubCategory()'
         label="Add"
     >
@@ -113,7 +113,7 @@
         (click)="deleteEntireCategory()" 
         label="Delete" 
         class="p-button-rounded" 
-        [style]="{'width': '4.5rem', 'height': '1.5rem', 'font-size': '0.7rem', 'background-color': '#3b2637', 'border': 'none'}"
+        [style]="{'width': '4.5rem', 'height': '1.5rem', 'font-size': '1.2rem', 'background-color': '#3b2637', 'border': 'none'}"
     >
     </button>
 </div>
