@@ -71,13 +71,13 @@ export class FirebaseService {
   addBudgetToArchive(archiveTitle: string ,budgetTotal: number, totalIncome: number, expenses: Array<any>, budgetCategories: Array<any>, totalSpent: number) {
     let archive = this.database.collection("users").doc(this.auth.userId).collection("budgetArchive").doc();
     archive.set({
-      archiveTitle: archiveTitle,
+      archiveTitle: archiveTitle === undefined ? '' : archiveTitle,
       docId: archive.ref.id,
       dateArchived: new Date(),
-      totalBudgeted: budgetTotal,
+      totalBudgeted: budgetTotal === undefined ? 0 : budgetTotal,
       income: totalIncome === undefined ? 0 : totalIncome,
-      expenses: expenses,
-      budget: budgetCategories,
+      expenses: expenses === undefined ? 0 : expenses,
+      budget: budgetCategories === undefined ? 0 :  budgetCategories,
       totalSpent: totalSpent
     })
   }
