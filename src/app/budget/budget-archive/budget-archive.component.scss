@@ -40,6 +40,22 @@
     font-size: 3rem;
     margin: 0 0 0 1rem;
     color: rgba(255, 255, 255, 0.765);
+
+    &__delete-button {
+        font-size: 1.2rem;
+        margin: 0.5rem 0.5rem 0 0;
+        color: black;
+        height: 1.5rem;
+        align-self: center;
+        background-color: rgba(255, 255, 255, 0.765);
+        border: none;
+        box-shadow: none;
+
+        &:hover {
+            background-color: rgba(255, 255, 255, 0.765);
+            color: black;
+        }
+    }
 }
 
 .form-container {
@@ -145,6 +161,33 @@
 
             &:focus {
                 box-shadow: none;
+            }
+        }
+    }
+}
+
+::ng-deep {
+
+    .popup-menu-style {
+        
+        &.p-confirm-popup {
+            background: rgba( 33, 51, 73, 0.90 );
+            border: 1px solid rgba( 255, 255, 255, 0.30 );
+            box-shadow: 0px 2px 7px black;
+            border-radius: 5px;
+            color: white;
+        }
+    }
+
+    .popup-menu-buttons {
+        background-color : #001127;
+        border: solid 2px #001127;   
+        
+        &.p-button {
+            box-shadow: none;
+            &:hover {
+                background-color : #001127;
+                border: solid 2px #001127;   
             }
         }
     }

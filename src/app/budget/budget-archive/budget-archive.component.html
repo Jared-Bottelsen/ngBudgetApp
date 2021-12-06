@@ -1,5 +1,15 @@
-<h1 class="archive-header-text">Budget Archive</h1>
-
+<div class="flex justify-content-between">
+    <h1 class="archive-header-text">Budget Archive</h1>
+    <p-confirmPopup styleClass="popup-menu-style"  defaultFocus="none"></p-confirmPopup>
+    <button 
+        *ngIf="archiveSelected" 
+        (click)="confirmArchiveDeletion($event)"
+        pButton 
+        class="p-button-rounded archive-header-text__delete-button" 
+        label="Delete Archive"
+    >
+    </button>
+</div>
 <div class="form-container">
     <form [formGroup]="archiveSelectionForm">
         <div class="grid grid-nogutter col-12">
@@ -23,7 +33,14 @@
 
 <div *ngIf="archiveSelected">
     <div class="flex justify-content-center">
-        <p-selectButton styleClass="select-button-style" [(ngModel)]="selectedButtonOption" [options]="menuSelectOptions" optionLabel="label" optionValue="value"></p-selectButton>
+        <p-selectButton 
+            styleClass="select-button-style" 
+            [(ngModel)]="selectedButtonOption" 
+            [options]="menuSelectOptions" 
+            optionLabel="label" 
+            optionValue="value"
+        >
+        </p-selectButton>
     </div>
     
     <div class="flex justify-content-center">
@@ -37,8 +54,12 @@
                     </tr>
                     <tr>
                         <td>{{archiveSelected.income | currency}}</td>
-                        <td [ngClass]="{'archive-info__overall--over-spent' : archiveSelected.totalBudgeted > archiveSelected.income}">{{archiveSelected.totalBudgeted | currency}}</td>
-                        <td [ngClass]="{'archive-info__overall--over-spent' : archiveSelected.totalSpent > archiveSelected.totalBudgeted}">{{archiveSelected.totalSpent | currency}}</td>
+                        <td [ngClass]="{'archive-info__overall--over-spent' : archiveSelected.totalBudgeted > archiveSelected.income}">
+                            {{archiveSelected.totalBudgeted | currency}}
+                        </td>
+                        <td [ngClass]="{'archive-info__overall--over-spent' : archiveSelected.totalSpent > archiveSelected.totalBudgeted}">
+                            {{archiveSelected.totalSpent | currency}}
+                        </td>
                     </tr>
                 </table>
             </div>
@@ -79,7 +100,9 @@
                     <td>{{subCategory.subCategoryTitle}}</td>
                     <td>{{subCategory.startingValue | currency}}</td>
                     <td>{{subCategory.subCategoryValue | currency}}</td>
-                    <td [ngClass]="{'budget-table__body--over-spent' : subCategory.subCategoryValue < 0}">{{subCategory.startingValue - subCategory.subCategoryValue | currency}}</td>
+                    <td [ngClass]="{'budget-table__body--over-spent' : subCategory.subCategoryValue < 0}">
+                        {{subCategory.startingValue - subCategory.subCategoryValue | currency}}
+                    </td>
                 </tr>    
             </table>
         </div>
