@@ -8,6 +8,20 @@
     color: rgba(255, 255, 255, 0.765);
 }
 
+.income-add-button {
+    margin: 0.5rem 0.5rem 0 0 ;
+    font-size: 1.2rem; 
+    height: 1.5rem; 
+    align-self: center; 
+    background-color: #001127; 
+    border: none; 
+    box-shadow: none;
+    
+    &:hover {
+        background-color: #001127; 
+    }
+}
+
 .budget-overview-information-container {
     background: rgba( 255, 255, 255, 0.15 );
     border: 1px solid rgba( 255, 255, 255, 0.18 );

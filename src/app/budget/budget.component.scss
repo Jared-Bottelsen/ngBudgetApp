@@ -23,10 +23,18 @@
         color: rgba(255, 255, 255, 0.765);
     }
     
-    &__add-icon {
-        margin: 0.5rem 0.5rem 0 0;
-        font-size: 1.8em;
-        color: rgba(255, 255, 255, 0.765);
+    &__add-button {
+        margin: 0.5rem 0.5rem 0 0 ;
+        font-size: 1.2rem; 
+        height: 1.5rem; 
+        align-self: center; 
+        background-color: #001127; 
+        border: none; 
+        box-shadow: none;
+        
+        &:hover {
+            background-color: #001127; 
+        }
     }
 }
 
@@ -102,12 +110,8 @@ hr {
         .p-dialog-content {
             @extend %glass-background-dialogs;
             
-            h1, h2, h3, label, fa-icon {
+            h2, h3, label, fa-icon {
                 color: white;
-            }
-
-            label {
-                font-size: 1.2rem
             }
         }
     }

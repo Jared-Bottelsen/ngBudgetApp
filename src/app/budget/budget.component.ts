@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { DialogService } from 'primeng/dynamicdialog';
 import { DynamicDialogRef } from 'primeng/dynamicdialog';
 import { BudgetAddComponent } from './budget-add/budget-add.component';
@@ -24,8 +23,6 @@ export class BudgetComponent implements OnInit, OnDestroy {
   getExpensesSubscription$!: Subscription;
 
   getIncomeSubscription$!: Subscription;
-
-  faPlusCircle = faPlusCircle
 
   testValue: number = 100;
 

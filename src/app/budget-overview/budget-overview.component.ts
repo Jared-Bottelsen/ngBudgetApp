@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { faHandHoldingUsd, faPlusCircle } from '@fortawesome/free-solid-svg-icons';
 import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
@@ -19,10 +18,6 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
   getExpensesObservable$!: Subscription;
 
   getBudgetCategoriesObservable$!: Subscription;
-
-  faHandHoldingUsd = faHandHoldingUsd;
-
-  faPlusCircle = faPlusCircle;
 
   isMobile: boolean = this.deviceService.isMobile();
 
