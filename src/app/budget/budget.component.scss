@@ -110,7 +110,7 @@ hr {
         .p-dialog-content {
             @extend %glass-background-dialogs;
             
-            h2, h3, label, fa-icon {
+            h1, h2, h3, label, fa-icon {
                 color: white;
             }
         }
