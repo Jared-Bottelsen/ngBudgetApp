@@ -68,8 +68,8 @@ export class BudgetComponent implements OnInit, OnDestroy {
        this.budgetCategories = categories;
      })
      this.menuItems = [
-       {label: 'New Budget Category', command: () => { this.showBudgetCategoryModal(); }},
-       {label: 'Add Expense', command: () => { this.showExpenseModal(); }},
+       {label: 'New Budget Category', icon: 'pi pi-book', command: () => { this.showBudgetCategoryModal(); }},
+       {label: 'Add Expense', icon: 'pi pi-credit-card', command: () => { this.showExpenseModal(); }},
      ]
 
      this.getExpensesSubscription$ = this.db.getExpenses().subscribe(result => {
