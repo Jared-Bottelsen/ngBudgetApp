@@ -1,7 +1,11 @@
+$app-white: rgba(255, 255, 255, 0.765);
+$button-dark-blue: #001127;
+$black-color: black;
+
 %glass-background-dialogs {
     background: rgba( 33, 51, 73, 0.90);
     border: 1px solid rgba( 255, 255, 255, 0.30 );
-    box-shadow: 0px 2px 7px black;
+    box-shadow: 0px 2px 7px $black-color;
     border-radius: 5px;
 }
 
@@ -20,7 +24,7 @@
     &__text {
         margin: 0 0 0 1rem;
         font-size: 3rem;
-        color: rgba(255, 255, 255, 0.765);
+        color: $app-white;
     }
     
     &__add-button {
@@ -28,14 +32,32 @@
         font-size: 1.2rem; 
         height: 1.5rem; 
         align-self: center; 
-        color: black;
-        background-color: rgba(255, 255, 255, 0.765);
+        color: $black-color;
+        background-color: $app-white;
         border: none; 
         box-shadow: none;
         
         &:hover {
-            background-color: rgba(255, 255, 255, 0.765);
-            color: black;
+            background-color: $app-white;
+            color: $black-color;
+        }
+    }
+}
+
+.budget-reset {
+
+    &__button {
+        margin: 0 0 0.5rem 10%; 
+        font-size: 1.2rem; 
+        height: 1.5rem;
+        color: $black-color; 
+        background-color: $app-white;
+        border: none; 
+        box-shadow: none;
+
+        &:hover {
+            background-color: $app-white;
+            color: $black-color;  
         }
     }
 }
@@ -50,8 +72,8 @@
         background: rgba( 255, 255, 255, 0.15 );
         border: 1px solid rgba( 255, 255, 255, 0.18 );
         border-radius: 5px;
-        box-shadow: 0px 2px 7px black;
-        color: rgba(255, 255, 255, 0.765);
+        box-shadow: 0px 2px 7px $black-color;
+        color: $app-white;
     }
 }
 
@@ -90,22 +112,40 @@ hr {
     margin-bottom: .4rem;
     height: .08rem;
     border: none;
-    background-color: black;
+    background-color: $black-color;
+}
+
+.button-group {
+
+    &__button {
+        width: 5rem;
+        height: 1.5rem;
+        background-color: $button-dark-blue;
+        border: 1px solid $button-dark-blue; 
+        font-size: 1.5rem;
+
+        &:hover {
+            background-color: $button-dark-blue;
+            border-color: $button-dark-blue;
+        }
+    }
 }
 
 .over-spent-color {
     color: red;
 }
 
-.p-scrollpanel {
-    :host ::ng-deep &.customScrollStyles {
-        .p-scrollpanel-wrapper {
-            height: 520px;
-        }
-    }
-}
 
 ::ng-deep {
+
+    .custom-scroll-styles{
+
+        &.p-scrollpanel {
+            .p-scrollpanel-wrapper {
+                height: 520px
+            }    
+        }
+    }
 
     .dynamic-dialog-wrapper {
 
@@ -127,14 +167,14 @@ hr {
     }
 
     .popup-menu-buttons {
-        background-color : #001127;
-        border: solid 2px #001127;   
+        background-color : $button-dark-blue;
+        border: solid 2px $button-dark-blue;   
         
         &.p-button {
             box-shadow: none;
             &:hover {
-                background-color : #001127;
-                border: solid 2px #001127;   
+                background-color : $button-dark-blue;
+                border: solid 2px $button-dark-blue;   
             }
         }
     }
@@ -150,7 +190,7 @@ hr {
             }
 
             .p-menuitem-text {
-                color: rgba(255, 255, 255, 0.765);
+                color: $app-white;
 
             }
 
@@ -164,11 +204,11 @@ hr {
                     background: none;
 
                     .p-menuitem-text {
-                        color: rgba(255, 255, 255, 0.765);
+                        color: $app-white;
                     } 
                     
                     .p-menuitem-icon {
-                        color: rgba(255, 255, 255, 0.765);
+                        color: $app-white;
                     }        
                 }
             }

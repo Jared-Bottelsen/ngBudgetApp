@@ -12,19 +12,14 @@
         <button 
             (click)="confirmBudgetReset($event)" 
             pButton label="Reset" 
-            [style]="{'margin' : '0 0 0.5rem 10%', 'font-size': '1.2rem', 'height': '1.5rem',         'color' : 'black', 'background-color' : 'rgba(255, 255, 255, 0.765)' , 'border': 'none', 'box-shadow': 'none'}" 
-            class="p-button-rounded">
+            class="p-button-rounded p-button-raised budget-reset__button">
         </button>
     </div>
     <p-menu #menu [popup]="true" [model]="menuItems" styleClass="p-menu-styling"></p-menu>   
     <div class="category-panel-container">
-        <p-scrollPanel styleClass="customScrollStyles">
-            <div 
-                class="budget-categories-container"
-            >
-                <div 
-                    class="budget-categories-container__category-wrapper" 
-                    *ngFor="let budgetCat of budgetCategories; let i = index" 
+        <p-scrollPanel styleClass="custom-scroll-styles">
+            <div class="budget-categories-container">
+                <div class="budget-categories-container__category-wrapper" *ngFor="let budgetCat of budgetCategories; let i = index" 
                 >
                     <div (click)="showMenu(i)">
                         <div class="budget-category-header-container">
@@ -40,19 +35,17 @@
                             <app-progress-bar [value]="calcRemainingPercent(subCat)"></app-progress-bar>
                         </div>    
                     </div>
-                    <div *ngIf="isMenuVisible === i" class="menu-options flex justify-content-center">
+                    <div *ngIf="isMenuVisible === i" class="flex justify-content-center">
                         <div class="col-10 flex justify-content-around">
                             <button 
                                 (click)="openBudgetEditModal(i)"
-                                class="p-button-rounded p-button-raised" 
-                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': '1px solid #001127', 'font-size': '1.5rem'}" 
+                                class="p-button-rounded p-button-raised button-group__button" 
                                 pButton 
                                 label='Edit'>
                             </button>
                             <button 
-                                class="p-button-rounded p-button-raised" 
+                                class="p-button-rounded p-button-raised button-group__button" 
                                 (click)="hideMenu()" 
-                                [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': '1px solid #001127', 'font-size': '1.5rem'}" 
                                 label='Cancel' 
                                 pButton>
                             </button>    
