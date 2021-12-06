@@ -1,10 +1,21 @@
+%glass-background-dialogs {
+    background: rgba( 33, 51, 73, 0.90);
+    border: 1px solid rgba( 255, 255, 255, 0.30 );
+    box-shadow: 0px 2px 7px black;
+    border-radius: 5px;
+}
+
+%flex-space-between {
+    display: flex;
+    justify-content: space-between;
+}
+
 * {
     font-family: 'Alumni Sans', sans-serif;
 }
 
 .header-container {
-    display: flex;
-    justify-content: space-between;
+    @extend %flex-space-between;
 
     &__text {
         margin: 0 0 0 1rem;
@@ -35,8 +46,7 @@
 }
 
 .budget-category-header-container {
-    display: flex;
-    justify-content: space-between;
+    @extend %flex-space-between;
 
     &__balance-header {
         margin: 3px 5px 0 0;
@@ -51,9 +61,8 @@
 }
 
 .budget-item-individual-expense-container {
-    display: flex;
+    @extend %flex-space-between;
     flex-direction: row;
-    justify-content: space-between;
     margin-bottom: 5px;
 
     &__item-title {
@@ -91,10 +100,7 @@ hr {
     .dynamic-dialog-wrapper {
 
         .p-dialog-content {
-            background: rgba( 33, 51, 73, 0.75 );
-            border: 1px solid rgba( 255, 255, 255, 0.30 );
-            box-shadow: 0px 2px 7px black;
-            border-radius: 5px;
+            @extend %glass-background-dialogs;
             
             h2, h3, label, fa-icon {
                 color: white;
@@ -105,10 +111,7 @@ hr {
     .popup-menu-style {
         
         &.p-confirm-popup {
-            background: rgba( 33, 51, 73, 0.90 );
-            border: 1px solid rgba( 255, 255, 255, 0.30 );
-            box-shadow: 0px 2px 7px black;
-            border-radius: 5px;
+            @extend %glass-background-dialogs;
             color: white;
         }
     }
@@ -122,6 +125,37 @@ hr {
             &:hover {
                 background-color : #001127;
                 border: solid 2px #001127;   
+            }
+        }
+    }
+
+    .p-menu-styling {
+
+        &.p-menu-overlay {
+            @extend %glass-background-dialogs;
+
+            &:hover {
+                background: rgba( 33, 51, 73, 0.90 );
+            }
+
+            .p-menuitem-text {
+                color: rgba(255, 255, 255, 0.765);
+
+            }
+
+            .p-menuitem-link {
+
+                &:focus {
+                    box-shadow: none;
+                }
+
+                &:not(.p-disabled):hover {
+                    background: none;
+
+                    .p-menuitem-text {
+                        color: rgba(255, 255, 255, 0.765);
+                    }    
+                }
             }
         }
     }
