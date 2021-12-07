@@ -12,17 +12,15 @@
     <button 
         (click)="selectYes()" 
         pButton 
-        class="col-5 p-button-rounded" 
+        class="col-5 p-button-rounded selection-button-group__button" 
         label="Yes" 
-        [style]="{'height': '1.5rem', 'background-color' : '#001127', 'border': 'none', 'font-size' : '1.2rem'}"
     >
     </button>
     <button 
         (click)="closeModal()" 
         pButton 
-        class="col-5 p-button-rounded" 
+        class="col-5 p-button-rounded selection-button-group__button" 
         label="No" 
-        [style]="{'height': '1.5rem', 'background-color' : '#001127', 'border': 'none', 'font-size' : '1.2rem'}"
     >
 </button>
 </div>
@@ -36,7 +34,7 @@
     <label class="col-12" style="font-size: 1.2rem;" for="archiveTitle">Name of Budget</label>
     <input 
         formControlName="budgetName" 
-        class="col-12" 
+        class="col-12 input-styles" 
         type="text" 
         id="archiveTitle" 
         pInputText 
@@ -45,9 +43,11 @@
     <div class="col-12 flex justify-content-end" style="padding: 0;">
         <button 
             (click)="submitForm(archiveTitleForm.value)" 
-            class="col-4 p-button-rounded" 
+            class=
+               "col-4 p-button-rounded 
+                selection-button-group__button 
+                selection-button-group__button--submit" 
             pButton 
-            [style]="{'background-color': '#001127', 'border': 'none', 'margin-top': '1rem', 'height': '1.5rem', 'font-size' : '1.2rem'}" 
             label="Submit"
         >
         </button>    
