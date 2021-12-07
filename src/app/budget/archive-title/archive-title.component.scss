@@ -1,7 +1,30 @@
+@use 'src/app/styles/_primeNg-overrides';
+
 * {
     font-family: 'Alumni Sans', sans-serif;
 }
 
-input {
+.selection-button-group {
+
+    &__button {
+        height: 1.5rem;
+        background-color: #001127;
+        border: none;
+        font-size: 1.2rem;
+        box-shadow: none;
+
+        &:hover {
+            background-color: #001127;
+            border: none;    
+        }
+
+        &--submit {
+            margin-top: 1rem;
+        }
+    }
+}
+
+.input-styles {
+    @include primeNg-overrides.pInputTextNoBorder;
     font-size: 1.2rem;
 }
