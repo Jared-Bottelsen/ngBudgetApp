@@ -4,7 +4,6 @@ import { FormArray, FormBuilder, FormGroup } from '@angular/forms';
 import { FirebaseService } from 'src/app/services/firebase.service';
 import * as _ from 'lodash';
 import { faTimes } from '@fortawesome/free-solid-svg-icons';
-
 @Component({
   selector: 'app-budget-edit',
   templateUrl: './budget-edit.component.html',
@@ -14,11 +13,7 @@ export class BudgetEditComponent implements OnInit {
 
   currentSubcategories: any = []
 
-  editForm!: FormGroup;
-
-  isDeleteButtonVisibleCurrent: number = -1;
-
-  isDeleteButtonVisibleNew: number = -1;
+  editForm: FormGroup;
 
   faTimes = faTimes;
 
@@ -61,27 +56,19 @@ export class BudgetEditComponent implements OnInit {
       startingValue: []
     })
     this.newSubCats.push(newCategory);
-    this.isDeleteButtonVisibleCurrent = -1;
-    this.isDeleteButtonVisibleNew = -1;
   }
 
   deleteCurrentSubcategory(i: number) {
     if (this.config.data.subCategories[i].subCategoryValue < this.config.data.subCategories[i].startingValue) {
       this.db.deleteExpensesOfDeletedSubCategory(this.config.data.subCategories[i].subCategoryTitle, this.config.data.docId);
       this.currentSubCats.removeAt(i);
-      this.isDeleteButtonVisibleCurrent = -1;
-      this.isDeleteButtonVisibleNew = -1;  
       return
     }
     this.currentSubCats.removeAt(i);
-    this.isDeleteButtonVisibleCurrent = -1;
-    this.isDeleteButtonVisibleNew = -1;
   }
 
   deleteNewSubcategory(i: number) {
     this.newSubCats.removeAt(i);
-    this.isDeleteButtonVisibleCurrent = -1;
-    this.isDeleteButtonVisibleNew = -1;
   }
 
   deleteEntireCategory() {
@@ -92,16 +79,6 @@ export class BudgetEditComponent implements OnInit {
     setTimeout(() => {
       this.ref.close();
     }, 500);
-  }
-
-  showDeleteButtonCurrent(i: number) {
-    this.isDeleteButtonVisibleNew = -1
-    this.isDeleteButtonVisibleCurrent = i;
-  }
-
-  showDeleteButtonNew(i: number) {
-    this.isDeleteButtonVisibleNew = i
-    this.isDeleteButtonVisibleCurrent = -1
   }
 
   onSubmit(payload: any) {
