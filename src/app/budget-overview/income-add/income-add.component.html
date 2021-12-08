@@ -53,5 +53,11 @@
 </div>
 
 <div class="button-group">
-    <button (click)="selectedOption === 'MO' ? submitForm(monthlyForm) : submitForm(biWeeklyForm)" pButton [style]="{'background-color' : '#001127', 'border': 'none', 'font-size' : '1.2rem'}" label="Submit"></button>
+    <button 
+        class="button-group--button" 
+        (click)="selectedOption === 'MO' ? submitForm(monthlyForm) : submitForm(biWeeklyForm)" 
+        pButton 
+        label="Submit"
+    >
+    </button>
 </div>

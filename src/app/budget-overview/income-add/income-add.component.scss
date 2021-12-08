@@ -1,3 +1,5 @@
+@use '/src/app/styles/primeNg-overrides';
+
 * {
     font-family: 'Alumni Sans', sans-serif;
 }
@@ -9,6 +11,7 @@
 }
 
 .input-sizing {
+    @include primeNg-overrides.pInputTextNoBorder;
     height: 2rem;
     font-size: 1.2rem;
 }
@@ -20,6 +23,12 @@
 .button-group {
     margin: 0.5rem 0 0 0;
     float: right;
+
+    &--button {
+        background-color: #001127;
+        border: none;
+        font-size: 1.2rem;
+    }
 }
 
 .form-container {
