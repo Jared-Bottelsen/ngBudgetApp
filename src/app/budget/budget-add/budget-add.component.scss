@@ -53,16 +53,6 @@
     margin-top: 10px;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
 ::ng-deep {
     .scroll-panel-styles {
         .p-scrollpanel-bar.p-scrollpanel-bar-y {

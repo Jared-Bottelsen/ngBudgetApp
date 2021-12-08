@@ -6,6 +6,17 @@
     padding: 0;
 }
 
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+input[type=number] {
+    -moz-appearance: textfield;
+}
+
+
 body {
     background-image: url('./assets/zoltan-tasi-jjv1OW1T2bI-unsplash.jpg');
     width: 100vw;
