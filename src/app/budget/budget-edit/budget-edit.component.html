@@ -16,23 +16,20 @@
                 id="categoryTitle"
                 formControlName="categoryTitle" 
                 type="text" 
-                class="col-12"
+                class="col-12 input-styles"
             >
         </div>    
     </div>
-    <p-scrollPanel [style]="{'width': '100%', 'height': '190px'}" styleClass="customScroll">
+    <p-scrollPanel styleClass="custom-scroll">
         <div formArrayName="currentCategories">
             <div *ngFor="let value of currentSubCats.controls; let i = index" [formGroupName]='i'>
-                <div
-                    class="grid col-12 grid-nogutter flex align-items-end" 
-                    (click)="showDeleteButtonCurrent(i)"
-                >
+                <div class="grid col-12 grid-nogutter flex align-items-end" >
                     <div class="col-7">
                         <label class="col-12" for="title">Subcategory Title</label>
                         <input
                             formControlName='subCategoryTitle' 
-                            pInputText 
-                            class="col-12" 
+                            pInputText
+                            class="col-12 input-styles" 
                             id="title" 
                             type="text" 
                         >    
@@ -45,25 +42,25 @@
                             Value
                         </label>
                         <input
-                            [style]="{'margin-left': '1rem'}" 
+                            style="margin-left: 0.5rem;"  
                             formControlName='startingValue'
                             pInputText 
-                            class="col-10"  
+                            class="col-10 input-styles"  
                             id="startingValue" 
                             type="number" 
                         >    
                     </div>
-                    <fa-icon (click)="deleteCurrentSubcategory(i)"  class="col-1" [icon]="faTimes" [style]="{'font-size': '1.3rem', 'margin-left': '1rem'}"></fa-icon>
+                    <fa-icon (click)="deleteCurrentSubcategory(i)"  class="col-1 close-icon" [icon]="faTimes"></fa-icon>
                 </div>
             </div>    
         </div>
         <div formArrayName='newSubCategories'>
             <div *ngFor='let control of newSubCats.controls; let i= index' [formGroupName]="i">
-                <div class="grid col-12 grid-nogutter flex align-items-end" (click)="showDeleteButtonNew(i)">
+                <div class="grid col-12 grid-nogutter flex align-items-end">
                     <div class="col-7">
                         <label class="col-12" for="title">Title</label>
                         <input 
-                            class="col-12" 
+                            class="col-12 input-styles" 
                             pInputText 
                             formControlName="subCategoryTitle" 
                             type="text"
@@ -78,14 +75,14 @@
                             Value
                         </label>
                         <input
-                            [style]="{'margin-left': '1rem'}" 
-                            class="col-10" 
+                            style="margin-left: 1rem;"  
+                            class="col-10 input-styles" 
                             pInputText 
                             formControlName="startingValue" 
                             type="number"
                         >    
                     </div>
-                    <fa-icon (click)="deleteNewSubcategory(i)" class="col-1" [icon]="faTimes" [style]="{'font-size': '1.3rem', 'margin-left': '1rem'}"></fa-icon>
+                    <fa-icon (click)="deleteNewSubcategory(i)" class="col-1 close-icon" [icon]="faTimes"></fa-icon>
                 </div>
             </div>        
         </div>        
@@ -95,15 +92,13 @@
     <button 
         pButton 
         (click)="onSubmit(editForm.value)"
-        class="p-button-rounded"
-        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '1.2rem'}"
+        class="p-button-rounded button-group__button"
         label="Submit"
     >
     </button>
     <button 
         pButton 
-        class="p-button-rounded"
-        [style]="{'width': '4.5rem', 'height': '1.5rem', 'background-color': '#001127', 'border': 'none', 'font-size': '1.2rem'}"
+        class="p-button-rounded button-group__button"
         (click)='addNewSubCategory()'
         label="Add"
     >
@@ -112,8 +107,7 @@
         pButton 
         (click)="deleteEntireCategory()" 
         label="Delete" 
-        class="p-button-rounded" 
-        [style]="{'width': '4.5rem', 'height': '1.5rem', 'font-size': '1.2rem', 'background-color': '#3b2637', 'border': 'none'}"
+        class="p-button-rounded button-group__button" 
     >
     </button>
 </div>

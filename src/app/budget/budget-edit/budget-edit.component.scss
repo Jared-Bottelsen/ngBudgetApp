@@ -1,5 +1,24 @@
+@use '/src/app/styles/primeNg-overrides';
+@use '/src/app/styles/global-mixins';
+
 * {
     font-family: 'Alumni Sans', sans-serif;
+}
+
+.close-icon {
+    font-size: 1.3rem;
+    margin-left: 1rem;
+}
+
+.button-group {
+    
+    &__button {
+        width: 4.5rem;
+        height: 1.5rem;
+        background-color: #001127;
+        border: none;
+        font-size: 1.2rem;
+    }
 }
 
 label {
@@ -7,24 +26,14 @@ label {
     margin-left: -0.5rem;
 }
 
-input {
+.input-styles {
+    @include primeNg-overrides.pInputTextNoBorder;
     height: 1.6rem;
     font-size: 1.2rem;
-    text-align: left;
 }
 
 .header {
     margin: 1rem 0.5rem 0.5rem 0.5rem;
-}
-
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-    -moz-appearance: textfield;
 }
 
 .p-scrollpanel {
@@ -35,3 +44,17 @@ input[type=number] {
     }
 }
 
+::ng-deep {
+    
+    .custom-scroll {
+
+        .p-scrollpanel-bar-y {
+            background-color: #4270ef59;
+        }
+
+        .p-scrollpanel-content {
+            width: 100%;
+            height: 190px;
+        }
+    }
+}
