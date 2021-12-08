@@ -12,8 +12,6 @@ export class BudgetAddComponent implements OnInit {
 
   faTimes = faTimes;
 
-  indexOfSubCategoryDeleteButton: number = -1;
-
   budgetForm = this.fb.group({
     categoryTitle: '',
     subCategory: this.fb.array([]),
@@ -33,12 +31,10 @@ export class BudgetAddComponent implements OnInit {
       subCategoryValue: []
     })
     this.subCategories.push(subCategory);
-    this.indexOfSubCategoryDeleteButton = this.subCategories.length - 1
   }
 
   deleteSubCategory(i: any) {
     this.subCategories.removeAt(i);
-    this.hideDeleteButton();
   }
 
   onSubmit(budgetForm: FormGroup) {
@@ -47,19 +43,9 @@ export class BudgetAddComponent implements OnInit {
     } else {
       this.ref.close(budgetForm.value);
     }
-    this.hideDeleteButton();
   }
 
   closeModal() {
     this.ref.close();
-    this.hideDeleteButton();
-  }
-
-  showDeleteButton(index: number) {
-    this.indexOfSubCategoryDeleteButton = index
-  }
-
-  hideDeleteButton() {
-    this.indexOfSubCategoryDeleteButton = -1;
   }
 }

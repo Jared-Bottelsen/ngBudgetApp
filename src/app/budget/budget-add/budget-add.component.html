@@ -1,12 +1,17 @@
 <div class="header-group flex justify-content-between align-items-center">
     <h1>Add to your Budget</h1>
-    <fa-icon (click)="closeModal()" [icon]="faTimes" class="header-group--icon-size"></fa-icon>
+    <fa-icon 
+        (click)="closeModal()" 
+        [icon]="faTimes" 
+        class="header-group--icon-size"
+    >
+    </fa-icon>
 </div>
 <form [formGroup]="budgetForm">
-    <div class="form-group-container" style="margin-bottom: 0.5rem;">
-        <label class="col-12" for="categoryTitle">New Category Title</label>
+    <div class="form-group-container">
+        <label class="col-12 label-styles" for="categoryTitle">New Category Title</label>
         <input 
-            class="col-12"
+            class="col-12 input-styles"
             pInputText 
             type="text"
             id="categoryTitle" 
@@ -16,16 +21,15 @@
         <div formArrayName="subCategory">
             <p-scrollPanel [style]="{'width': '100%', 'height': '185px'}" styleClass="scroll-panel-styles">
                 <div 
-                    (click)="showDeleteButton(i)"
                     *ngFor="let subCat of subCategories.controls; let i = index" 
                     [formGroupName]="i" 
                     class="grid col-12 grid-nogutter flex justify-content-between" 
                     style="padding: 0;"
                 >
                     <div class="col-7">
-                        <label class="col-12" for="subCategoryTitle">Item Label</label>
+                        <label class="col-12 label-styles" for="subCategoryTitle">Item Label</label>
                         <input 
-                            class="col-12" 
+                            class="col-12 input-styles" 
                             pInputText 
                             type="text"
                             id="subCategoryTitle" 
@@ -34,9 +38,9 @@
                         >    
                     </div>
                     <div class="col-3">
-                        <label class="col-12" for="subCategoryValue">Amount</label>
+                        <label class="col-12 label-styles" for="subCategoryValue">Amount</label>
                         <input 
-                            class="col-11" 
+                            class="col-11 input-styles" 
                             pInputText 
                             type="number" 
                             name="subCategoryValue" 
@@ -45,7 +49,12 @@
                         >    
                     </div>
                     <div class="col-1 flex align-items-center">
-                        <fa-icon (click)="deleteSubCategory(i)" [icon]="faTimes" [style]="{'font-size': '1.5rem', 'margin-top': '0.9rem'}" class="col-12"></fa-icon>
+                        <fa-icon 
+                            (click)="deleteSubCategory(i)" 
+                            [icon]="faTimes" 
+                            class="col-12 delete-subCategory"
+                        >
+                        </fa-icon>
                     </div>
                 </div>
             </p-scrollPanel>
@@ -54,15 +63,13 @@
 <div class="button-group-container">
     <button 
         pButton
-        [style]="{'background-color': '#001127', 'border': 'none', 'height': '1.5rem', 'font-size' : '1.2rem'}" 
-        class="p-button-rounded" 
+        class="p-button-rounded button-group__button" 
         (click)="addSubcategory()" 
         label="Add Subcategory">
     </button>    
     <button 
         pButton
-        [style]="{'background-color': '#001127', 'border': 'none', 'height': '1.5rem', 'font-size' : '1.2rem'}" 
-        class="p-button-rounded" 
+        class="p-button-rounded button-group__button" 
         (click)= "onSubmit(budgetForm)" 
         label="Create">
     </button>

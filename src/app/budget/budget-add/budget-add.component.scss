@@ -1,3 +1,5 @@
+@use '/src/app/styles/primeNg-overrides';
+
 * {
     font-family: 'Alumni Sans', sans-serif;
 }
@@ -10,17 +12,38 @@
     }
 }
 
+.button-group {
+
+    &__button {
+        background-color: #001127;
+        border: none;
+        height: 1.5rem;
+        font-size: 1.2rem;
+
+        &:hover {
+            background-color: #001127;
+        }
+    }
+}
+
+.delete-subCategory {
+    font-size: 1.5rem;
+    margin-top: 0.9rem;
+}
+
 .form-group-container {
     display: grid;
     grid-template-columns: 1fr;
+    margin-bottom: 0.5rem;
 }
 
-label {
+.label-styles {
     font-size: 1.2rem;
-    margin-left: -0.3rem;
+    margin-left: -0.3rem; 
 }
 
-input {
+.input-styles {
+    @include primeNg-overrides.pInputTextNoBorder;
     font-size: 1.2rem;
 }
 
