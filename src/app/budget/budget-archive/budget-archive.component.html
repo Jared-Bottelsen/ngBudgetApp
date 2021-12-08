@@ -48,9 +48,7 @@
             <div class="archive-info__overall">
                 <table>
                     <tr>
-                        <th>Income</th>
-                        <th>Budgeted</th>
-                        <th>Spent</th>
+                        <th *ngFor="let overviewHeader of overviewHeaderTitles">{{overviewHeader.title}}</th>
                     </tr>
                     <tr>
                         <td>{{archiveSelected.income | currency}}</td>
@@ -71,10 +69,7 @@
         <div class="expenses-table">
             <table class="expenses-table__body">
                 <tr>
-                    <th>Date</th>
-                    <th>Category</th>
-                    <th>Name</th>
-                    <th>Amount</th>
+                    <th *ngFor="let expenseTitles of expenseHeaderTitles">{{expenseTitles.title}}</th>
                 </tr>
                 <tr *ngFor="let expense of archiveSelected.expenses">
                     <td>{{expense.expenseDate}}</td>
@@ -91,10 +86,7 @@
         <div class="budget-table">
             <table class="budget-table__body">
                 <tr>
-                    <th>Category Title</th>
-                    <th>Starting Value</th>
-                    <th>Ending Value</th>
-                    <th>Total Spent</th>
+                    <th *ngFor="let budgetHeader of budgetHeaderTitles">{{budgetHeader.title}}</th>
                 </tr>
                 <tr *ngFor="let subCategory of archiveSelected.budget">
                     <td>{{subCategory.subCategoryTitle}}</td>
