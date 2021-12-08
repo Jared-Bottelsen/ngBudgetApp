@@ -30,16 +30,6 @@
     font-size: 1.2rem;
 }
 
-input::-webkit-outer-spin-button,
-input::-webkit-inner-spin-button {
-  -webkit-appearance: none;
-  margin: 0;
-}
-
-input[type=number] {
-  -moz-appearance: textfield;
-}
-
 ::ng-deep {
 
     .select-button-style {
