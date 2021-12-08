@@ -32,6 +32,10 @@
     margin: 0.5rem 0 0 10%;
 }
 
+$offWhite: rgba(255, 255, 255, 0.765);
+$darkBlueBlack: #001127;
+$commonFontSize: 1.2rem;
+
 * {
     font-family: 'Alumni Sans', sans-serif;
 }
@@ -39,20 +43,20 @@
 .archive-header-text { 
     font-size: 3rem;
     margin: 0 0 0 1rem;
-    color: rgba(255, 255, 255, 0.765);
+    color: $offWhite;
 
     &__delete-button {
-        font-size: 1.2rem;
+        font-size: $commonFontSize;
         margin: 0.5rem 0.5rem 0 0;
         color: black;
         height: 1.5rem;
         align-self: center;
-        background-color: rgba(255, 255, 255, 0.765);
+        background-color: $offWhite;
         border: none;
         box-shadow: none;
 
         &:hover {
-            background-color: rgba(255, 255, 255, 0.765);
+            background-color: $offWhite;
             color: black;
         }
     }
@@ -62,8 +66,8 @@
     @extend %flex-center;
 
     label {
-        color: rgba(255, 255, 255, 0.765);
-        font-size: 1.2rem;
+        color: $offWhite;
+        font-size: $commonFontSize;
     }
 }
 
@@ -80,7 +84,7 @@
     
         table {
             width: 100%;
-            font-size: 1.2rem;
+            text-align: center;
         }
 
         th {
@@ -88,10 +92,9 @@
             text-decoration: underline;
         }
     
-        td, th {
-            font-size: 1.2rem;
+        td {
+            font-size: $commonFontSize;
             width: 4rem;
-            text-align: center;
         }  
         
         &--over-spent {
@@ -121,7 +124,7 @@
         @extend %table-body;
 
         th, td {
-            font-size: 1.2rem;
+            font-size: $commonFontSize;
             @extend %table-header-data;
         } 
         
@@ -138,7 +141,7 @@
         @extend %table-body;
 
         th, td {
-            font-size: 1.2rem;
+            font-size: $commonFontSize;
             @extend %table-header-data
         }    
     }
@@ -149,12 +152,12 @@
     .select-button-style {
 
         .p-button.p-highlight {
-            background-color : #001127;
-            border: solid 2px #001127;
+            background-color : $darkBlueBlack;
+            border: solid 2px $darkBlueBlack;
 
             &:hover {
-                background-color: #001127;
-                border-color: #001127;
+                background-color: $darkBlueBlack;
+                border-color: $darkBlueBlack;
             }
         }
         .p-button {
@@ -180,14 +183,14 @@
     }
 
     .popup-menu-buttons {
-        background-color : #001127;
-        border: solid 2px #001127;   
+        background-color :  $darkBlueBlack;
+        border: solid 2px  $darkBlueBlack;
         
         &.p-button {
             box-shadow: none;
             &:hover {
-                background-color : #001127;
-                border: solid 2px #001127;   
+                background-color :  $darkBlueBlack;
+                border: solid 2px  $darkBlueBlack; 
             }
         }
     }

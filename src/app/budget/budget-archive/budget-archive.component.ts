@@ -26,7 +26,13 @@ export class BudgetArchiveComponent implements OnInit, OnDestroy {
 
   menuSelectOptions: any;
 
-  selectedButtonOption: string = 'expenses'
+  selectedButtonOption: string = 'expenses';
+
+  overviewHeaderTitles: any[];
+
+  expenseHeaderTitles: any[];
+
+  budgetHeaderTitles: any[];
 
   constructor(private db: FirebaseService, private fb: FormBuilder, private router: Router, private confirmationService: ConfirmationService) {
     this.archiveSelectionForm = this.fb.group({
@@ -39,6 +45,9 @@ export class BudgetArchiveComponent implements OnInit, OnDestroy {
       label: "Budget",
       value: "budget"
     }]
+    this.overviewHeaderTitles = [{ title: "Income" }, { title: "Budgeted" }, { title: "Spent" }];
+    this.expenseHeaderTitles = [{ title: "Date" }, { title: "Category" }, { title: "Name" }, { title: "Amount" }];
+    this.budgetHeaderTitles = [{ title: "Category Title" }, { title: "Starting Value" }, { title: "Ending Value" }, { title: "Total Spent" }];
    }
 
   ngOnInit(): void {
