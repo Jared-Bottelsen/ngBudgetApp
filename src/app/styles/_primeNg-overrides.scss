@@ -1,0 +1,8 @@
+@mixin pInputTextNoBorder {
+    ::ng-deep &.p-inputtext {
+        &:focus, &:enabled {
+            box-shadow: none;
+            border: none;    
+        }
+    }    
+}
