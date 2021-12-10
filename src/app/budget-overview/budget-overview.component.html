@@ -1,19 +1,29 @@
 <div class="flex justify-content-between">
     <h1 class="overview-header-text">Overview</h1>
-    <button (click)="openIncomeModal()" label="Add Income" pButton class="p-button-rounded income-add-button"></button>
+    <button 
+        (click)="openIncomeModal()" 
+        label="Add Income" 
+        pButton 
+        class="p-button-rounded income-add-button"
+    >
+    </button>
 </div>
 
 <div class="flex justify-content-center">
     <div class="budget-overview-information-container">
         <div class="flex flex-column align-items-center">
             <p>Total Spent this Month</p>
-            <p [ngClass]="{'budget-income-overview-container__children--over-budget' : isOverSpent()}">{{expenseTotal | currency}}</p>
+            <p [ngClass]="{'budget-income-overview-container__children--over-budget' : isOverSpent()}">
+                {{expenseTotal | currency}}
+            </p>
         </div> 
             <div class="budget-income-overview-container flex justify-content-between">
                 <div class="budget-income-overview-container__children">
                     <div>
                         <p>Budgeted</p>
-                        <p [ngClass]="{'budget-income-overview-container__children--over-budget' : isOverBudget()}">{{budgetCategoryTotal | currency}}</p>    
+                        <p [ngClass]="{'budget-income-overview-container__children--over-budget' : isOverBudget()}">
+                            {{budgetCategoryTotal | currency}}
+                        </p>    
                     </div>
                 </div>  
                 <div class="budget-income-overview-container__children">     
@@ -27,33 +37,29 @@
 </div>
 <h3 *ngIf="individualExpenses.length > 0" class="expenses-header">Most Recent Expenses</h3>
 <div>
-    <p-scrollPanel [style] = "{'width': '100%', 'height': '320px'}" styleClass="customStyles">
+    <p-scrollPanel styleClass="scroll-styles">
         <div class="expenses-container">
             <div *ngFor="let expense of individualExpenses; let i = index" class="individual-expense"> 
                 <div *ngIf="isButtonMenuVisible === i" class="individual-expense__button-group">
                     <div class="individual-expense__button-group--alignment">
                         <button 
-                            class="p-button-rounded" 
+                            class="p-button-rounded individual-expense__button-group--button-delete" 
                             pButton 
                             (click)="deleteExpense(i)"
-                            label="Delete" 
-                            [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#3b2637',
-                            'font-size': '1.4rem', 'border': 'none'}">
+                            label="Delete"> 
                         </button>
                         <button 
-                            class="p-button-rounded" 
+                            class="p-button-rounded individual-expense__button-group--button-cancel" 
                             pButton 
                             (click)="hideButtons()"
-                            label="Cancel" 
-                            [style]="{'width': '5rem', 'height': '1.5rem', 'background-color': '#011229',
-                            'font-size': '1.4rem', 'border': 'none'}">
+                            label="Cancel"> 
                         </button>    
                     </div>
                 </div>        
-                <div *ngIf="isButtonMenuVisible !== i" (click)="showButtons(i)" class="individual-expense__label-container" style="height: inherit;">
-                    <p style="justify-self: center;">{{expense.expenseDate}}</p>
+                <div *ngIf="isButtonMenuVisible !== i" (click)="showButtons(i)" class="individual-expense__label-container">
+                    <p class="individual-expense__label-container--center">{{expense.expenseDate}}</p>
                     <p>{{expense.expenseName}}</p>
-                    <p style="justify-self: start; margin-right: 0.8rem;">{{expense.expenseAmount | currency}}</p>
+                    <p class="individual-expense__label-container--start">{{expense.expenseAmount | currency}}</p>
                 </div>
             </div>
         </div>

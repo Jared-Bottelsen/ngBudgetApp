@@ -1,3 +1,5 @@
+$low-white: rgba(255, 255, 255, 0.765);
+
 * {
     font-family: 'Alumni Sans', sans-serif;
 }
@@ -5,7 +7,7 @@
 .overview-header-text {
     font-size: 3rem;
     margin: 0 0 0 1rem;
-    color: rgba(255, 255, 255, 0.765);
+    color: $low-white;
 }
 
 .income-add-button {
@@ -14,12 +16,12 @@
     height: 1.5rem; 
     align-self: center; 
     color: black;
-    background-color: rgba(255, 255, 255, 0.765);
-border: none; 
+    background-color: $low-white;
+    border: none; 
     box-shadow: none;
     
     &:hover {
-        background-color: rgba(255, 255, 255, 0.765);
+        background-color: $low-white;
         color: black;
     }
 }
@@ -28,9 +30,9 @@ border: none;
     background: rgba( 255, 255, 255, 0.15 );
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     font-size: 1.5rem;
-    color: rgba(255, 255, 255, 0.765);
+    color: $low-white;
     width: 70%;
-    height: 160px;
+    height: 10rem;
     box-shadow: 0px 2px 7px black;
     border-radius: 5px;
 }
@@ -52,7 +54,7 @@ border: none;
 .expenses-header {
     margin: 5% 0 2% 15%;
     font-size: 2rem;  
-    color: rgba(255, 255, 255, 0.765);  
+    color: $low-white;  
 }
 
 .expenses-container {
@@ -69,9 +71,9 @@ border: none;
     border: 1px solid rgba( 255, 255, 255, 0.18 );
     box-shadow: 0px 2px 7px black;
     border-radius: 5px;
-    font-size: 25px;
+    font-size: 1.6rem;
     width: 95%;
-    color: rgba(255, 255, 255, 0.765);
+    color: $low-white;
 
     &__button-group {
         display: flex;
@@ -79,6 +81,7 @@ border: none;
         position: absolute;
         height: inherit;
         width: 100%;
+
         &--alignment {
             height: inherit;
             width: 70%;
@@ -86,21 +89,34 @@ border: none;
             justify-content: space-around;
             align-items: center;
         }
+        &--button-delete {
+            width: 5rem;
+            height: 1.5rem;
+            background-color: #3b2637;
+            font-size: 1.4rem;
+            border: none;
+        }
+        &--button-cancel {
+            width: 5rem;
+            height: 1.5rem;
+            background-color: #011229;
+            font-size: 1.4rem;
+            border: none;
+        }
     }    
 
     &__label-container {
+        height: inherit;
         display: grid;
         grid-template-columns: .6fr 2fr .5fr;
         align-content: center;
-    }
-}
 
-.p-scrollpanel {
+        &--center {
+            justify-self: center;
+        }
 
-    :host ::ng-deep &.customStyles {
-
-        .p-scrollpanel-bar {
-            background-color: rgba(255, 255, 255, 0.765);
+        &--start {
+            justify-self: start;
         }
     }
 }
@@ -115,6 +131,18 @@ border: none;
             box-shadow: 0px 2px 7px black;
             border-radius: 5px;
             color: white;        
+        }
+    }
+
+    .scroll-styles {
+
+        .p-scrollpanel-bar {
+            background-color: rgba( 255, 255, 255, 0.15 );
+        }
+
+        .p-scrollpanel-wrapper {
+            height: 320px;
+            width: 100%;
         }
     }
 }
