@@ -1,7 +1,26 @@
-.p-progressbar {
-    :host ::ng-deep &.customStyle {
+// .p-progressbar {
+//     :host ::ng-deep &.customStyle {
+//         .p-progressbar-value {
+//             background-color: #10293d;
+//         }
+//     }
+// }
+
+::ng-deep {
+    .condition-green 
         .p-progressbar-value {
-            background-color: #10293d;
+            background-color: rgba(0, 128, 0, 0.50);
+        }
+
+    .condition-yellow {
+        .p-progressbar-value {
+            background-color: rgba(255, 255, 0, 0.5);
+        }
+    }
+
+    .condition-red {
+        .p-progressbar-value {
+            background-color: rgba(255, 0, 0, 0.50);
         }
     }
 }
