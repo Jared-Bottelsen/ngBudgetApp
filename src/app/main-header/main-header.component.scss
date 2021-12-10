@@ -5,6 +5,8 @@
     border-radius: 5px;
 }
 
+$low-white: rgba(255, 255, 255, 0.765);
+
 .header-main-container {
     height: 50px;
         
@@ -18,7 +20,7 @@
 
         .sub-menu-header-icon {
             font-size: 1.6rem;
-            color: rgba(255, 255, 255, 0.765);
+            color: $low-white;
         }
     }
 }       
@@ -36,7 +38,7 @@
             }
 
             .p-menuitem-text {
-                color: rgba(255, 255, 255, 0.765);
+                color: $low-white;
 
             }
 
@@ -50,17 +52,17 @@
                     background: none;
 
                     .p-menuitem-text {
-                        color: rgba(255, 255, 255, 0.765);
+                        color: $low-white;
                     }
                     
                     .p-menuitem-icon {
-                        color: rgba(255, 255, 255, 0.765);
+                        color: $low-white;
                     }        
                 }
             }
 
             .p-menuitem-icon {
-                color: rgba(255, 255, 255, 0.765);
+                color: $low-white;
             }
         }
     }
