@@ -1,5 +1,4 @@
 import { Component, OnInit, OnDestroy } from '@angular/core';
-import { DeviceDetectorService } from 'ngx-device-detector';
 import { Subscription } from 'rxjs';
 import { FirebaseService } from '../services/firebase.service';
 import { DialogService, DynamicDialogRef } from 'primeng/dynamicdialog';
@@ -19,10 +18,6 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   getBudgetCategoriesObservable$!: Subscription;
 
-  isMobile: boolean = this.deviceService.isMobile();
-
-  isDesktop: boolean = this.deviceService.isDesktop();
-
   individualExpenses: Array<any> = []; 
 
   budgetCategories: Array<any> = [];
@@ -37,7 +32,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   overSpent: boolean = false;
 
-  constructor(private deviceService: DeviceDetectorService, private db: FirebaseService, private dialogService: DialogService, private ref: DynamicDialogRef) { }
+  constructor(private db: FirebaseService, private dialogService: DialogService, private ref: DynamicDialogRef) { }
 
   ngOnInit(): void {
     this.getExpensesObservable$ = this.db.getExpenses()
@@ -51,7 +46,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
       this.budgetCategoryTotal = this.addUpBudgetCategories();
     })
     this.db.getIncome().subscribe((result: any) => {
-      this.income = result.income || 0
+      this.income = result.income || 0;
     })
 
     this.db.createUser();
