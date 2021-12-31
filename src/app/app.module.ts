@@ -35,53 +35,48 @@ import { AutofocusDirective } from './directives/autofocus.directive';
 import { ArchiveTitleComponent } from './budget/archive-title/archive-title.component';
 import { BudgetArchiveComponent } from './budget/budget-archive/budget-archive.component';
 @NgModule({
-  declarations: [
-    AppComponent,
-    MainHeaderComponent,
-    MobileFooterComponent,
-    BudgetOverviewComponent,
-    BudgetComponent,
-    ProgressBarComponent,
-    BudgetAddComponent,
-    ExpenseAddComponent,
-    BudgetEditComponent,
-    LoginComponent,
-    IncomeAddComponent,
-    AutofocusDirective,
-    ArchiveTitleComponent,
-    BudgetArchiveComponent,
-  ],
-  imports: [
-    AngularFireModule.initializeApp(environment.firebaseConfig),
-    AngularFireDatabaseModule,
-    AngularFirestoreModule,
-    BrowserModule,
-    AppRoutingModule,
-    FontAwesomeModule,
-    ScrollPanelModule,
-    ProgressBarModule,
-    DynamicDialogModule,
-    BrowserAnimationsModule,
-    DragDropModule,
-    ReactiveFormsModule,
-    SelectButtonModule,
-    FormsModule,
-    MultiSelectModule,
-    ButtonModule,
-    InputTextModule,
-    MenuModule,
-    ConfirmPopupModule
-  ],
-
-  entryComponents: [
-    BudgetAddComponent
-  ],
-
-  exports: [
-    ProgressBarModule,
-    ProgressBarComponent
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
+    declarations: [
+        AppComponent,
+        MainHeaderComponent,
+        MobileFooterComponent,
+        BudgetOverviewComponent,
+        BudgetComponent,
+        ProgressBarComponent,
+        BudgetAddComponent,
+        ExpenseAddComponent,
+        BudgetEditComponent,
+        LoginComponent,
+        IncomeAddComponent,
+        AutofocusDirective,
+        ArchiveTitleComponent,
+        BudgetArchiveComponent,
+    ],
+    imports: [
+        AngularFireModule.initializeApp(environment.firebaseConfig),
+        AngularFireDatabaseModule,
+        AngularFirestoreModule,
+        BrowserModule,
+        AppRoutingModule,
+        FontAwesomeModule,
+        ScrollPanelModule,
+        ProgressBarModule,
+        DynamicDialogModule,
+        BrowserAnimationsModule,
+        DragDropModule,
+        ReactiveFormsModule,
+        SelectButtonModule,
+        FormsModule,
+        MultiSelectModule,
+        ButtonModule,
+        InputTextModule,
+        MenuModule,
+        ConfirmPopupModule
+    ],
+    exports: [
+        ProgressBarModule,
+        ProgressBarComponent
+    ],
+    providers: [],
+    bootstrap: [AppComponent]
 })
 export class AppModule { }
