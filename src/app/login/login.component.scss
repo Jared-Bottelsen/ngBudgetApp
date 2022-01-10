@@ -4,9 +4,10 @@
 
 .login-button-container {
     display: flex;
-    flex-direction: column;
     justify-content: center;
-    align-content: center;
-    width: 100%;
-    margin-top: 60%;
+    margin-top: 35vh;
+
+    &:hover {
+        cursor: pointer;
+    }
 }
