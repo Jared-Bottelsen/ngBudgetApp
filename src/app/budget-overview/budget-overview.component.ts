@@ -22,17 +22,31 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   budgetCategories: Array<any> = [];
 
-  budgetCategoryTotal: number = 0
+  budgetCategoryTotal: number = 0;
 
-  expenseTotal: number = 0
+  expenseTotal: number = 0;
 
-  income: number = 0
+  income: number = 0;
 
-  overBudgeted: boolean = false
+  overBudgeted: boolean = false;
 
   overSpent: boolean = false;
 
-  constructor(private db: FirebaseService, private dialogService: DialogService, private ref: DynamicDialogRef) { }
+  menuSelectOptions: any;
+
+  selectedButtonOption: string = 'expenses';
+
+  budgetSubCategoryArray: Array<any> = [];
+  
+  constructor(private db: FirebaseService, private dialogService: DialogService, private ref: DynamicDialogRef) { 
+    this.menuSelectOptions = [{
+      label: "Expenses",
+      value: "expenses"
+    }, {
+      label: "Overview",
+      value: "overview"
+    }]
+  }
 
   ngOnInit(): void {
     this.getExpensesObservable$ = this.db.getExpenses()
@@ -43,6 +57,7 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
     this.getBudgetCategoriesObservable$ = this.db.getCategories()
     .subscribe(categories => {
       this.budgetCategories = categories;
+      this.budgetSubCategoryArray = this.buildSubCategoryArray();
       this.budgetCategoryTotal = this.addUpBudgetCategories();
     })
     this.db.getIncome().subscribe((result: any) => {
@@ -73,6 +88,17 @@ export class BudgetOverviewComponent implements OnInit, OnDestroy {
 
   hideButtons() {
      this.isButtonMenuVisible = -1;
+  }
+
+  buildSubCategoryArray() {
+    let subCategoryArray = [];
+    for (let i = 0; i < this.budgetCategories.length; i++) {
+      let subCategories = this.budgetCategories[i].subCategory;
+      for (let j = 0; j < subCategories.length; j++) {
+        subCategoryArray.push(subCategories[j]);
+      }
+    }
+    return subCategoryArray;
   }
 
   addUpBudgetCategories() {

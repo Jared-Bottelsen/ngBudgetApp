@@ -34,6 +34,7 @@ import { IncomeAddComponent } from './budget-overview/income-add/income-add.comp
 import { AutofocusDirective } from './directives/autofocus.directive';
 import { ArchiveTitleComponent } from './budget/archive-title/archive-title.component';
 import { BudgetArchiveComponent } from './budget/budget-archive/budget-archive.component';
+import { RealtimeOverviewComponent } from './budget-overview/realtime-overview/realtime-overview.component';
 @NgModule({
     declarations: [
         AppComponent,
@@ -50,6 +51,7 @@ import { BudgetArchiveComponent } from './budget/budget-archive/budget-archive.c
         AutofocusDirective,
         ArchiveTitleComponent,
         BudgetArchiveComponent,
+        RealtimeOverviewComponent,
     ],
     imports: [
         AngularFireModule.initializeApp(environment.firebaseConfig),

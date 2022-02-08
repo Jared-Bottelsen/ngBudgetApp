@@ -1,0 +1,13 @@
+<div class="overview-container">
+    <div class="overview-table">
+        <table class="overview-table__body">
+            <th *ngFor="let overviewHeader of overviewHeaderTitles">{{overviewHeader.title}}</th>
+            <tr *ngFor="let subCategory of subCategoryArray">
+                <td>{{subCategory.subCategoryTitle}}</td>
+                <td>{{subCategory.startingValue | currency}}</td>
+                <td>{{subCategory.subCategoryValue | currency}}</td>
+                <td [ngClass]="{'overview-table__body--over-spent' : subCategory.subCategoryValue < 0}">{{subCategory.startingValue - subCategory.subCategoryValue | currency}}</td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,4 +1,5 @@
 $low-white: rgba(255, 255, 255, 0.765);
+$darkBlueBlack: #001127;
 
 * {
     font-family: 'Alumni Sans', sans-serif;
@@ -49,6 +50,10 @@ $low-white: rgba(255, 255, 255, 0.765);
             color: red;
         }
     }
+}
+
+.select-button-container {
+    margin: 1rem 0 1rem 0;
 }
 
 .expenses-header {
@@ -143,6 +148,25 @@ $low-white: rgba(255, 255, 255, 0.765);
         .p-scrollpanel-wrapper {
             height: 320px;
             width: 100%;
+        }
+    }
+
+    .select-button-style {
+
+        .p-button.p-highlight {
+            background-color : $darkBlueBlack;
+            border: solid 2px $darkBlueBlack;
+
+            &:hover {
+                background-color: $darkBlueBlack;
+                border-color: $darkBlueBlack;
+            }
+        }
+        .p-button {
+
+            &:focus {
+                box-shadow: none;
+            }
         }
     }
 }

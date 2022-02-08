@@ -1,0 +1,48 @@
+%table-body {
+    width: 90%;
+    border-collapse: collapse;   
+    overflow: hidden; 
+    margin-bottom: 5rem; 
+    @extend %glass-background;
+}
+
+%glass-background {
+    background: rgba( 255, 255, 255, 0.15 );
+    border: 1px solid rgba( 255, 255, 255, 0.18 );
+    border-radius: 5px;
+    box-shadow: 0px 2px 7px black;
+    color: rgba(255, 255, 255, 0.765);
+}
+
+%table-header-data {
+    border: 1px white solid;  
+    border-collapse: collapse;     
+    padding: 0.2rem;
+    text-align: center;
+}
+
+%flex-center {
+    display: flex;
+    justify-content: center;
+}
+
+$low-white: rgba(255, 255, 255, 0.765);
+$darkBlueBlack: #001127;
+$commonFontSize: 1.2rem;
+
+.overview-table {
+    @extend %flex-center;
+
+    &__body {
+        @extend %table-body;
+
+        th, td {
+            font-size: $commonFontSize;
+            @extend %table-header-data;
+        } 
+        
+        &--over-spent {
+            color: red;
+        }
+    }
+}

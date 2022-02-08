@@ -35,10 +35,20 @@
         </div>
     </div>
 </div>
-<h3 *ngIf="individualExpenses.length > 0" class="expenses-header">Most Recent Expenses</h3>
+<!-- <h3 *ngIf="individualExpenses.length > 0" class="expenses-header">Most Recent Expenses</h3> -->
+<div class="flex justify-content-center select-button-container">
+    <p-selectButton
+    styleClass="select-button-style"
+    [(ngModel)]="selectedButtonOption"
+    [options]="menuSelectOptions"
+    optionLavel="label"
+    optionValue="value"
+    >
+    </p-selectButton>
+</div>
 <div>
     <p-scrollPanel styleClass="scroll-styles">
-        <div class="expenses-container">
+        <div *ngIf="selectedButtonOption === 'expenses'" class="expenses-container">
             <div *ngFor="let expense of individualExpenses; let i = index" class="individual-expense"> 
                 <div *ngIf="isButtonMenuVisible === i" class="individual-expense__button-group">
                     <div class="individual-expense__button-group--alignment">
@@ -63,5 +73,10 @@
                 </div>
             </div>
         </div>
+        <app-realtime-overview 
+            *ngIf="selectedButtonOption === 'overview'"
+            [subCategoryArray]="budgetSubCategoryArray"
+        >
+        </app-realtime-overview>
     </p-scrollPanel>
 </div>
