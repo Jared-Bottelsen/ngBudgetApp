@@ -12,7 +12,7 @@ export class RealtimeOverviewComponent implements OnInit {
   overviewHeaderTitles: any[];
 
   constructor() { 
-    this.overviewHeaderTitles = [{ title: "Category Title" }, { title: "Starting Value" }, { title: "Ending Value" }, { title: "Total Spent" }];
+    this.overviewHeaderTitles = [{ title: "Category Title" }, { title: "Starting Value" }, { title: "Current Value" }, { title: "Total Spent" }];
   }
 
   ngOnInit(): void {
